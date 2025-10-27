@@ -21,33 +21,48 @@ export default function Login() {
 
     if (authError) {
       setError(authError.message);
-    } else if (data?.session) {
-      // Ensure user record exists in users table
-      try {
-        const { data: userExists } = await supabase
-          .from("users")
-          .select("id")
-          .eq("id", data.session.user.id)
-          .maybeSingle();
-
-        if (!userExists) {
-          // Create user record if it doesn't exist
-          await supabase.from("users").insert([
-            {
-              id: data.session.user.id,
-              name: email.split("@")[0], // Use email prefix as default name
-              email: email,
-            },
-          ]);
-        }
-      } catch (err) {
-        console.warn("Could not ensure user record:", err);
-        // Don't block login if user creation fails
-      }
-
-      navigate("/");
+      setLoading(false);
+      return;
     }
 
+    if (!data?.session) {
+      setError("Falha ao fazer login");
+      setLoading(false);
+      return;
+    }
+
+    // Ensure user record exists in users table
+    try {
+      const { data: userExists, error: checkError } = await supabase
+        .from("users")
+        .select("id")
+        .eq("id", data.session.user.id);
+
+      if (checkError) {
+        console.warn("Could not check user:", checkError);
+      }
+
+      if (!userExists || userExists.length === 0) {
+        // Create user record if it doesn't exist
+        const { error: insertError } = await supabase.from("users").insert([
+          {
+            id: data.session.user.id,
+            name: email.split("@")[0], // Use email prefix as default name
+            email: email,
+          },
+        ]);
+
+        if (insertError) {
+          console.error("Could not create user record:", insertError);
+          // Still navigate, home page will handle user creation retry
+        }
+      }
+    } catch (err) {
+      console.error("User creation error:", err);
+      // Don't block login, home page will handle it
+    }
+
+    navigate("/");
     setLoading(false);
   };
 

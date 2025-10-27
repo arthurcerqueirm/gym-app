@@ -81,6 +81,8 @@ export default function Index() {
 
         // Get or create today's workout
         const today = new Date().toISOString().split("T")[0];
+        const dayOfWeek = new Date().getDay();
+        const normalizedDay = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Convert to Monday=0, Sunday=6
 
         let { data: workoutList, error: workoutError } = await supabase
           .from("workouts")
@@ -91,41 +93,112 @@ export default function Index() {
         let workoutData =
           workoutList && workoutList.length > 0 ? workoutList[0] : null;
 
-        if (!workoutData) {
-          // Create new workout for today
-          const { data: newWorkout, error: createError } = await supabase
-            .from("workouts")
-            .insert([
-              {
-                user_id: session.user.id,
-                date: today,
-                completed: false,
-              },
-            ])
-            .select()
+        // Get scheduled template for today
+        let exercises: Exercise[] = [];
+        let templateName = "Descanso";
+
+        const { data: scheduleData } = await supabase
+          .from("weekly_schedule")
+          .select("template_id")
+          .eq("user_id", session.user.id)
+          .eq("day_of_week", normalizedDay)
+          .single();
+
+        if (scheduleData?.template_id) {
+          // Get template exercises
+          const { data: templateExercises } = await supabase
+            .from("template_exercises")
+            .select("*")
+            .eq("template_id", scheduleData.template_id)
+            .order("order_index");
+
+          // Get template name
+          const { data: template } = await supabase
+            .from("workout_templates")
+            .select("name")
+            .eq("id", scheduleData.template_id)
             .single();
 
-          if (createError) throw createError;
-          workoutData = newWorkout;
+          if (template) {
+            templateName = template.name;
+          }
+
+          if (!workoutData) {
+            // Create new workout for today
+            const { data: newWorkout, error: createError } = await supabase
+              .from("workouts")
+              .insert([
+                {
+                  user_id: session.user.id,
+                  date: today,
+                  completed: false,
+                },
+              ])
+              .select()
+              .single();
+
+            if (createError) throw createError;
+            workoutData = newWorkout;
+          }
+
+          // Get or create exercises for this workout
+          const { data: existingExercises } = await supabase
+            .from("exercises")
+            .select("*")
+            .eq("workout_id", workoutData.id);
+
+          if (!existingExercises || existingExercises.length === 0) {
+            // Create exercises from template
+            const exercisesToInsert = (templateExercises || []).map(
+              (templateEx, index) => ({
+                workout_id: workoutData!.id,
+                name: templateEx.name,
+                sets: templateEx.sets,
+                reps: templateEx.reps,
+                last_weight: null,
+                done: false,
+                order_index: index,
+              }),
+            );
+
+            if (exercisesToInsert.length > 0) {
+              const { data: insertedExercises } = await supabase
+                .from("exercises")
+                .insert(exercisesToInsert)
+                .select();
+
+              exercises = (insertedExercises || []).map((ex) => ({
+                ...ex,
+                new_weight: null,
+              }));
+            }
+          } else {
+            exercises = existingExercises.map((ex) => ({
+              ...ex,
+              new_weight: null,
+            }));
+          }
+        } else if (workoutData) {
+          // No template scheduled, but workout exists - load its exercises
+          const { data: exercisesData } = await supabase
+            .from("exercises")
+            .select("*")
+            .eq("workout_id", workoutData.id);
+
+          exercises = (exercisesData || []).map((ex) => ({
+            ...ex,
+            new_weight: null,
+          }));
         }
 
-        // Get exercises for this workout
-        const { data: exercisesData, error: exercisesError } = await supabase
-          .from("exercises")
-          .select("*")
-          .eq("workout_id", workoutData.id);
-
-        if (exercisesError) throw exercisesError;
-
-        const exercises: Exercise[] = (exercisesData || []).map((ex) => ({
-          ...ex,
-          new_weight: null,
-        }));
-
-        setWorkout({
-          ...workoutData,
-          exercises,
-        });
+        setWorkout(
+          workoutData
+            ? {
+                ...workoutData,
+                exercises,
+              }
+            : null,
+        );
 
         // Get user stats
         const { data: streaksList } = await supabase

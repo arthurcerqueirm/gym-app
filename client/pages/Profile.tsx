@@ -50,7 +50,7 @@ export default function Profile() {
           .eq("user_id", session.user.id)
           .order("date", { ascending: false })
           .limit(1)
-          .single();
+          .maybeSingle();
 
         if (metricsData) {
           setMeasurements({

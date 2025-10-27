@@ -495,6 +495,20 @@ export default function Schedule() {
                           className="h-9 rounded-lg border-2 border-gray-200 px-2 text-sm"
                         />
                       </div>
+                      <div>
+                        <Input
+                          type="number"
+                          placeholder="Peso inicial (kg) - opcional"
+                          value={newExercise.initial_weight || ""}
+                          onChange={(e) =>
+                            setNewExercise({
+                              ...newExercise,
+                              initial_weight: e.target.value ? parseFloat(e.target.value) : null,
+                            })
+                          }
+                          className="w-full h-9 rounded-lg border-2 border-gray-200 px-2 text-sm"
+                        />
+                      </div>
                       <div className="flex gap-2">
                         <Button
                           onClick={() => handleAddExercise(template.id)}

@@ -114,19 +114,25 @@ export default function Index() {
         console.log("DEBUG: Schedule data found:", scheduleData);
 
         if (scheduleData?.template_id) {
+          console.log("DEBUG: Template ID from schedule:", scheduleData.template_id);
+
           // Get template exercises
-          const { data: templateExercises } = await supabase
+          const { data: templateExercises, error: exercisesError } = await supabase
             .from("template_exercises")
             .select("*")
             .eq("template_id", scheduleData.template_id)
             .order("order_index");
 
+          console.log("DEBUG: Template exercises result:", { templateExercises, exercisesError });
+
           // Get template name
-          const { data: template } = await supabase
+          const { data: template, error: templateError } = await supabase
             .from("workout_templates")
             .select("name")
             .eq("id", scheduleData.template_id)
             .single();
+
+          console.log("DEBUG: Template name result:", { template, templateError });
 
           if (template) {
             templateName = template.name;

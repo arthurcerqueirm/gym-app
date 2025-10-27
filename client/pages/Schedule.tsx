@@ -14,6 +14,7 @@ interface TemplateExercise {
   reps: number;
   rest_seconds: number;
   order_index: number;
+  initial_weight?: number | null;
 }
 
 interface WorkoutTemplate {
@@ -50,6 +51,7 @@ export default function Schedule() {
     sets: 3,
     reps: 10,
     rest: 60,
+    initial_weight: null as number | null,
   });
 
   useEffect(() => {
@@ -211,6 +213,7 @@ export default function Schedule() {
           sets: newExercise.sets,
           reps: newExercise.reps,
           rest_seconds: newExercise.rest,
+          initial_weight: newExercise.initial_weight,
           order_index: orderIndex,
         },
       ]);
@@ -235,7 +238,7 @@ export default function Schedule() {
         ),
       );
 
-      setNewExercise({ name: "", sets: 3, reps: 10, rest: 60 });
+      setNewExercise({ name: "", sets: 3, reps: 10, rest: 60, initial_weight: null });
     } catch (error) {
       console.error("Error adding exercise:", error);
       alert("Erro ao adicionar exercício");

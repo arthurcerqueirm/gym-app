@@ -45,11 +45,13 @@ export default function Calendar() {
           .eq("completed", true);
 
         // Get streak info
-        const { data: streaksData } = await supabase
+        const { data: streaksList } = await supabase
           .from("streaks")
           .select("*")
-          .eq("user_id", session.user.id)
-          .single();
+          .eq("user_id", session.user.id);
+
+        const streaksData =
+          streaksList && streaksList.length > 0 ? streaksList[0] : null;
 
         // Generate calendar days
         const workoutDates = new Set(workouts?.map((w) => w.date) || []);

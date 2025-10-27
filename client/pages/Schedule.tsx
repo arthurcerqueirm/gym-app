@@ -471,7 +471,7 @@ export default function Schedule() {
                           className="h-9 rounded-lg border-2 border-gray-200 px-2 text-sm"
                         />
                       </div>
-                      <div className="grid grid-cols-2 gap-2">
+                      <div>
                         <Input
                           type="number"
                           placeholder="Reps"
@@ -484,32 +484,22 @@ export default function Schedule() {
                           }
                           className="h-9 rounded-lg border-2 border-gray-200 px-2 text-sm"
                         />
-                        <Input
-                          type="number"
-                          placeholder="Rest (seg)"
-                          value={newExercise.rest}
-                          onChange={(e) =>
-                            setNewExercise({
-                              ...newExercise,
-                              rest: parseInt(e.target.value) || 60,
-                            })
-                          }
-                          className="h-9 rounded-lg border-2 border-gray-200 px-2 text-sm"
-                        />
                       </div>
                       <div>
                         <Input
                           type="number"
-                          placeholder="Peso inicial (kg) - opcional"
-                          value={newExercise.initial_weight || ""}
+                          placeholder="Peso inicial (kg) *"
+                          required
+                          value={newExercise.initial_weight}
                           onChange={(e) =>
                             setNewExercise({
                               ...newExercise,
-                              initial_weight: e.target.value ? parseFloat(e.target.value) : null,
+                              initial_weight: e.target.value,
                             })
                           }
-                          className="w-full h-9 rounded-lg border-2 border-gray-200 px-2 text-sm"
+                          className="w-full h-9 rounded-lg border-2 border-red-300 px-2 text-sm font-semibold"
                         />
+                        <p className="text-xs text-red-600 mt-1">* Campo obrigatório</p>
                       </div>
                       <div className="flex gap-2">
                         <Button

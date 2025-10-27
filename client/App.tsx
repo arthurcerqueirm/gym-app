@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import Calendar from "./pages/Calendar";
 import Evolution from "./pages/Evolution";
 import Profile from "./pages/Profile";
+import Schedule from "./pages/Schedule";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -93,6 +94,14 @@ const App = () => (
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/schedule"
+            element={
+              <ProtectedRoute>
+                <Schedule />
               </ProtectedRoute>
             }
           />

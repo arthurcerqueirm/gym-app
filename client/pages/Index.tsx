@@ -97,20 +97,11 @@ export default function Index() {
         let exercises: Exercise[] = [];
         let templateName = "Descanso";
 
-        console.log("DEBUG: Loading schedule for user:", session.user.id);
-        console.log("DEBUG: Today:", today);
-        console.log("DEBUG: Day of week (0=Monday, 6=Sunday):", normalizedDay);
-
         const { data: scheduleList, error: scheduleError } = await supabase
           .from("weekly_schedule")
           .select("*")
           .eq("user_id", session.user.id)
           .eq("day_of_week", normalizedDay);
-
-        console.log("DEBUG: Schedule query result:", {
-          scheduleList,
-          scheduleError,
-        });
 
         const scheduleData =
           scheduleList && scheduleList.length > 0 ? scheduleList[0] : null;

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signIn } from "@/lib/auth";
-import { supabase } from "@/lib/supabase";
+import { signIn, ensureUserExists } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -31,35 +30,16 @@ export default function Login() {
       return;
     }
 
-    // Ensure user record exists in users table
-    try {
-      const { data: userExists, error: checkError } = await supabase
-        .from("users")
-        .select("id")
-        .eq("id", data.session.user.id);
+    // Ensure user record exists in users table (required for foreign keys)
+    const { success, error: userError } = await ensureUserExists(
+      data.session.user.id,
+      data.session.user.email || email,
+      email.split("@")[0]
+    );
 
-      if (checkError) {
-        console.warn("Could not check user:", checkError);
-      }
-
-      if (!userExists || userExists.length === 0) {
-        // Create user record if it doesn't exist
-        const { error: insertError } = await supabase.from("users").insert([
-          {
-            id: data.session.user.id,
-            name: email.split("@")[0], // Use email prefix as default name
-            email: email,
-          },
-        ]);
-
-        if (insertError) {
-          console.error("Could not create user record:", insertError);
-          // Still navigate, home page will handle user creation retry
-        }
-      }
-    } catch (err) {
-      console.error("User creation error:", err);
-      // Don't block login, home page will handle it
+    if (!success) {
+      console.warn("Could not create/verify user record:", userError);
+      // Don't block login, home page will attempt to create the user again
     }
 
     navigate("/");

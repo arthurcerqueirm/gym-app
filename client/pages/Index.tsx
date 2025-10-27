@@ -97,12 +97,13 @@ export default function Index() {
         let exercises: Exercise[] = [];
         let templateName = "Descanso";
 
-        const { data: scheduleData } = await supabase
+        const { data: scheduleList } = await supabase
           .from("weekly_schedule")
           .select("template_id")
           .eq("user_id", session.user.id)
-          .eq("day_of_week", normalizedDay)
-          .single();
+          .eq("day_of_week", normalizedDay);
+
+        const scheduleData = scheduleList && scheduleList.length > 0 ? scheduleList[0] : null;
 
         if (scheduleData?.template_id) {
           // Get template exercises

@@ -60,17 +60,40 @@ export default function Index() {
         setUserId(session.user.id);
         setUserName(session.user.user_metadata?.name || "Usuário");
 
+        // Ensure user exists in users table (required for foreign key constraint)
+        try {
+          const { data: userExists } = await supabase
+            .from("users")
+            .select("id")
+            .eq("id", session.user.id)
+            .maybeSingle();
+
+          if (!userExists) {
+            // Create user record if it doesn't exist
+            await supabase.from("users").insert([
+              {
+                id: session.user.id,
+                name: session.user.user_metadata?.name || "Usuário",
+                email: session.user.email || "",
+              },
+            ]);
+          }
+        } catch (userError) {
+          console.warn("Could not verify/create user:", userError);
+        }
+
         // Get or create today's workout
         const today = new Date().toISOString().split("T")[0];
 
-        let { data: workoutData, error: workoutError } = await supabase
+        let { data: workoutList, error: workoutError } = await supabase
           .from("workouts")
           .select("*")
           .eq("user_id", session.user.id)
-          .eq("date", today)
-          .single();
+          .eq("date", today);
 
-        if (workoutError) {
+        let workoutData = workoutList && workoutList.length > 0 ? workoutList[0] : null;
+
+        if (!workoutData) {
           // Create new workout for today
           const { data: newWorkout, error: createError } = await supabase
             .from("workouts")
@@ -107,11 +130,13 @@ export default function Index() {
         });
 
         // Get user stats
-        const { data: streaksData } = await supabase
+        const { data: streaksList } = await supabase
           .from("streaks")
           .select("*")
-          .eq("user_id", session.user.id)
-          .single();
+          .eq("user_id", session.user.id);
+
+        const streaksData =
+          streaksList && streaksList.length > 0 ? streaksList[0] : null;
 
         const { data: allWorkouts } = await supabase
           .from("workouts")

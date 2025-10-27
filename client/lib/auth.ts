@@ -1,5 +1,52 @@
 import { supabase } from "./supabase";
 
+/**
+ * Ensure a user record exists in the users table
+ * This is required for foreign key constraints on other tables
+ */
+export async function ensureUserExists(
+  userId: string,
+  email: string,
+  name?: string
+) {
+  try {
+    // Check if user already exists
+    const { data: existingUser, error: checkError } = await supabase
+      .from("users")
+      .select("id")
+      .eq("id", userId);
+
+    if (checkError) {
+      console.error("Error checking for existing user:", checkError);
+      return { success: false, error: checkError };
+    }
+
+    // If user exists, we're done
+    if (existingUser && existingUser.length > 0) {
+      return { success: true, error: null };
+    }
+
+    // Create user record
+    const { error: insertError } = await supabase.from("users").insert([
+      {
+        id: userId,
+        name: name || email.split("@")[0],
+        email: email,
+      },
+    ]);
+
+    if (insertError) {
+      console.error("Error creating user record:", insertError);
+      return { success: false, error: insertError };
+    }
+
+    return { success: true, error: null };
+  } catch (err) {
+    console.error("Unexpected error in ensureUserExists:", err);
+    return { success: false, error: err };
+  }
+}
+
 export async function signUp(email: string, password: string, name: string) {
   const { data, error } = await supabase.auth.signUp({
     email,

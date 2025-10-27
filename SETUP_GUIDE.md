@@ -83,6 +83,52 @@ CREATE TABLE streaks (
 CREATE INDEX idx_streaks_user ON streaks(user_id);
 ```
 
+### **1.6 Workout Templates Table**
+
+```sql
+CREATE TABLE workout_templates (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  description TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+);
+
+CREATE INDEX idx_workout_templates_user ON workout_templates(user_id);
+```
+
+### **1.7 Template Exercises Table**
+
+```sql
+CREATE TABLE template_exercises (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  template_id UUID NOT NULL REFERENCES workout_templates(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  sets INTEGER DEFAULT 3,
+  reps INTEGER DEFAULT 10,
+  rest_seconds INTEGER DEFAULT 60,
+  order_index INTEGER DEFAULT 0,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+);
+
+CREATE INDEX idx_template_exercises_template ON template_exercises(template_id);
+```
+
+### **1.8 Weekly Schedule Table**
+
+```sql
+CREATE TABLE weekly_schedule (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  day_of_week INTEGER NOT NULL,
+  template_id UUID NOT NULL REFERENCES workout_templates(id) ON DELETE CASCADE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+  UNIQUE(user_id, day_of_week)
+);
+
+CREATE INDEX idx_weekly_schedule_user ON weekly_schedule(user_id);
+```
+
 ## 2. Authentication Setup
 
 The app uses Supabase Auth. Enable email/password authentication:

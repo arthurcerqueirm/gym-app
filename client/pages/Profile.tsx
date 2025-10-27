@@ -61,7 +61,11 @@ export default function Profile() {
           })
         }
       } catch (error) {
-        console.error('Error loading profile:', error)
+        const errorMessage = error instanceof Error ? error.message : String(error)
+        console.error('Error loading profile:', {
+          message: errorMessage,
+          error: error,
+        })
       } finally {
         setLoading(false)
       }

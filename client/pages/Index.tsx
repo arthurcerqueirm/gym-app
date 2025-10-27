@@ -62,24 +62,30 @@ export default function Index() {
 
         // Ensure user exists in users table (required for foreign key constraint)
         try {
-          const { data: userExists } = await supabase
+          const { data: userExists, error: userCheckError } = await supabase
             .from("users")
             .select("id")
-            .eq("id", session.user.id)
-            .maybeSingle();
+            .eq("id", session.user.id);
 
-          if (!userExists) {
-            // Create user record if it doesn't exist
-            await supabase.from("users").insert([
+          if (!userExists || userExists.length === 0) {
+            const { error: insertError } = await supabase.from("users").insert([
               {
                 id: session.user.id,
                 name: session.user.user_metadata?.name || "Usuário",
                 email: session.user.email || "",
               },
             ]);
+
+            if (insertError) {
+              console.error("Failed to create user record:", insertError);
+              throw new Error(`Falha ao criar registro de usuário: ${insertError.message}`);
+            }
           }
         } catch (userError) {
-          console.warn("Could not verify/create user:", userError);
+          const errorMsg = userError instanceof Error ? userError.message : String(userError);
+          console.error("User creation/verification failed:", userError);
+          alert(`⚠️ Erro ao inicializar usuário: ${errorMsg}\n\nVerifique se as tabelas do Supabase foram criadas corretamente.`);
+          throw userError;
         }
 
         // Get or create today's workout

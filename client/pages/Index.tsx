@@ -97,32 +97,16 @@ export default function Index() {
         let exercises: Exercise[] = [];
         let templateName = "Descanso";
 
-        console.log("DEBUG: Loading schedule for user:", session.user.id);
-        console.log("DEBUG: Today:", today);
-        console.log("DEBUG: Day of week (0=Monday, 6=Sunday):", normalizedDay);
-
         const { data: scheduleList, error: scheduleError } = await supabase
           .from("weekly_schedule")
           .select("*")
           .eq("user_id", session.user.id)
           .eq("day_of_week", normalizedDay);
 
-        console.log("DEBUG: Schedule query result:", {
-          scheduleList,
-          scheduleError,
-        });
-
         const scheduleData =
           scheduleList && scheduleList.length > 0 ? scheduleList[0] : null;
 
-        console.log("DEBUG: Schedule data found:", scheduleData);
-
         if (scheduleData?.template_id) {
-          console.log(
-            "DEBUG: Template ID from schedule:",
-            scheduleData.template_id,
-          );
-
           // Get template exercises
           const { data: templateExercises, error: exercisesError } =
             await supabase
@@ -131,22 +115,12 @@ export default function Index() {
               .eq("template_id", scheduleData.template_id)
               .order("order_index");
 
-          console.log("DEBUG: Template exercises result:", {
-            templateExercises,
-            exercisesError,
-          });
-
           // Get template name
           const { data: template, error: templateError } = await supabase
             .from("workout_templates")
             .select("name")
             .eq("id", scheduleData.template_id)
             .single();
-
-          console.log("DEBUG: Template name result:", {
-            template,
-            templateError,
-          });
 
           if (template) {
             templateName = template.name;
@@ -178,11 +152,6 @@ export default function Index() {
 
           if (!existingExercises || existingExercises.length === 0) {
             // Create exercises from template
-            console.log(
-              "DEBUG: Creating exercises from template. Template exercises:",
-              templateExercises,
-            );
-
             const exercisesToInsert = (templateExercises || []).map(
               (templateEx, index) => ({
                 workout_id: workoutData!.id,
@@ -195,8 +164,6 @@ export default function Index() {
               }),
             );
 
-            console.log("DEBUG: Exercises to insert:", exercisesToInsert);
-
             if (exercisesToInsert.length > 0) {
               const { data: insertedExercises, error: insertError } =
                 await supabase
@@ -204,18 +171,12 @@ export default function Index() {
                   .insert(exercisesToInsert)
                   .select();
 
-              console.log("DEBUG: Insert result:", {
-                insertedExercises,
-                insertError,
-              });
-
               exercises = (insertedExercises || []).map((ex) => ({
                 ...ex,
                 new_weight: null,
               }));
             }
           } else {
-            console.log("DEBUG: Using existing exercises from workout");
             exercises = existingExercises.map((ex) => ({
               ...ex,
               new_weight: null,

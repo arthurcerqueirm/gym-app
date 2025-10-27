@@ -19,9 +19,12 @@ const NotFound = () => {
       <div className="text-center max-w-md">
         <AlertCircle size={64} className="mx-auto mb-6 text-orange-500" />
         <h1 className="text-6xl font-bold text-orange-600 mb-2">404</h1>
-        <p className="text-2xl font-bold text-gray-800 mb-2">Página não encontrada</p>
+        <p className="text-2xl font-bold text-gray-800 mb-2">
+          Página não encontrada
+        </p>
         <p className="text-gray-600 mb-8">
-          Desculpe, a página que você está procurando não existe. Parece que você saiu do caminho.
+          Desculpe, a página que você está procurando não existe. Parece que
+          você saiu do caminho.
         </p>
         <Button
           onClick={() => navigate("/")}

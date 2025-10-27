@@ -1,56 +1,56 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Layout from '@/components/Layout'
-import { supabase } from '@/lib/supabase'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { User, Save } from 'lucide-react'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Layout from "@/components/Layout";
+import { supabase } from "@/lib/supabase";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { User, Save } from "lucide-react";
 
 interface Measurement {
-  weight: string
-  muscleMass: string
-  fatPercentage: string
-  height: string
+  weight: string;
+  muscleMass: string;
+  fatPercentage: string;
+  height: string;
 }
 
 export default function Profile() {
-  const navigate = useNavigate()
-  const [loading, setLoading] = useState(true)
-  const [saving, setSaving] = useState(false)
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [measurements, setMeasurements] = useState<Measurement>({
-    weight: '',
-    muscleMass: '',
-    fatPercentage: '',
-    height: '',
-  })
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
-  const [userName, setUserName] = useState('Usuário')
-  const [userId, setUserId] = useState<string | null>(null)
+    weight: "",
+    muscleMass: "",
+    fatPercentage: "",
+    height: "",
+  });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [userName, setUserName] = useState("Usuário");
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     const loadProfile = async () => {
       try {
         const {
           data: { session },
-        } = await supabase.auth.getSession()
+        } = await supabase.auth.getSession();
 
         if (!session) {
-          navigate('/login')
-          return
+          navigate("/login");
+          return;
         }
 
-        setUserId(session.user.id)
-        setUserName(session.user.user_metadata?.name || 'Usuário')
+        setUserId(session.user.id);
+        setUserName(session.user.user_metadata?.name || "Usuário");
 
         // Get latest measurements
         const { data: metricsData } = await supabase
-          .from('body_metrics')
-          .select('*')
-          .eq('user_id', session.user.id)
-          .order('date', { ascending: false })
+          .from("body_metrics")
+          .select("*")
+          .eq("user_id", session.user.id)
+          .order("date", { ascending: false })
           .limit(1)
-          .single()
+          .single();
 
         if (metricsData) {
           setMeasurements({
@@ -58,71 +58,89 @@ export default function Profile() {
             muscleMass: metricsData.muscle_mass.toString(),
             fatPercentage: metricsData.fat_percentage.toString(),
             height: metricsData.height.toString(),
-          })
+          });
         }
       } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : String(error)
-        console.error('Error loading profile:', {
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
+        console.error("Error loading profile:", {
           message: errorMessage,
           error: error,
-        })
+        });
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    loadProfile()
-  }, [navigate])
+    loadProfile();
+  }, [navigate]);
 
   const handleSaveMeasurements = async () => {
-    setError('')
-    setSuccess(false)
+    setError("");
+    setSuccess(false);
 
-    if (!measurements.weight || !measurements.muscleMass || !measurements.fatPercentage || !measurements.height) {
-      setError('Por favor, preencha todos os campos')
-      return
+    if (
+      !measurements.weight ||
+      !measurements.muscleMass ||
+      !measurements.fatPercentage ||
+      !measurements.height
+    ) {
+      setError("Por favor, preencha todos os campos");
+      return;
     }
 
-    if (!userId) return
+    if (!userId) return;
 
     try {
-      setSaving(true)
+      setSaving(true);
 
-      const today = new Date().toISOString().split('T')[0]
+      const today = new Date().toISOString().split("T")[0];
 
-      const { error: insertError } = await supabase.from('body_metrics').insert([
-        {
-          user_id: userId,
-          date: today,
-          weight: parseFloat(measurements.weight),
-          muscle_mass: parseFloat(measurements.muscleMass),
-          fat_percentage: parseFloat(measurements.fatPercentage),
-          height: parseFloat(measurements.height),
-        },
-      ])
+      const { error: insertError } = await supabase
+        .from("body_metrics")
+        .insert([
+          {
+            user_id: userId,
+            date: today,
+            weight: parseFloat(measurements.weight),
+            muscle_mass: parseFloat(measurements.muscleMass),
+            fat_percentage: parseFloat(measurements.fatPercentage),
+            height: parseFloat(measurements.height),
+          },
+        ]);
 
-      if (insertError) throw insertError
+      if (insertError) throw insertError;
 
-      setSuccess(true)
-      setTimeout(() => setSuccess(false), 3000)
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : String(err)
-      console.error('Error saving measurements:', {
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      console.error("Error saving measurements:", {
         message: errorMessage,
         error: err,
-      })
+      });
 
-      if (errorMessage.includes('relation') || errorMessage.includes('does not exist')) {
-        setError('⚠️ Banco de dados não configurado. Execute os scripts SQL do SETUP_GUIDE.md')
-      } else if (errorMessage.includes('permission') || errorMessage.includes('policy')) {
-        setError('⚠️ Erro de permissão. Verifique as políticas RLS do Supabase.')
+      if (
+        errorMessage.includes("relation") ||
+        errorMessage.includes("does not exist")
+      ) {
+        setError(
+          "⚠️ Banco de dados não configurado. Execute os scripts SQL do SETUP_GUIDE.md",
+        );
+      } else if (
+        errorMessage.includes("permission") ||
+        errorMessage.includes("policy")
+      ) {
+        setError(
+          "⚠️ Erro de permissão. Verifique as políticas RLS do Supabase.",
+        );
       } else {
-        setError(`Erro ao salvar as medições: ${errorMessage}`)
+        setError(`Erro ao salvar as medições: ${errorMessage}`);
       }
     } finally {
-      setSaving(false)
+      setSaving(false);
     }
-  }
+  };
 
   if (loading) {
     return (
@@ -131,7 +149,7 @@ export default function Profile() {
           <p className="text-gray-600">Carregando perfil...</p>
         </div>
       </Layout>
-    )
+    );
   }
 
   return (
@@ -150,7 +168,9 @@ export default function Profile() {
 
         {/* Measurements Form */}
         <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Medições Corporais</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+            Medições Corporais
+          </h2>
 
           <div className="space-y-5 mb-8">
             <div>
@@ -179,7 +199,10 @@ export default function Profile() {
                 step="0.1"
                 value={measurements.muscleMass}
                 onChange={(e) =>
-                  setMeasurements({ ...measurements, muscleMass: e.target.value })
+                  setMeasurements({
+                    ...measurements,
+                    muscleMass: e.target.value,
+                  })
                 }
                 className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-purple-500"
               />
@@ -195,7 +218,10 @@ export default function Profile() {
                 step="0.1"
                 value={measurements.fatPercentage}
                 onChange={(e) =>
-                  setMeasurements({ ...measurements, fatPercentage: e.target.value })
+                  setMeasurements({
+                    ...measurements,
+                    fatPercentage: e.target.value,
+                  })
                 }
                 className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-purple-500"
               />
@@ -236,7 +262,7 @@ export default function Profile() {
             className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 rounded-lg text-base flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
           >
             <Save size={20} />
-            {saving ? 'Salvando...' : 'Salvar Medições'}
+            {saving ? "Salvando..." : "Salvar Medições"}
           </Button>
         </div>
 
@@ -244,10 +270,11 @@ export default function Profile() {
         <div className="mt-8 bg-blue-50 rounded-2xl p-6 text-blue-900">
           <p className="font-semibold mb-2">💡 Dica</p>
           <p className="text-sm">
-            Recomendamos registrar suas medições mensalmente no mesmo dia e horário para obter resultados mais precisos na evolução.
+            Recomendamos registrar suas medições mensalmente no mesmo dia e
+            horário para obter resultados mais precisos na evolução.
           </p>
         </div>
       </div>
     </Layout>
-  )
+  );
 }

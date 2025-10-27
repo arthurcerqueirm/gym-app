@@ -5,6 +5,7 @@
 ### 📱 Core Pages Implemented
 
 #### 1. **Login Page** (`client/pages/Login.tsx`)
+
 - Email and password authentication
 - Supabase Auth integration
 - Beautiful gradient background (Duolingo-inspired)
@@ -13,6 +14,7 @@
 - Portuguese language support
 
 #### 2. **Home Page - Treino do Dia** (`client/pages/Index.tsx`)
+
 - Daily workout tracker
 - **Greeting**: "🔥 Dia {treinosConcluidos}/365 — Não quebre a corrente!"
 - Streak tracking (current and longest)
@@ -27,6 +29,7 @@
 - Celebration animation on completion: "Parabéns {userName}! +1 no streak 🔥"
 
 #### 3. **Calendar Page** (`client/pages/Calendar.tsx`)
+
 - Yearly progress heatmap (GitHub-style)
 - Visual cards showing:
   - 🔥 Current streak counter
@@ -37,6 +40,7 @@
 - Legend for interpretation
 
 #### 4. **Evolution Page** (`client/pages/Evolution.tsx`)
+
 - Body metrics charts using **Recharts**
 - Summary cards showing:
   - Current weight with change indicator
@@ -49,6 +53,7 @@
 - Empty state for users without measurements
 
 #### 5. **Profile Page** (`client/pages/Profile.tsx`)
+
 - Monthly measurement logging form
 - Input fields for:
   - Weight (kg)
@@ -62,6 +67,7 @@
 ### 🎨 Design & Layout
 
 #### **Global Layout** (`client/components/Layout.tsx`)
+
 - Responsive design:
   - **Desktop**: Fixed sidebar navigation (gradient orange/amber)
   - **Mobile**: Bottom tab navigation
@@ -74,6 +80,7 @@
 - Active route highlighting
 
 #### **Color Scheme** (Duolingo-inspired)
+
 - Primary: Vibrant Orange (`#FF8C00`)
 - Secondary: Gradient Amber to Orange
 - Accent colors for different sections (Purple, Green, Blue)
@@ -82,6 +89,7 @@
 - Responsive shadows and hover effects
 
 #### **Tailwind Configuration**
+
 - Updated color variables in HSL format
 - Rounded radius adjustments for modern look
 - Dual theme support (light/dark mode ready)
@@ -90,6 +98,7 @@
 ### 🔐 Authentication & Security
 
 #### **Auth Module** (`client/lib/auth.ts`)
+
 - `signUp()`: Register new users
 - `signIn()`: Login with email/password
 - `signOut()`: Logout functionality
@@ -97,18 +106,21 @@
 - `getUserProfile()`: Fetch user data from database
 
 #### **Protected Routes**
+
 - All app pages except `/login` are protected
 - Automatic redirect to login for unauthenticated users
 - Loading spinner while checking authentication state
 - Auth state persistence across page refreshes
 
 #### **Supabase Integration** (`client/lib/supabase.ts`)
+
 - Client initialization with provided credentials
 - Ready to connect to your Supabase project
 
 ### 💾 Database Ready
 
 The app is configured to work with the following Supabase tables:
+
 - `users`: User profiles
 - `workouts`: Daily workout records (date + completion status)
 - `exercises`: Exercise list for workouts (sets, reps, weight tracking)
@@ -120,6 +132,7 @@ The app is configured to work with the following Supabase tables:
 ### 🧭 Routing
 
 All routes are configured in `client/App.tsx`:
+
 - `/login` - Login page (public)
 - `/` - Home/Treino do Dia (protected)
 - `/calendar` - Calendar/Progress (protected)
@@ -130,16 +143,19 @@ All routes are configured in `client/App.tsx`:
 ### 🔄 Data Flow
 
 **Login Flow**:
+
 ```
 Login Page → Supabase Auth → Home Page
 ```
 
 **Workout Tracking**:
+
 ```
 Home Page → Update Exercises → Save Workout → Update Streaks
 ```
 
 **Progress Tracking**:
+
 ```
 Calendar: Fetch workouts from DB → Display heatmap
 Evolution: Fetch body_metrics → Render charts
@@ -158,33 +174,39 @@ Profile: Save measurements → Store in DB
 ## 🚀 Features Highlights
 
 ✨ **Duolingo-Style Design**
+
 - Vibrant, modern, gamified interface
 - Engaging visual feedback and animations
 - Mobile-first responsive layout
 
 🔥 **Streak System**
+
 - Daily streak tracking
 - Personal best tracking
 - Visual celebration on completion
 
 📊 **Progress Analytics**
+
 - Yearly calendar heatmap
 - Body composition charts
 - Weight trend visualization
 
 📱 **Full Responsiveness**
+
 - Desktop sidebar navigation
 - Mobile bottom navigation
 - Touch-friendly interactions
 - Optimized spacing for all screen sizes
 
 🌐 **Internationalization**
+
 - Portuguese language (pt-BR)
 - Easy to extend to other languages
 
 ## 📋 Next Steps for Users
 
 1. **Set up Supabase Database**:
+
    ```bash
    # Follow SQL scripts in SETUP_GUIDE.md
    ```
@@ -194,6 +216,7 @@ Profile: Save measurements → Store in DB
    - Enable Email/Password provider
 
 3. **Run Development Server**:
+
    ```bash
    pnpm dev
    ```
@@ -212,6 +235,7 @@ Profile: Save measurements → Store in DB
 ## 🎯 Design Philosophy
 
 The app follows these principles:
+
 - **Consistency**: Same color scheme, typography, and spacing throughout
 - **Clarity**: Clear visual hierarchy and user feedback
 - **Accessibility**: Semantic HTML, proper contrast ratios

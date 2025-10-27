@@ -9,6 +9,7 @@ The GymStreak app is fully implemented and ready to use. Follow these steps to g
 The app is already configured to connect to the provided Supabase project. You need to create the following tables in your Supabase dashboard:
 
 ### **1.1 Users Table**
+
 ```sql
 CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -19,6 +20,7 @@ CREATE TABLE users (
 ```
 
 ### **1.2 Workouts Table**
+
 ```sql
 CREATE TABLE workouts (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -33,6 +35,7 @@ CREATE INDEX idx_workouts_user_date ON workouts(user_id, date);
 ```
 
 ### **1.3 Exercises Table**
+
 ```sql
 CREATE TABLE exercises (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -49,6 +52,7 @@ CREATE INDEX idx_exercises_workout ON exercises(workout_id);
 ```
 
 ### **1.4 Body Metrics Table**
+
 ```sql
 CREATE TABLE body_metrics (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -65,6 +69,7 @@ CREATE INDEX idx_body_metrics_user_date ON body_metrics(user_id, date);
 ```
 
 ### **1.5 Streaks Table**
+
 ```sql
 CREATE TABLE streaks (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -114,6 +119,7 @@ pnpm dev
 ## 📱 App Features
 
 ### **🔥 Treino do Dia (Home Page)**
+
 - Daily workout tracker
 - Exercise list with sets, reps, and weight tracking
 - Completion tracking
@@ -122,18 +128,21 @@ pnpm dev
 - Automatic streak updates when all exercises are completed
 
 ### **📅 Calendário (Calendar)**
+
 - Yearly progress heatmap (GitHub-style)
 - Current streak display
 - Best streak tracker
 - Total workouts counter
 
 ### **📈 Evolução (Evolution)**
+
 - Body weight tracking chart
 - Body composition analysis (muscle mass vs fat percentage)
 - Comparative metrics
 - Trend visualization
 
 ### **👤 Perfil (Profile)**
+
 - Monthly measurement logging:
   - Weight
   - Muscle mass
@@ -179,6 +188,7 @@ pnpm start
 ```
 
 You can deploy to:
+
 - **Netlify**: Use the Netlify MCP integration
 - **Vercel**: Use the Vercel MCP integration
 - **Any Node.js server**: Using `pnpm build && pnpm start`
@@ -186,15 +196,18 @@ You can deploy to:
 ## 🐛 Troubleshooting
 
 ### Blank Page After Login
+
 - Check browser console for errors
 - Verify Supabase tables are created
 - Check that `user_id` in workouts matches authenticated user
 
 ### Charts Not Showing
+
 - Ensure body_metrics table has data
 - Check that measurements were saved with correct date format
 
 ### Exercises Not Loading
+
 - Create a workout for today via the database or app
 - Add exercises to the workout
 

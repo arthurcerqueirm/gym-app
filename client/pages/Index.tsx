@@ -127,7 +127,9 @@ export default function Index() {
 
         setAllCompleted(exercises.length > 0 && exercises.every((e) => e.done))
       } catch (error) {
-        console.error('Error loading workout:', error)
+        const errorMessage = error instanceof Error ? error.message : String(error)
+        console.error('Error loading workout:', errorMessage, error)
+        alert(`Erro ao carregar treino: ${errorMessage}`)
       } finally {
         setLoading(false)
       }

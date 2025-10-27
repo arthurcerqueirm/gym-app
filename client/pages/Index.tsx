@@ -306,7 +306,17 @@ export default function Index() {
           .single();
 
         const today = new Date().toISOString().split("T")[0];
-        const newStreak = (streaksData?.current_streak || 0) + 1;
+        const lastWorkoutDate = streaksData?.last_workout_date;
+
+        // Only increment streak if workout hasn't been completed today
+        let newStreak = streaksData?.current_streak || 0;
+        let shouldIncrement = false;
+
+        if (lastWorkoutDate !== today) {
+          newStreak += 1;
+          shouldIncrement = true;
+        }
+
         const longestStreak = Math.max(
           newStreak,
           streaksData?.longest_streak || 0,
@@ -326,7 +336,7 @@ export default function Index() {
           ...stats,
           currentStreak: newStreak,
           longestStreak,
-          treinosConcluidos: stats.treinosConcluidos + 1,
+          treinosConcluidos: stats.treinosConcluidos + (shouldIncrement ? 1 : 0),
         });
       }
     } catch (error) {

@@ -155,7 +155,7 @@ export default function Index() {
                 name: templateEx.name,
                 sets: templateEx.sets,
                 reps: templateEx.reps,
-                last_weight: null,
+                last_weight: templateEx.initial_weight || null,
                 done: false,
                 order_index: index,
               }),

@@ -424,7 +424,7 @@ export default function Schedule() {
                             </p>
                             <p className="text-xs text-gray-600">
                               {exercise.sets}x{exercise.reps} •{" "}
-                              {exercise.rest_seconds}s
+                              {exercise.rest_seconds}s{exercise.initial_weight ? ` • ${exercise.initial_weight}kg` : ""}
                             </p>
                           </div>
                           <Button

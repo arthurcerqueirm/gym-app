@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "@/lib/auth";
-import { Flame, Calendar, TrendingUp, User, LogOut } from "lucide-react";
+import { Flame, Calendar, TrendingUp, User, LogOut, Dumbbell } from "lucide-react";
 
 interface LayoutProps {
   children: ReactNode;
@@ -22,6 +22,7 @@ export default function Layout({
 
   const navigationItems = [
     { path: "/", label: "Treino", icon: Flame },
+    { path: "/schedule", label: "Programação", icon: Dumbbell },
     { path: "/calendar", label: "Calendário", icon: Calendar },
     { path: "/evolution", label: "Evolução", icon: TrendingUp },
     { path: "/profile", label: "Perfil", icon: User },

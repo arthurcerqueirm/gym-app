@@ -101,7 +101,9 @@ export default function Schedule() {
 
         const schedule: { [key: number]: string | null } = {};
         DAYS_OF_WEEK.forEach((day) => {
-          const scheduled = scheduleData?.find((s) => s.day_of_week === day.index);
+          const scheduled = scheduleData?.find(
+            (s) => s.day_of_week === day.index,
+          );
           schedule[day.index] = scheduled?.template_id || null;
         });
 
@@ -160,7 +162,7 @@ export default function Schedule() {
   const handleDeleteTemplate = async (templateId: string) => {
     if (
       !confirm(
-        "Tem certeza? Isso vai deletar o treino e remover de todos os dias."
+        "Tem certeza? Isso vai deletar o treino e remover de todos os dias.",
       )
     ) {
       return;
@@ -229,8 +231,8 @@ export default function Schedule() {
                 ...t,
                 exercises: updatedTemplate || [],
               }
-            : t
-        )
+            : t,
+        ),
       );
 
       setNewExercise({ name: "", sets: 3, reps: 10, rest: 60 });
@@ -240,7 +242,10 @@ export default function Schedule() {
     }
   };
 
-  const handleDeleteExercise = async (exerciseId: string, templateId: string) => {
+  const handleDeleteExercise = async (
+    exerciseId: string,
+    templateId: string,
+  ) => {
     try {
       await supabase.from("template_exercises").delete().eq("id", exerciseId);
 
@@ -251,8 +256,8 @@ export default function Schedule() {
                 ...t,
                 exercises: t.exercises.filter((e) => e.id !== exerciseId),
               }
-            : t
-        )
+            : t,
+        ),
       );
     } catch (error) {
       console.error("Error deleting exercise:", error);
@@ -260,7 +265,10 @@ export default function Schedule() {
     }
   };
 
-  const updateWeeklySchedule = async (dayOfWeek: number, templateId: string | null) => {
+  const updateWeeklySchedule = async (
+    dayOfWeek: number,
+    templateId: string | null,
+  ) => {
     if (!userId) return;
 
     try {
@@ -320,8 +328,12 @@ export default function Schedule() {
       <div className="p-4 md:p-8 max-w-6xl mx-auto">
         {/* Header */}
         <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-3xl p-8 mb-8 shadow-lg">
-          <h1 className="text-3xl md:text-4xl font-bold">Programação de Treino</h1>
-          <p className="text-white/90 mt-2">Crie templates e agende seu programa semanal</p>
+          <h1 className="text-3xl md:text-4xl font-bold">
+            Programação de Treino
+          </h1>
+          <p className="text-white/90 mt-2">
+            Crie templates e agende seu programa semanal
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -329,7 +341,9 @@ export default function Schedule() {
           <div className="lg:col-span-2 space-y-6">
             {/* Create Template */}
             <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4">Criar Novo Treino</h2>
+              <h2 className="text-xl font-bold text-gray-800 mb-4">
+                Criar Novo Treino
+              </h2>
               <div className="space-y-3">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">
@@ -371,9 +385,13 @@ export default function Schedule() {
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="text-lg font-bold text-gray-800">{template.name}</h3>
+                      <h3 className="text-lg font-bold text-gray-800">
+                        {template.name}
+                      </h3>
                       {template.description && (
-                        <p className="text-sm text-gray-600 mt-1">{template.description}</p>
+                        <p className="text-sm text-gray-600 mt-1">
+                          {template.description}
+                        </p>
                       )}
                     </div>
                     <Button
@@ -388,7 +406,9 @@ export default function Schedule() {
                   {/* Exercises */}
                   <div className="space-y-2 mb-4">
                     {template.exercises.length === 0 ? (
-                      <p className="text-gray-500 text-sm italic">Nenhum exercício adicionado</p>
+                      <p className="text-gray-500 text-sm italic">
+                        Nenhum exercício adicionado
+                      </p>
                     ) : (
                       template.exercises.map((exercise, idx) => (
                         <div
@@ -396,9 +416,12 @@ export default function Schedule() {
                           className="flex items-center justify-between bg-gray-50 p-3 rounded-lg"
                         >
                           <div>
-                            <p className="font-semibold text-gray-800">{exercise.name}</p>
+                            <p className="font-semibold text-gray-800">
+                              {exercise.name}
+                            </p>
                             <p className="text-xs text-gray-600">
-                              {exercise.sets}x{exercise.reps} • {exercise.rest_seconds}s
+                              {exercise.sets}x{exercise.reps} •{" "}
+                              {exercise.rest_seconds}s
                             </p>
                           </div>
                           <Button
@@ -513,7 +536,9 @@ export default function Schedule() {
               <div className="space-y-2">
                 {DAYS_OF_WEEK.map((day) => (
                   <div key={day.index} className="space-y-1">
-                    <label className="text-sm font-semibold text-gray-700">{day.name}</label>
+                    <label className="text-sm font-semibold text-gray-700">
+                      {day.name}
+                    </label>
                     <select
                       value={weeklySchedule[day.index] || ""}
                       onChange={(e) =>
@@ -535,7 +560,8 @@ export default function Schedule() {
               <div className="mt-6 pt-6 border-t-2 border-gray-200 bg-blue-50 rounded-lg p-4">
                 <p className="text-xs text-blue-900 font-semibold">💡 Dica</p>
                 <p className="text-xs text-blue-700 mt-1">
-                  Selecione um treino para cada dia da semana. O programa vai se repetir automaticamente.
+                  Selecione um treino para cada dia da semana. O programa vai se
+                  repetir automaticamente.
                 </p>
               </div>
             </div>

@@ -7,7 +7,7 @@ import { supabase } from "./supabase";
 export async function ensureUserExists(
   userId: string,
   email: string,
-  name?: string
+  name?: string,
 ) {
   try {
     // Check if user already exists

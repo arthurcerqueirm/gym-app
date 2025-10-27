@@ -62,17 +62,19 @@ export default function Index() {
         setUserName(session.user.user_metadata?.name || "Usuário");
 
         // Ensure user exists in users table (required for foreign key constraint)
-        const { success: userExists, error: userError } = await ensureUserExists(
-          session.user.id,
-          session.user.email || "",
-          session.user.user_metadata?.name
-        );
+        const { success: userExists, error: userError } =
+          await ensureUserExists(
+            session.user.id,
+            session.user.email || "",
+            session.user.user_metadata?.name,
+          );
 
         if (!userExists) {
-          const errorMsg = userError instanceof Error ? userError.message : String(userError);
+          const errorMsg =
+            userError instanceof Error ? userError.message : String(userError);
           console.error("User creation/verification failed:", userError);
           alert(
-            `⚠️ Erro ao inicializar usuário: ${errorMsg}\n\nVerifique se as tabelas do Supabase foram criadas corretamente.`
+            `⚠️ Erro ao inicializar usuário: ${errorMsg}\n\nVerifique se as tabelas do Supabase foram criadas corretamente.`,
           );
           throw userError;
         }
@@ -86,7 +88,8 @@ export default function Index() {
           .eq("user_id", session.user.id)
           .eq("date", today);
 
-        let workoutData = workoutList && workoutList.length > 0 ? workoutList[0] : null;
+        let workoutData =
+          workoutList && workoutList.length > 0 ? workoutList[0] : null;
 
         if (!workoutData) {
           // Create new workout for today

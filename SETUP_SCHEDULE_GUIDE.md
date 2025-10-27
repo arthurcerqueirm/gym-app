@@ -51,6 +51,7 @@ CREATE INDEX idx_schedule_user ON weekly_schedule(user_id);
 ```
 
 ## Dias da Semana (ISO 8601)
+
 - 0 = Segunda (Monday)
 - 1 = Terça (Tuesday)
 - 2 = Quarta (Wednesday)

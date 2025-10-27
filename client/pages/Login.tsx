@@ -34,7 +34,7 @@ export default function Login() {
     const { success, error: userError } = await ensureUserExists(
       data.session.user.id,
       data.session.user.email || email,
-      email.split("@")[0]
+      email.split("@")[0],
     );
 
     if (!success) {

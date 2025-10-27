@@ -152,11 +152,6 @@ export default function Index() {
 
           if (!existingExercises || existingExercises.length === 0) {
             // Create exercises from template
-            console.log(
-              "DEBUG: Creating exercises from template. Template exercises:",
-              templateExercises,
-            );
-
             const exercisesToInsert = (templateExercises || []).map(
               (templateEx, index) => ({
                 workout_id: workoutData!.id,
@@ -169,8 +164,6 @@ export default function Index() {
               }),
             );
 
-            console.log("DEBUG: Exercises to insert:", exercisesToInsert);
-
             if (exercisesToInsert.length > 0) {
               const { data: insertedExercises, error: insertError } =
                 await supabase
@@ -178,18 +171,12 @@ export default function Index() {
                   .insert(exercisesToInsert)
                   .select();
 
-              console.log("DEBUG: Insert result:", {
-                insertedExercises,
-                insertError,
-              });
-
               exercises = (insertedExercises || []).map((ex) => ({
                 ...ex,
                 new_weight: null,
               }));
             }
           } else {
-            console.log("DEBUG: Using existing exercises from workout");
             exercises = existingExercises.map((ex) => ({
               ...ex,
               new_weight: null,

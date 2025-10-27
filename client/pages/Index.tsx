@@ -81,6 +81,8 @@ export default function Index() {
 
         // Get or create today's workout
         const today = new Date().toISOString().split("T")[0];
+        const dayOfWeek = new Date().getDay();
+        const normalizedDay = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Convert to Monday=0, Sunday=6
 
         let { data: workoutList, error: workoutError } = await supabase
           .from("workouts")
@@ -91,41 +93,155 @@ export default function Index() {
         let workoutData =
           workoutList && workoutList.length > 0 ? workoutList[0] : null;
 
-        if (!workoutData) {
-          // Create new workout for today
-          const { data: newWorkout, error: createError } = await supabase
-            .from("workouts")
-            .insert([
-              {
-                user_id: session.user.id,
-                date: today,
-                completed: false,
-              },
-            ])
-            .select()
+        // Get scheduled template for today
+        let exercises: Exercise[] = [];
+        let templateName = "Descanso";
+
+        console.log("DEBUG: Loading schedule for user:", session.user.id);
+        console.log("DEBUG: Today:", today);
+        console.log("DEBUG: Day of week (0=Monday, 6=Sunday):", normalizedDay);
+
+        const { data: scheduleList, error: scheduleError } = await supabase
+          .from("weekly_schedule")
+          .select("*")
+          .eq("user_id", session.user.id)
+          .eq("day_of_week", normalizedDay);
+
+        console.log("DEBUG: Schedule query result:", {
+          scheduleList,
+          scheduleError,
+        });
+
+        const scheduleData =
+          scheduleList && scheduleList.length > 0 ? scheduleList[0] : null;
+
+        console.log("DEBUG: Schedule data found:", scheduleData);
+
+        if (scheduleData?.template_id) {
+          console.log(
+            "DEBUG: Template ID from schedule:",
+            scheduleData.template_id,
+          );
+
+          // Get template exercises
+          const { data: templateExercises, error: exercisesError } =
+            await supabase
+              .from("template_exercises")
+              .select("*")
+              .eq("template_id", scheduleData.template_id)
+              .order("order_index");
+
+          console.log("DEBUG: Template exercises result:", {
+            templateExercises,
+            exercisesError,
+          });
+
+          // Get template name
+          const { data: template, error: templateError } = await supabase
+            .from("workout_templates")
+            .select("name")
+            .eq("id", scheduleData.template_id)
             .single();
 
-          if (createError) throw createError;
-          workoutData = newWorkout;
+          console.log("DEBUG: Template name result:", {
+            template,
+            templateError,
+          });
+
+          if (template) {
+            templateName = template.name;
+          }
+
+          if (!workoutData) {
+            // Create new workout for today
+            const { data: newWorkout, error: createError } = await supabase
+              .from("workouts")
+              .insert([
+                {
+                  user_id: session.user.id,
+                  date: today,
+                  completed: false,
+                },
+              ])
+              .select()
+              .single();
+
+            if (createError) throw createError;
+            workoutData = newWorkout;
+          }
+
+          // Get or create exercises for this workout
+          const { data: existingExercises } = await supabase
+            .from("exercises")
+            .select("*")
+            .eq("workout_id", workoutData.id);
+
+          if (!existingExercises || existingExercises.length === 0) {
+            // Create exercises from template
+            console.log(
+              "DEBUG: Creating exercises from template. Template exercises:",
+              templateExercises,
+            );
+
+            const exercisesToInsert = (templateExercises || []).map(
+              (templateEx, index) => ({
+                workout_id: workoutData!.id,
+                name: templateEx.name,
+                sets: templateEx.sets,
+                reps: templateEx.reps,
+                last_weight: templateEx.initial_weight || null,
+                done: false,
+                order_index: index,
+              }),
+            );
+
+            console.log("DEBUG: Exercises to insert:", exercisesToInsert);
+
+            if (exercisesToInsert.length > 0) {
+              const { data: insertedExercises, error: insertError } =
+                await supabase
+                  .from("exercises")
+                  .insert(exercisesToInsert)
+                  .select();
+
+              console.log("DEBUG: Insert result:", {
+                insertedExercises,
+                insertError,
+              });
+
+              exercises = (insertedExercises || []).map((ex) => ({
+                ...ex,
+                new_weight: null,
+              }));
+            }
+          } else {
+            console.log("DEBUG: Using existing exercises from workout");
+            exercises = existingExercises.map((ex) => ({
+              ...ex,
+              new_weight: null,
+            }));
+          }
+        } else if (workoutData) {
+          // No template scheduled, but workout exists - load its exercises
+          const { data: exercisesData } = await supabase
+            .from("exercises")
+            .select("*")
+            .eq("workout_id", workoutData.id);
+
+          exercises = (exercisesData || []).map((ex) => ({
+            ...ex,
+            new_weight: null,
+          }));
         }
 
-        // Get exercises for this workout
-        const { data: exercisesData, error: exercisesError } = await supabase
-          .from("exercises")
-          .select("*")
-          .eq("workout_id", workoutData.id);
-
-        if (exercisesError) throw exercisesError;
-
-        const exercises: Exercise[] = (exercisesData || []).map((ex) => ({
-          ...ex,
-          new_weight: null,
-        }));
-
-        setWorkout({
-          ...workoutData,
-          exercises,
-        });
+        setWorkout(
+          workoutData
+            ? {
+                ...workoutData,
+                exercises,
+              }
+            : null,
+        );
 
         // Get user stats
         const { data: streaksList } = await supabase
@@ -233,7 +349,17 @@ export default function Index() {
           .single();
 
         const today = new Date().toISOString().split("T")[0];
-        const newStreak = (streaksData?.current_streak || 0) + 1;
+        const lastWorkoutDate = streaksData?.last_workout_date;
+
+        // Only increment streak if workout hasn't been completed today
+        let newStreak = streaksData?.current_streak || 0;
+        let shouldIncrement = false;
+
+        if (lastWorkoutDate !== today) {
+          newStreak += 1;
+          shouldIncrement = true;
+        }
+
         const longestStreak = Math.max(
           newStreak,
           streaksData?.longest_streak || 0,
@@ -253,7 +379,8 @@ export default function Index() {
           ...stats,
           currentStreak: newStreak,
           longestStreak,
-          treinosConcluidos: stats.treinosConcluidos + 1,
+          treinosConcluidos:
+            stats.treinosConcluidos + (shouldIncrement ? 1 : 0),
         });
       }
     } catch (error) {
@@ -303,9 +430,15 @@ export default function Index() {
         {/* Exercises List */}
         {workout && workout.exercises.length > 0 ? (
           <div className="space-y-4 mb-8">
-            <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">
-              Seus exercícios
-            </h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+                Exercícios do Dia
+              </h2>
+              <div className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-semibold">
+                {workout.exercises.filter((e) => e.done).length}/
+                {workout.exercises.length} feitos
+              </div>
+            </div>
             {workout.exercises.map((exercise) => (
               <div
                 key={exercise.id}
@@ -332,7 +465,7 @@ export default function Index() {
                       )}
                     </h3>
 
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                       <div className="bg-gray-100 rounded-lg p-3">
                         <label className="text-gray-600 font-semibold block mb-1">
                           Séries
@@ -349,13 +482,23 @@ export default function Index() {
                           {exercise.reps}
                         </p>
                       </div>
-                      <div className="bg-gray-100 rounded-lg p-3 col-span-2 md:col-span-1">
-                        <label className="text-gray-600 font-semibold block mb-1">
-                          Última carga
+                      <div className="bg-blue-100 rounded-lg p-3">
+                        <label className="text-blue-700 font-semibold block mb-1">
+                          Anterior
                         </label>
-                        <p className="text-gray-800 font-bold text-lg">
+                        <p className="text-blue-900 font-bold text-lg">
                           {exercise.last_weight
                             ? `${exercise.last_weight}kg`
+                            : "—"}
+                        </p>
+                      </div>
+                      <div className="bg-purple-100 rounded-lg p-3">
+                        <label className="text-purple-700 font-semibold block mb-1">
+                          Progresso
+                        </label>
+                        <p className="text-purple-900 font-bold text-lg">
+                          {exercise.new_weight && exercise.last_weight
+                            ? `${(exercise.new_weight - exercise.last_weight).toFixed(1)}kg`
                             : "—"}
                         </p>
                       </div>
@@ -392,11 +535,9 @@ export default function Index() {
         ) : (
           <div className="bg-gray-50 rounded-2xl p-8 text-center mb-8">
             <p className="text-gray-600 mb-4">
-              Nenhum exercício adicionado para hoje
+              Nenhum exercício agendado para hoje. Acesse "Programação" para
+              configurar seus treinos.
             </p>
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-              Adicionar exercício
-            </Button>
           </div>
         )}
 
@@ -415,13 +556,13 @@ export default function Index() {
           </div>
         )}
 
-        {/* Save Button */}
+        {/* Finalize Button */}
         <Button
           onClick={handleSaveWorkout}
           disabled={saving || !workout}
           className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-xl text-base mb-8 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
         >
-          {saving ? "Salvando..." : "Salvar treino de hoje"}
+          {saving ? "Finalizando..." : "Finalizar treino"}
         </Button>
       </div>
     </Layout>

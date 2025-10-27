@@ -128,8 +128,20 @@ export default function Index() {
         setAllCompleted(exercises.length > 0 && exercises.every((e) => e.done))
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error)
-        console.error('Error loading workout:', errorMessage, error)
-        alert(`Erro ao carregar treino: ${errorMessage}`)
+        console.error('Error loading workout:', {
+          message: errorMessage,
+          error: error,
+          details: error instanceof Error ? error.stack : 'No stack trace'
+        })
+
+        // Check if it's a table doesn't exist error
+        if (errorMessage.includes('relation') || errorMessage.includes('does not exist')) {
+          alert('⚠️ Banco de dados não configurado.\n\nPor favor, execute os scripts SQL do SETUP_GUIDE.md para criar as tabelas necessárias.')
+        } else if (errorMessage.includes('permission') || errorMessage.includes('policy')) {
+          alert('⚠️ Erro de permissão.\n\nVerifique as políticas RLS do Supabase ou execute os scripts SQL do SETUP_GUIDE.md')
+        } else {
+          alert(`Erro ao carregar treino: ${errorMessage}`)
+        }
       } finally {
         setLoading(false)
       }

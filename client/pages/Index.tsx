@@ -208,7 +208,9 @@ export default function Index() {
         })
       }
     } catch (error) {
-      console.error('Error saving workout:', error)
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      console.error('Error saving workout:', errorMessage, error)
+      alert(`Erro ao salvar treino: ${errorMessage}`)
     } finally {
       setSaving(false)
     }

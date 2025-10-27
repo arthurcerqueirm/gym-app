@@ -106,8 +106,7 @@ CREATE TABLE template_exercises (
   name TEXT NOT NULL,
   sets INTEGER DEFAULT 3,
   reps INTEGER DEFAULT 10,
-  rest_seconds INTEGER DEFAULT 60,
-  initial_weight NUMERIC(10, 2),
+  initial_weight NUMERIC(10, 2) NOT NULL,
   order_index INTEGER DEFAULT 0,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
@@ -115,10 +114,14 @@ CREATE TABLE template_exercises (
 CREATE INDEX idx_template_exercises_template ON template_exercises(template_id);
 ```
 
-**If you already have the table, add the column:**
+**If you already have the table, run these commands:**
 
 ```sql
-ALTER TABLE template_exercises ADD COLUMN initial_weight NUMERIC(10, 2);
+-- Add initial_weight if it doesn't exist
+ALTER TABLE template_exercises ADD COLUMN initial_weight NUMERIC(10, 2) NOT NULL DEFAULT 0;
+
+-- Remove rest_seconds if it exists (optional, for cleanup)
+ALTER TABLE template_exercises DROP COLUMN IF EXISTS rest_seconds;
 ```
 
 ### **1.8 Weekly Schedule Table**

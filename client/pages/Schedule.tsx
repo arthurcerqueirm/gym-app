@@ -12,9 +12,8 @@ interface TemplateExercise {
   name: string;
   sets: number;
   reps: number;
-  rest_seconds: number;
   order_index: number;
-  initial_weight?: number | null;
+  initial_weight: number;
 }
 
 interface WorkoutTemplate {
@@ -50,8 +49,7 @@ export default function Schedule() {
     name: "",
     sets: 3,
     reps: 10,
-    rest: 60,
-    initial_weight: null as number | null,
+    initial_weight: "" as string,
   });
 
   useEffect(() => {
@@ -206,14 +204,19 @@ export default function Schedule() {
       const template = templates.find((t) => t.id === templateId);
       const orderIndex = (template?.exercises.length || 0) + 1;
 
+      const weight = parseFloat(newExercise.initial_weight);
+      if (isNaN(weight)) {
+        alert("Peso é obrigatório");
+        return;
+      }
+
       const { error } = await supabase.from("template_exercises").insert([
         {
           template_id: templateId,
           name: newExercise.name,
           sets: newExercise.sets,
           reps: newExercise.reps,
-          rest_seconds: newExercise.rest,
-          initial_weight: newExercise.initial_weight,
+          initial_weight: weight,
           order_index: orderIndex,
         },
       ]);
@@ -238,7 +241,7 @@ export default function Schedule() {
         ),
       );
 
-      setNewExercise({ name: "", sets: 3, reps: 10, rest: 60, initial_weight: null });
+      setNewExercise({ name: "", sets: 3, reps: 10, initial_weight: "" });
     } catch (error) {
       console.error("Error adding exercise:", error);
       alert("Erro ao adicionar exercício");
@@ -423,8 +426,7 @@ export default function Schedule() {
                               {exercise.name}
                             </p>
                             <p className="text-xs text-gray-600">
-                              {exercise.sets}x{exercise.reps} •{" "}
-                              {exercise.rest_seconds}s{exercise.initial_weight ? ` • ${exercise.initial_weight}kg` : ""}
+                              {exercise.sets}x{exercise.reps} • {exercise.initial_weight}kg
                             </p>
                           </div>
                           <Button

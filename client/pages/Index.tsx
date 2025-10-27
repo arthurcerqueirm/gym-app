@@ -107,23 +107,34 @@ export default function Index() {
           .eq("user_id", session.user.id)
           .eq("day_of_week", normalizedDay);
 
-        console.log("DEBUG: Schedule query result:", { scheduleList, scheduleError });
+        console.log("DEBUG: Schedule query result:", {
+          scheduleList,
+          scheduleError,
+        });
 
-        const scheduleData = scheduleList && scheduleList.length > 0 ? scheduleList[0] : null;
+        const scheduleData =
+          scheduleList && scheduleList.length > 0 ? scheduleList[0] : null;
 
         console.log("DEBUG: Schedule data found:", scheduleData);
 
         if (scheduleData?.template_id) {
-          console.log("DEBUG: Template ID from schedule:", scheduleData.template_id);
+          console.log(
+            "DEBUG: Template ID from schedule:",
+            scheduleData.template_id,
+          );
 
           // Get template exercises
-          const { data: templateExercises, error: exercisesError } = await supabase
-            .from("template_exercises")
-            .select("*")
-            .eq("template_id", scheduleData.template_id)
-            .order("order_index");
+          const { data: templateExercises, error: exercisesError } =
+            await supabase
+              .from("template_exercises")
+              .select("*")
+              .eq("template_id", scheduleData.template_id)
+              .order("order_index");
 
-          console.log("DEBUG: Template exercises result:", { templateExercises, exercisesError });
+          console.log("DEBUG: Template exercises result:", {
+            templateExercises,
+            exercisesError,
+          });
 
           // Get template name
           const { data: template, error: templateError } = await supabase
@@ -132,7 +143,10 @@ export default function Index() {
             .eq("id", scheduleData.template_id)
             .single();
 
-          console.log("DEBUG: Template name result:", { template, templateError });
+          console.log("DEBUG: Template name result:", {
+            template,
+            templateError,
+          });
 
           if (template) {
             templateName = template.name;
@@ -164,7 +178,10 @@ export default function Index() {
 
           if (!existingExercises || existingExercises.length === 0) {
             // Create exercises from template
-            console.log("DEBUG: Creating exercises from template. Template exercises:", templateExercises);
+            console.log(
+              "DEBUG: Creating exercises from template. Template exercises:",
+              templateExercises,
+            );
 
             const exercisesToInsert = (templateExercises || []).map(
               (templateEx, index) => ({
@@ -181,12 +198,16 @@ export default function Index() {
             console.log("DEBUG: Exercises to insert:", exercisesToInsert);
 
             if (exercisesToInsert.length > 0) {
-              const { data: insertedExercises, error: insertError } = await supabase
-                .from("exercises")
-                .insert(exercisesToInsert)
-                .select();
+              const { data: insertedExercises, error: insertError } =
+                await supabase
+                  .from("exercises")
+                  .insert(exercisesToInsert)
+                  .select();
 
-              console.log("DEBUG: Insert result:", { insertedExercises, insertError });
+              console.log("DEBUG: Insert result:", {
+                insertedExercises,
+                insertError,
+              });
 
               exercises = (insertedExercises || []).map((ex) => ({
                 ...ex,
@@ -358,7 +379,8 @@ export default function Index() {
           ...stats,
           currentStreak: newStreak,
           longestStreak,
-          treinosConcluidos: stats.treinosConcluidos + (shouldIncrement ? 1 : 0),
+          treinosConcluidos:
+            stats.treinosConcluidos + (shouldIncrement ? 1 : 0),
         });
       }
     } catch (error) {
@@ -413,7 +435,8 @@ export default function Index() {
                 Exercícios do Dia
               </h2>
               <div className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-semibold">
-                {workout.exercises.filter((e) => e.done).length}/{workout.exercises.length} feitos
+                {workout.exercises.filter((e) => e.done).length}/
+                {workout.exercises.length} feitos
               </div>
             </div>
             {workout.exercises.map((exercise) => (
@@ -512,7 +535,8 @@ export default function Index() {
         ) : (
           <div className="bg-gray-50 rounded-2xl p-8 text-center mb-8">
             <p className="text-gray-600 mb-4">
-              Nenhum exercício agendado para hoje. Acesse "Programação" para configurar seus treinos.
+              Nenhum exercício agendado para hoje. Acesse "Programação" para
+              configurar seus treinos.
             </p>
           </div>
         )}

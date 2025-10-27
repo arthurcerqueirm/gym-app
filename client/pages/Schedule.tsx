@@ -216,9 +216,7 @@ export default function Schedule() {
         .order("order_index");
 
       const updatedTemplates = templates.map((t) =>
-        t.id === templateId
-          ? { ...t, exercises: updatedTemplate || [] }
-          : t,
+        t.id === templateId ? { ...t, exercises: updatedTemplate || [] } : t,
       );
 
       setTemplates(updatedTemplates);
@@ -229,7 +227,10 @@ export default function Schedule() {
     }
   };
 
-  const handleDeleteExercise = async (exerciseId: string, templateId: string) => {
+  const handleDeleteExercise = async (
+    exerciseId: string,
+    templateId: string,
+  ) => {
     try {
       await supabase.from("template_exercises").delete().eq("id", exerciseId);
 
@@ -240,9 +241,7 @@ export default function Schedule() {
         .order("order_index");
 
       const updatedTemplates = templates.map((t) =>
-        t.id === templateId
-          ? { ...t, exercises: updatedExercises || [] }
-          : t,
+        t.id === templateId ? { ...t, exercises: updatedExercises || [] } : t,
       );
 
       setTemplates(updatedTemplates);
@@ -252,7 +251,10 @@ export default function Schedule() {
     }
   };
 
-  const handleScheduleDay = async (dayIndex: number, templateId: string | null) => {
+  const handleScheduleDay = async (
+    dayIndex: number,
+    templateId: string | null,
+  ) => {
     if (!userId) return;
 
     try {
@@ -364,8 +366,11 @@ export default function Schedule() {
               {templates.length === 0 ? (
                 <div className="bg-gray-50 rounded-2xl p-8 text-center border-2 border-dashed border-gray-300">
                   <p className="text-gray-500 text-lg">
-                    Nenhum treino criado ainda.<br/>
-                    <span className="text-sm">Crie um novo treino para começar</span>
+                    Nenhum treino criado ainda.
+                    <br />
+                    <span className="text-sm">
+                      Crie um novo treino para começar
+                    </span>
                   </p>
                 </div>
               ) : (
@@ -411,7 +416,8 @@ export default function Schedule() {
                                 {exercise.name}
                               </p>
                               <p className="text-sm text-gray-600">
-                                {exercise.sets}x{exercise.reps} • {exercise.initial_weight}kg
+                                {exercise.sets}x{exercise.reps} •{" "}
+                                {exercise.initial_weight}kg
                               </p>
                             </div>
                             <Button
@@ -531,10 +537,7 @@ export default function Schedule() {
                       <select
                         value={scheduledTemplateId || ""}
                         onChange={(e) =>
-                          handleScheduleDay(
-                            day.index,
-                            e.target.value || null,
-                          )
+                          handleScheduleDay(day.index, e.target.value || null)
                         }
                         className="w-full h-10 rounded-lg border-2 border-gray-300 px-3 text-sm bg-white text-gray-800 font-medium focus:border-purple-500 focus:outline-none"
                       >
@@ -556,7 +559,8 @@ export default function Schedule() {
               </div>
               <div className="mt-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
                 <p className="text-xs text-blue-700">
-                  💡 <strong>Dica:</strong> Selecione um treino para cada dia. O programa se repete automaticamente toda semana.
+                  💡 <strong>Dica:</strong> Selecione um treino para cada dia. O
+                  programa se repete automaticamente toda semana.
                 </p>
               </div>
             </div>

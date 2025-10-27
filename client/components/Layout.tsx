@@ -1,7 +1,14 @@
 import { ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "@/lib/auth";
-import { Flame, Calendar, TrendingUp, User, LogOut, Dumbbell } from "lucide-react";
+import {
+  Flame,
+  Calendar,
+  TrendingUp,
+  User,
+  LogOut,
+  Dumbbell,
+} from "lucide-react";
 
 interface LayoutProps {
   children: ReactNode;

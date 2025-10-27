@@ -107,11 +107,18 @@ CREATE TABLE template_exercises (
   sets INTEGER DEFAULT 3,
   reps INTEGER DEFAULT 10,
   rest_seconds INTEGER DEFAULT 60,
+  initial_weight NUMERIC(10, 2),
   order_index INTEGER DEFAULT 0,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
 
 CREATE INDEX idx_template_exercises_template ON template_exercises(template_id);
+```
+
+**If you already have the table, add the column:**
+
+```sql
+ALTER TABLE template_exercises ADD COLUMN initial_weight NUMERIC(10, 2);
 ```
 
 ### **1.8 Weekly Schedule Table**

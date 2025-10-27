@@ -81,7 +81,19 @@ export default function Evolution() {
           })
         }
       } catch (error) {
-        console.error('Error loading metrics:', error)
+        const errorMessage = error instanceof Error ? error.message : String(error)
+        console.error('Error loading metrics:', {
+          message: errorMessage,
+          error: error,
+        })
+
+        if (errorMessage.includes('relation') || errorMessage.includes('does not exist')) {
+          alert('⚠️ Banco de dados não configurado.\n\nPor favor, execute os scripts SQL do SETUP_GUIDE.md para criar as tabelas necessárias.')
+        } else if (errorMessage.includes('permission') || errorMessage.includes('policy')) {
+          alert('⚠️ Erro de permissão.\n\nVerifique as políticas RLS do Supabase.')
+        } else {
+          alert(`Erro ao carregar evolução: ${errorMessage}`)
+        }
       } finally {
         setLoading(false)
       }

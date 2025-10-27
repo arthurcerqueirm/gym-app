@@ -106,8 +106,19 @@ export default function Profile() {
       setSuccess(true)
       setTimeout(() => setSuccess(false), 3000)
     } catch (err) {
-      console.error('Error saving measurements:', err)
-      setError('Erro ao salvar as medições. Tente novamente.')
+      const errorMessage = err instanceof Error ? err.message : String(err)
+      console.error('Error saving measurements:', {
+        message: errorMessage,
+        error: err,
+      })
+
+      if (errorMessage.includes('relation') || errorMessage.includes('does not exist')) {
+        setError('⚠️ Banco de dados não configurado. Execute os scripts SQL do SETUP_GUIDE.md')
+      } else if (errorMessage.includes('permission') || errorMessage.includes('policy')) {
+        setError('⚠️ Erro de permissão. Verifique as políticas RLS do Supabase.')
+      } else {
+        setError(`Erro ao salvar as medições: ${errorMessage}`)
+      }
     } finally {
       setSaving(false)
     }

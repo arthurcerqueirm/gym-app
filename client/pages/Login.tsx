@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -21,6 +22,29 @@ export default function Login() {
     if (authError) {
       setError(authError.message);
     } else if (data?.session) {
+      // Ensure user record exists in users table
+      try {
+        const { data: userExists } = await supabase
+          .from("users")
+          .select("id")
+          .eq("id", data.session.user.id)
+          .maybeSingle();
+
+        if (!userExists) {
+          // Create user record if it doesn't exist
+          await supabase.from("users").insert([
+            {
+              id: data.session.user.id,
+              name: email.split("@")[0], // Use email prefix as default name
+              email: email,
+            },
+          ]);
+        }
+      } catch (err) {
+        console.warn("Could not ensure user record:", err);
+        // Don't block login if user creation fails
+      }
+
       navigate("/");
     }
 

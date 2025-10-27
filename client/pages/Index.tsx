@@ -376,9 +376,14 @@ export default function Index() {
         {/* Exercises List */}
         {workout && workout.exercises.length > 0 ? (
           <div className="space-y-4 mb-8">
-            <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">
-              Seus exercícios
-            </h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+                Exercícios do Dia
+              </h2>
+              <div className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-semibold">
+                {workout.exercises.filter((e) => e.done).length}/{workout.exercises.length} feitos
+              </div>
+            </div>
             {workout.exercises.map((exercise) => (
               <div
                 key={exercise.id}
@@ -405,7 +410,7 @@ export default function Index() {
                       )}
                     </h3>
 
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                       <div className="bg-gray-100 rounded-lg p-3">
                         <label className="text-gray-600 font-semibold block mb-1">
                           Séries
@@ -422,13 +427,23 @@ export default function Index() {
                           {exercise.reps}
                         </p>
                       </div>
-                      <div className="bg-gray-100 rounded-lg p-3 col-span-2 md:col-span-1">
-                        <label className="text-gray-600 font-semibold block mb-1">
-                          Última carga
+                      <div className="bg-blue-100 rounded-lg p-3">
+                        <label className="text-blue-700 font-semibold block mb-1">
+                          Anterior
                         </label>
-                        <p className="text-gray-800 font-bold text-lg">
+                        <p className="text-blue-900 font-bold text-lg">
                           {exercise.last_weight
                             ? `${exercise.last_weight}kg`
+                            : "—"}
+                        </p>
+                      </div>
+                      <div className="bg-purple-100 rounded-lg p-3">
+                        <label className="text-purple-700 font-semibold block mb-1">
+                          Progresso
+                        </label>
+                        <p className="text-purple-900 font-bold text-lg">
+                          {exercise.new_weight && exercise.last_weight
+                            ? `${(exercise.new_weight - exercise.last_weight).toFixed(1)}kg`
                             : "—"}
                         </p>
                       </div>
@@ -465,11 +480,8 @@ export default function Index() {
         ) : (
           <div className="bg-gray-50 rounded-2xl p-8 text-center mb-8">
             <p className="text-gray-600 mb-4">
-              Nenhum exercício adicionado para hoje
+              Nenhum exercício agendado para hoje. Acesse "Programação" para configurar seus treinos.
             </p>
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white">
-              Adicionar exercício
-            </Button>
           </div>
         )}
 
@@ -488,13 +500,13 @@ export default function Index() {
           </div>
         )}
 
-        {/* Save Button */}
+        {/* Finalize Button */}
         <Button
           onClick={handleSaveWorkout}
           disabled={saving || !workout}
           className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-xl text-base mb-8 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
         >
-          {saving ? "Salvando..." : "Salvar treino de hoje"}
+          {saving ? "Finalizando..." : "Finalizar treino"}
         </Button>
       </div>
     </Layout>

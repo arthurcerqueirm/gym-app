@@ -248,7 +248,7 @@ export default function Evolution() {
                 <Line
                   type="monotone"
                   dataKey="muscleMass"
-                  stroke="#10b981"
+                  stroke="#f97316"
                   dot={{ r: 4 }}
                   strokeWidth={2}
                   name="Massa Magra (kg)"
@@ -256,7 +256,7 @@ export default function Evolution() {
                 <Line
                   type="monotone"
                   dataKey="fatPercentage"
-                  stroke="#ef4444"
+                  stroke="#ea580c"
                   dot={{ r: 4 }}
                   strokeWidth={2}
                   name="Gordura (%)"

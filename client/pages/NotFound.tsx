@@ -28,7 +28,7 @@ const NotFound = () => {
         </p>
         <Button
           onClick={() => navigate("/")}
-          className="inline-flex items-center gap-2 bg-primary hover:opacity-90 text-white font-bold py-3 px-8 rounded-xl transition-all transform hover:scale-105 active:scale-95"
+          className="inline-flex items-center gap-2 btn-gradient text-white font-bold py-3 px-8 rounded-xl transition-all transform hover:scale-105 active:scale-95"
         >
           <ArrowLeft size={20} />
           Voltar para Home

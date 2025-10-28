@@ -131,7 +131,7 @@ export default function Calendar() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-2xl p-6 shadow-lg">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold opacity-90">
@@ -144,7 +144,7 @@ export default function Calendar() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-green-500 to-emerald-500 text-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-gradient-to-br from-orange-600 to-amber-600 text-white rounded-2xl p-6 shadow-lg">
             <div>
               <p className="text-sm font-semibold opacity-90">Dias Treinados</p>
               <p className="text-4xl font-bold mt-2">{stats.totalWorkouts}</p>

@@ -21,7 +21,8 @@ export default function Layout({
 }: LayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  const displayName = userName && userName !== "Usuário" ? userName : "GymStreak";
+  const displayName =
+    userName && userName !== "Usuário" ? userName : "GymStreak";
 
   const handleLogout = async () => {
     await signOut();
@@ -55,7 +56,9 @@ export default function Layout({
         <div className="mb-12">
           <h1 className="text-3xl font-bold">GymStreak</h1>
           {userName && userName !== "Usuário" && (
-            <p className="text-orange-100 text-sm mt-2">Bem-vindo, {userName}!</p>
+            <p className="text-orange-100 text-sm mt-2">
+              Bem-vindo, {userName}!
+            </p>
           )}
         </div>
 

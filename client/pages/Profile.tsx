@@ -230,7 +230,9 @@ export default function Profile() {
             <div className="flex items-center gap-4">
               <User size={40} />
               <div>
-                <h1 className="text-3xl font-bold">{userProfile.name || "Novo Usuário"}</h1>
+                <h1 className="text-3xl font-bold">
+                  {userProfile.name || "Novo Usuário"}
+                </h1>
                 <p className="text-white/90">Gerencie seu perfil e medições</p>
               </div>
             </div>

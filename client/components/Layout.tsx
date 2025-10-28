@@ -40,7 +40,7 @@ export default function Layout({
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row">
       {/* Mobile Header */}
-      <div className="md:hidden bg-sidebar text-white p-4 flex justify-between items-center">
+      <div className="md:hidden sidebar-gradient text-white p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">{displayName}</h1>
         <button
           onClick={handleLogout}
@@ -52,7 +52,7 @@ export default function Layout({
       </div>
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex flex-col w-64 bg-sidebar text-white p-8 min-h-screen">
+      <div className="hidden md:flex flex-col w-64 sidebar-gradient text-white p-8 min-h-screen">
         <div className="mb-12">
           <h1 className="text-3xl font-bold">GymStreak</h1>
           {userName && userName !== "Usuário" && (

@@ -97,7 +97,7 @@ export default function Login() {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary hover:opacity-90 text-white font-bold py-3 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+            className="w-full btn-gradient text-white font-bold py-3 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
           >
             {loading ? "Entrando..." : "Entrar"}
           </Button>

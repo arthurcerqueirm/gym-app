@@ -222,21 +222,172 @@ export default function Profile() {
   }
 
   return (
-    <Layout userName={userName}>
-      <div className="p-4 md:p-8 max-w-2xl mx-auto">
+    <Layout userName={userProfile.name}>
+      <div className="p-4 md:p-8 max-w-3xl mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-3xl p-8 mb-8 shadow-lg">
-          <div className="flex items-center gap-4">
-            <User size={40} />
-            <div>
-              <h1 className="text-3xl font-bold">{userName}</h1>
-              <p className="text-white/90">Registre suas medições mensais</p>
+        <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-3xl p-8 mb-8 shadow-lg">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <User size={40} />
+              <div>
+                <h1 className="text-3xl font-bold">{userProfile.name || "Novo Usuário"}</h1>
+                <p className="text-white/90">Gerencie seu perfil e medições</p>
+              </div>
             </div>
           </div>
         </div>
 
+        {/* Profile Section */}
+        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-800">Meu Perfil</h2>
+            {!editingProfile && (
+              <Button
+                onClick={() => setEditingProfile(true)}
+                className="bg-orange-100 hover:bg-orange-200 text-orange-600 font-bold py-2 px-4 rounded-lg flex items-center gap-2"
+              >
+                <Edit2 size={18} /> Editar
+              </Button>
+            )}
+          </div>
+
+          {editingProfile ? (
+            <div className="space-y-5 mb-8">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Nome *
+                </label>
+                <Input
+                  type="text"
+                  placeholder="Seu nome completo"
+                  value={userProfile.name}
+                  onChange={(e) =>
+                    setUserProfile({ ...userProfile, name: e.target.value })
+                  }
+                  className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Gênero
+                </label>
+                <select
+                  value={userProfile.gender}
+                  onChange={(e) =>
+                    setUserProfile({ ...userProfile, gender: e.target.value })
+                  }
+                  className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base bg-white focus:border-orange-500"
+                >
+                  <option value="">Prefiro não informar</option>
+                  <option value="masculino">Masculino</option>
+                  <option value="feminino">Feminino</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Data de Nascimento
+                </label>
+                <Input
+                  type="date"
+                  value={userProfile.dateOfBirth}
+                  onChange={(e) =>
+                    setUserProfile({
+                      ...userProfile,
+                      dateOfBirth: e.target.value,
+                    })
+                  }
+                  className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Bio (opcional)
+                </label>
+                <textarea
+                  placeholder="Uma breve descrição sobre você..."
+                  value={userProfile.bio}
+                  onChange={(e) =>
+                    setUserProfile({ ...userProfile, bio: e.target.value })
+                  }
+                  className="w-full h-24 rounded-lg border-2 border-gray-200 px-4 py-3 text-base focus:border-orange-500 resize-none"
+                />
+              </div>
+
+              {error && (
+                <div className="bg-red-50 text-red-600 p-4 rounded-lg text-sm font-medium">
+                  {error}
+                </div>
+              )}
+
+              {success && (
+                <div className="bg-green-50 text-green-600 p-4 rounded-lg text-sm font-medium">
+                  ✓ Perfil atualizado com sucesso!
+                </div>
+              )}
+
+              <div className="flex gap-3">
+                <Button
+                  onClick={handleSaveProfile}
+                  disabled={saving}
+                  className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+                >
+                  <Check size={20} />
+                  {saving ? "Salvando..." : "Salvar Perfil"}
+                </Button>
+                <Button
+                  onClick={() => setEditingProfile(false)}
+                  disabled={saving}
+                  className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-lg"
+                >
+                  Cancelar
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <div className="bg-gray-50 rounded-lg p-4">
+                <p className="text-sm text-gray-600">Nome</p>
+                <p className="text-lg font-semibold text-gray-800">
+                  {userProfile.name || "Não informado"}
+                </p>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4">
+                <p className="text-sm text-gray-600">Gênero</p>
+                <p className="text-lg font-semibold text-gray-800">
+                  {userProfile.gender
+                    ? userProfile.gender.charAt(0).toUpperCase() +
+                      userProfile.gender.slice(1)
+                    : "Não informado"}
+                </p>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4">
+                <p className="text-sm text-gray-600">Data de Nascimento</p>
+                <p className="text-lg font-semibold text-gray-800">
+                  {userProfile.dateOfBirth
+                    ? new Date(userProfile.dateOfBirth).toLocaleDateString(
+                        "pt-BR",
+                      )
+                    : "Não informada"}
+                </p>
+              </div>
+              {userProfile.bio && (
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-600">Bio</p>
+                  <p className="text-lg font-semibold text-gray-800">
+                    {userProfile.bio}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
         {/* Measurements Form */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">
             Medições Corporais
           </h2>
@@ -254,7 +405,7 @@ export default function Profile() {
                 onChange={(e) =>
                   setMeasurements({ ...measurements, weight: e.target.value })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-purple-500"
+                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
               />
             </div>
 
@@ -273,7 +424,7 @@ export default function Profile() {
                     muscleMass: e.target.value,
                   })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-purple-500"
+                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
               />
             </div>
 
@@ -292,7 +443,7 @@ export default function Profile() {
                     fatPercentage: e.target.value,
                   })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-purple-500"
+                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
               />
             </div>
 
@@ -308,7 +459,7 @@ export default function Profile() {
                 onChange={(e) =>
                   setMeasurements({ ...measurements, height: e.target.value })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-purple-500"
+                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
               />
             </div>
           </div>
@@ -328,7 +479,7 @@ export default function Profile() {
           <Button
             onClick={handleSaveMeasurements}
             disabled={saving}
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 rounded-lg text-base flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+            className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-lg text-base flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
           >
             <Save size={20} />
             {saving ? "Salvando..." : "Salvar Medições"}
@@ -336,7 +487,7 @@ export default function Profile() {
         </div>
 
         {/* Info Box */}
-        <div className="mt-8 bg-blue-50 rounded-2xl p-6 text-blue-900">
+        <div className="bg-orange-50 rounded-2xl p-6 text-orange-900 border-l-4 border-orange-500">
           <p className="font-semibold mb-2">💡 Dica</p>
           <p className="text-sm">
             Recomendamos registrar suas medições mensalmente no mesmo dia e

@@ -40,7 +40,7 @@ export default function Layout({
     <div className="min-h-screen bg-white flex flex-col md:flex-row">
       {/* Mobile Header */}
       <div className="md:hidden bg-gradient-to-r from-orange-500 to-amber-500 text-white p-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">GymStreak</h1>
+        <h1 className="text-2xl font-bold">{displayName}</h1>
         <button
           onClick={handleLogout}
           className="text-white hover:bg-white/20 p-2 rounded-full transition-all"
@@ -52,7 +52,12 @@ export default function Layout({
 
       {/* Desktop Sidebar */}
       <div className="hidden md:flex flex-col w-64 bg-gradient-to-b from-orange-500 to-amber-500 text-white p-8 min-h-screen">
-        <h1 className="text-3xl font-bold mb-12">GymStreak</h1>
+        <div className="mb-12">
+          <h1 className="text-3xl font-bold">GymStreak</h1>
+          {userName && userName !== "Usuário" && (
+            <p className="text-orange-100 text-sm mt-2">Bem-vindo, {userName}!</p>
+          )}
+        </div>
 
         <nav className="flex-1 space-y-4">
           {navigationItems.map((item) => {

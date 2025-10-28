@@ -375,7 +375,7 @@ export default function Index() {
     <Layout userName={userName}>
       <div className="p-4 md:p-8 max-w-2xl mx-auto">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-3xl p-6 md:p-8 mb-8 shadow-lg">
+        <div className="bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 text-white rounded-3xl p-6 md:p-8 mb-8 shadow-lg shadow-purple-500/30">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-3xl md:text-4xl font-bold">Treino do Dia</h1>
             <Flame size={32} className="animate-bounce" />
@@ -393,10 +393,10 @@ export default function Index() {
         {workout && workout.exercises.length > 0 ? (
           <div className="space-y-4 mb-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+              <h2 className="text-xl md:text-2xl font-bold text-foreground">
                 Exercícios do Dia
               </h2>
-              <div className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-semibold">
+              <div className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm font-semibold border border-purple-500/40">
                 {workout.exercises.filter((e) => e.done).length}/
                 {workout.exercises.length} feitos
               </div>
@@ -404,10 +404,10 @@ export default function Index() {
             {workout.exercises.map((exercise) => (
               <div
                 key={exercise.id}
-                className={`bg-white rounded-2xl p-5 shadow-md border-2 transition-all ${
+                className={`rounded-2xl p-5 shadow-md border-2 transition-all ${
                   exercise.done
-                    ? "border-green-500 bg-green-50"
-                    : "border-gray-200 hover:border-orange-300"
+                    ? "bg-emerald-950 border-emerald-500 bg-gradient-to-br from-emerald-950 to-emerald-900"
+                    : "bg-card border-purple-500/30 hover:border-purple-500/60"
                 }`}
               >
                 <div className="flex items-start gap-4">
@@ -420,7 +420,7 @@ export default function Index() {
                   />
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-gray-800 text-lg mb-2 flex items-center gap-2">
+                    <h3 className="font-bold text-foreground text-lg mb-2 flex items-center gap-2">
                       {exercise.name}
                       {exercise.done && (
                         <Check size={20} className="text-green-600" />
@@ -428,19 +428,19 @@ export default function Index() {
                     </h3>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                      <div className="bg-gray-100 rounded-lg p-3">
-                        <label className="text-gray-600 font-semibold block mb-1">
+                      <div className="bg-slate-700/50 rounded-lg p-3">
+                        <label className="text-muted-foreground font-semibold block mb-1">
                           Séries
                         </label>
-                        <p className="text-gray-800 font-bold text-lg">
+                        <p className="text-foreground font-bold text-lg">
                           {exercise.sets}
                         </p>
                       </div>
-                      <div className="bg-gray-100 rounded-lg p-3">
-                        <label className="text-gray-600 font-semibold block mb-1">
+                      <div className="bg-slate-700/50 rounded-lg p-3">
+                        <label className="text-muted-foreground font-semibold block mb-1">
                           Reps
                         </label>
-                        <p className="text-gray-800 font-bold text-lg">
+                        <p className="text-foreground font-bold text-lg">
                           {exercise.reps}
                         </p>
                       </div>

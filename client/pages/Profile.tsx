@@ -391,14 +391,14 @@ export default function Profile() {
         </div>
 
         {/* Measurements Form */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        <div className="card-light dark:card-dark rounded-2xl shadow-lg p-6 md:p-8 mb-8">
+          <h2 className="text-2xl font-bold text-foreground mb-6">
             Medições Corporais
           </h2>
 
           <div className="space-y-5 mb-8">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-foreground mb-2">
                 Peso (kg)
               </label>
               <Input
@@ -409,12 +409,12 @@ export default function Profile() {
                 onChange={(e) =>
                   setMeasurements({ ...measurements, weight: e.target.value })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-background text-foreground"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-foreground mb-2">
                 Massa Magra (kg)
               </label>
               <Input
@@ -428,12 +428,12 @@ export default function Profile() {
                     muscleMass: e.target.value,
                   })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-background text-foreground"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-foreground mb-2">
                 Gordura Corporal (%)
               </label>
               <Input
@@ -447,7 +447,7 @@ export default function Profile() {
                     fatPercentage: e.target.value,
                   })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-background text-foreground"
               />
             </div>
 

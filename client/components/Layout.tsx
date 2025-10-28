@@ -21,6 +21,7 @@ export default function Layout({
 }: LayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
+  const displayName = userName && userName !== "Usuário" ? userName : "GymStreak";
 
   const handleLogout = async () => {
     await signOut();

@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ThemeToggle from "@/components/ThemeToggle";
 import { User, Save, Edit2, Check } from "lucide-react";
 
 interface UserProfile {
@@ -225,7 +226,7 @@ export default function Profile() {
     <Layout userName={userProfile.name}>
       <div className="p-4 md:p-8 max-w-3xl mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-3xl p-8 mb-8 shadow-lg">
+        <div className="btn-gradient text-white rounded-3xl p-8 mb-8 shadow-lg shadow-orange-500/20">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <User size={40} />
@@ -236,17 +237,18 @@ export default function Profile() {
                 <p className="text-white/90">Gerencie seu perfil e medições</p>
               </div>
             </div>
+            <ThemeToggle />
           </div>
         </div>
 
         {/* Profile Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-8">
+        <div className="card-light dark:card-dark rounded-2xl shadow-lg p-6 md:p-8 mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-800">Meu Perfil</h2>
+            <h2 className="text-2xl font-bold text-foreground">Meu Perfil</h2>
             {!editingProfile && (
               <Button
                 onClick={() => setEditingProfile(true)}
-                className="bg-orange-100 hover:bg-orange-200 text-orange-600 font-bold py-2 px-4 rounded-lg flex items-center gap-2"
+                className="bg-primary/10 hover:bg-primary/20 text-primary font-bold py-2 px-4 rounded-lg flex items-center gap-2"
               >
                 <Edit2 size={18} /> Editar
               </Button>
@@ -256,7 +258,7 @@ export default function Profile() {
           {editingProfile ? (
             <div className="space-y-5 mb-8">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2">
                   Nome *
                 </label>
                 <Input
@@ -266,12 +268,12 @@ export default function Profile() {
                   onChange={(e) =>
                     setUserProfile({ ...userProfile, name: e.target.value })
                   }
-                  className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                  className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-background text-foreground"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2">
                   Gênero
                 </label>
                 <select

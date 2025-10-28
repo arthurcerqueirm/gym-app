@@ -485,7 +485,7 @@ export default function Index() {
                             e.target.value ? parseFloat(e.target.value) : null,
                           )
                         }
-                        className="w-full h-10 rounded-lg border-2 border-gray-200 px-3 text-sm focus:border-orange-500"
+                        className="w-full h-10 rounded-lg border-2 border-slate-700 px-3 text-sm focus:border-purple-500 bg-slate-800 text-foreground"
                         disabled={!exercise.done}
                       />
                     </div>
@@ -495,8 +495,8 @@ export default function Index() {
             ))}
           </div>
         ) : (
-          <div className="bg-gray-50 rounded-2xl p-8 text-center mb-8">
-            <p className="text-gray-600 mb-4">
+          <div className="bg-card rounded-2xl p-8 text-center mb-8 border border-purple-500/20">
+            <p className="text-muted-foreground mb-4">
               Nenhum exercício agendado para hoje. Acesse "Programação" para
               configurar seus treinos.
             </p>
@@ -505,7 +505,7 @@ export default function Index() {
 
         {/* Completion Feedback */}
         {allCompleted && workout && workout.exercises.length > 0 && (
-          <div className="bg-gradient-to-r from-green-400 to-emerald-400 text-white rounded-2xl p-6 mb-8 shadow-lg animate-pulse">
+          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl p-6 mb-8 shadow-lg shadow-emerald-500/30 animate-pulse">
             <div className="text-center">
               <h3 className="text-2xl font-bold mb-2">
                 Parabéns {userName}! 🎉
@@ -522,7 +522,7 @@ export default function Index() {
         <Button
           onClick={handleSaveWorkout}
           disabled={saving || !workout}
-          className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-xl text-base mb-8 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+          className="w-full btn-gradient text-white font-bold py-3 rounded-xl text-base mb-8 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
         >
           {saving ? "Finalizando..." : "Finalizar treino"}
         </Button>

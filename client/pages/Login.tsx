@@ -47,11 +47,11 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-2">
-            <span className="text-orange-500">GymStreak</span>
+            <span className="text-primary">GymStreak</span>
           </h1>
           <p className="text-gray-600 text-lg">Não quebre a corrente! 🔥</p>
         </div>
@@ -69,7 +69,7 @@ export default function Login() {
               placeholder="seu@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full h-12 rounded-xl border-2 border-gray-200 px-4 text-base focus:border-orange-500 focus:outline-none"
+              className="w-full h-12 rounded-xl border-2 border-gray-200 px-4 text-base focus:border-primary focus:outline-none"
               required
             />
           </div>
@@ -83,7 +83,7 @@ export default function Login() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full h-12 rounded-xl border-2 border-gray-200 px-4 text-base focus:border-orange-500 focus:outline-none"
+              className="w-full h-12 rounded-xl border-2 border-gray-200 px-4 text-base focus:border-primary focus:outline-none"
               required
             />
           </div>
@@ -97,7 +97,7 @@ export default function Login() {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+            className="w-full bg-primary hover:opacity-90 text-white font-bold py-3 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
           >
             {loading ? "Entrando..." : "Entrar"}
           </Button>

@@ -40,7 +40,7 @@ export default function Layout({
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row">
       {/* Mobile Header */}
-      <div className="md:hidden bg-gradient-to-r from-orange-500 to-amber-500 text-white p-4 flex justify-between items-center">
+      <div className="md:hidden bg-sidebar text-white p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">{displayName}</h1>
         <button
           onClick={handleLogout}
@@ -52,11 +52,11 @@ export default function Layout({
       </div>
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex flex-col w-64 bg-gradient-to-b from-orange-500 to-amber-500 text-white p-8 min-h-screen">
+      <div className="hidden md:flex flex-col w-64 bg-sidebar text-white p-8 min-h-screen">
         <div className="mb-12">
           <h1 className="text-3xl font-bold">GymStreak</h1>
           {userName && userName !== "Usuário" && (
-            <p className="text-orange-100 text-sm mt-2">
+            <p className="text-sidebar-foreground text-sm mt-2 opacity-80">
               Bem-vindo, {userName}!
             </p>
           )}
@@ -72,7 +72,7 @@ export default function Layout({
                 onClick={() => navigate(item.path)}
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg font-semibold transition-all ${
                   isActive
-                    ? "bg-white/30 bg-white text-orange-600"
+                    ? "bg-white/30 bg-white text-primary"
                     : "text-white hover:bg-white/20"
                 }`}
               >
@@ -107,7 +107,7 @@ export default function Layout({
                 onClick={() => navigate(item.path)}
                 className={`flex flex-col items-center py-3 px-2 flex-1 transition-all ${
                   isActive
-                    ? "text-orange-500 font-bold"
+                    ? "text-primary font-bold"
                     : "text-gray-400 hover:text-gray-600"
                 }`}
               >

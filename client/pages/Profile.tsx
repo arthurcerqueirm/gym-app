@@ -103,6 +103,47 @@ export default function Profile() {
     loadProfile();
   }, [navigate]);
 
+  const handleSaveProfile = async () => {
+    setError("");
+    setSuccess(false);
+
+    if (!userProfile.name.trim()) {
+      setError("Nome é obrigatório");
+      return;
+    }
+
+    if (!userId) return;
+
+    try {
+      setSaving(true);
+
+      const { error: updateError } = await supabase
+        .from("users")
+        .update({
+          name: userProfile.name,
+          gender: userProfile.gender || null,
+          bio: userProfile.bio || null,
+          date_of_birth: userProfile.dateOfBirth || null,
+        })
+        .eq("id", userId);
+
+      if (updateError) throw updateError;
+
+      setEditingProfile(false);
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 3000);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      console.error("Error saving profile:", {
+        message: errorMessage,
+        error: err,
+      });
+      setError(`Erro ao salvar perfil: ${errorMessage}`);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const handleSaveMeasurements = async () => {
     setError("");
     setSuccess(false);

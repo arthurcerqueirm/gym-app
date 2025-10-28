@@ -361,7 +361,7 @@ export default function Index() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <Flame
-              className="mx-auto mb-4 text-orange-500 animate-bounce"
+              className="mx-auto mb-4 text-accent animate-bounce"
               size={48}
             />
             <p className="text-gray-600">Carregando seu treino...</p>
@@ -444,21 +444,21 @@ export default function Index() {
                           {exercise.reps}
                         </p>
                       </div>
-                      <div className="bg-orange-100 rounded-lg p-3">
-                        <label className="text-orange-700 font-semibold block mb-1">
+                      <div className="bg-secondary/10 rounded-lg p-3">
+                        <label className="text-secondary font-semibold block mb-1">
                           Anterior
                         </label>
-                        <p className="text-orange-900 font-bold text-lg">
+                        <p className="text-secondary font-bold text-lg">
                           {exercise.last_weight
                             ? `${exercise.last_weight}kg`
                             : "—"}
                         </p>
                       </div>
-                      <div className="bg-amber-100 rounded-lg p-3">
-                        <label className="text-amber-700 font-semibold block mb-1">
+                      <div className="bg-primary/10 rounded-lg p-3">
+                        <label className="text-primary font-semibold block mb-1">
                           Progresso
                         </label>
-                        <p className="text-amber-900 font-bold text-lg">
+                        <p className="text-primary font-bold text-lg">
                           {exercise.new_weight && exercise.last_weight
                             ? `${(exercise.new_weight - exercise.last_weight).toFixed(1)}kg`
                             : "—"}

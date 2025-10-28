@@ -182,17 +182,18 @@ export default function Index() {
               new_weight: null,
             }));
           }
-        } else if (workoutData) {
-          // No template scheduled, but workout exists - load its exercises
-          const { data: exercisesData } = await supabase
-            .from("exercises")
-            .select("*")
-            .eq("workout_id", workoutData.id);
-
-          exercises = (exercisesData || []).map((ex) => ({
-            ...ex,
-            new_weight: null,
-          }));
+        } else {
+          // No template scheduled for today
+          if (workoutData) {
+            // Delete the workout and its exercises if no template is scheduled
+            await supabase
+              .from("exercises")
+              .delete()
+              .eq("workout_id", workoutData.id);
+            await supabase.from("workouts").delete().eq("id", workoutData.id);
+            workoutData = null;
+          }
+          exercises = [];
         }
 
         setWorkout(
@@ -443,21 +444,21 @@ export default function Index() {
                           {exercise.reps}
                         </p>
                       </div>
-                      <div className="bg-blue-100 rounded-lg p-3">
-                        <label className="text-blue-700 font-semibold block mb-1">
+                      <div className="bg-orange-100 rounded-lg p-3">
+                        <label className="text-orange-700 font-semibold block mb-1">
                           Anterior
                         </label>
-                        <p className="text-blue-900 font-bold text-lg">
+                        <p className="text-orange-900 font-bold text-lg">
                           {exercise.last_weight
                             ? `${exercise.last_weight}kg`
                             : "—"}
                         </p>
                       </div>
-                      <div className="bg-purple-100 rounded-lg p-3">
-                        <label className="text-purple-700 font-semibold block mb-1">
+                      <div className="bg-amber-100 rounded-lg p-3">
+                        <label className="text-amber-700 font-semibold block mb-1">
                           Progresso
                         </label>
-                        <p className="text-purple-900 font-bold text-lg">
+                        <p className="text-amber-900 font-bold text-lg">
                           {exercise.new_weight && exercise.last_weight
                             ? `${(exercise.new_weight - exercise.last_weight).toFixed(1)}kg`
                             : "—"}

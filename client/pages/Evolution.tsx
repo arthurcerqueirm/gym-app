@@ -136,8 +136,8 @@ export default function Evolution() {
     return (
       <Layout userName={userName}>
         <div className="p-4 md:p-8 max-w-4xl mx-auto">
-          <div className="bg-blue-50 rounded-2xl p-8 text-center">
-            <TrendingUp size={48} className="mx-auto mb-4 text-blue-500" />
+          <div className="bg-orange-50 rounded-2xl p-8 text-center">
+            <TrendingUp size={48} className="mx-auto mb-4 text-orange-500" />
             <h2 className="text-2xl font-bold text-gray-800 mb-2">
               Nenhuma medição registrada
             </h2>
@@ -156,7 +156,7 @@ export default function Evolution() {
       <div className="p-4 md:p-8 max-w-5xl mx-auto">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-blue-200">
+          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-orange-200">
             <p className="text-gray-600 font-semibold text-sm mb-2">
               Peso Atual
             </p>
@@ -173,7 +173,7 @@ export default function Evolution() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-purple-200">
+          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-orange-200">
             <p className="text-gray-600 font-semibold text-sm mb-2">
               Gordura Corporal
             </p>
@@ -190,7 +190,7 @@ export default function Evolution() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-green-200">
+          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-orange-200">
             <p className="text-gray-600 font-semibold text-sm mb-2">
               Massa Magra
             </p>
@@ -224,7 +224,7 @@ export default function Evolution() {
                 <Line
                   type="monotone"
                   dataKey="weight"
-                  stroke="#3b82f6"
+                  stroke="#f97316"
                   dot={{ r: 5 }}
                   strokeWidth={2}
                   name="Peso (kg)"
@@ -248,7 +248,7 @@ export default function Evolution() {
                 <Line
                   type="monotone"
                   dataKey="muscleMass"
-                  stroke="#10b981"
+                  stroke="#f97316"
                   dot={{ r: 4 }}
                   strokeWidth={2}
                   name="Massa Magra (kg)"
@@ -256,7 +256,7 @@ export default function Evolution() {
                 <Line
                   type="monotone"
                   dataKey="fatPercentage"
-                  stroke="#ef4444"
+                  stroke="#ea580c"
                   dot={{ r: 4 }}
                   strokeWidth={2}
                   name="Gordura (%)"

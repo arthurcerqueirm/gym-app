@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "@/lib/auth";
+import { useTheme } from "@/hooks/use-theme";
 import {
   Flame,
   Calendar,
@@ -21,8 +22,19 @@ export default function Layout({
 }: LayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme } = useTheme();
   const displayName =
     userName && userName !== "Usuário" ? userName : "GymStreak";
+
+  useEffect(() => {
+    // Initialize theme on mount
+    const html = document.documentElement;
+    if (theme === 'dark') {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
+  }, [theme]);
 
   const handleLogout = async () => {
     await signOut();

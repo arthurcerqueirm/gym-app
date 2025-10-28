@@ -186,7 +186,10 @@ export default function Index() {
           // No template scheduled for today
           if (workoutData) {
             // Delete the workout and its exercises if no template is scheduled
-            await supabase.from("exercises").delete().eq("workout_id", workoutData.id);
+            await supabase
+              .from("exercises")
+              .delete()
+              .eq("workout_id", workoutData.id);
             await supabase.from("workouts").delete().eq("id", workoutData.id);
             workoutData = null;
           }

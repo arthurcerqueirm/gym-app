@@ -324,9 +324,9 @@ export default function Schedule() {
           {/* LEFT: Create & Manage Templates */}
           <div className="lg:col-span-2 space-y-6">
             {/* Create Template Card */}
-            <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-orange-200">
+            <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-primary/20">
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <Plus size={24} className="text-orange-500" />
+                <Plus size={24} className="text-primary" />
                 Criar Novo Treino
               </h2>
               <div className="space-y-3">

@@ -4,7 +4,14 @@ import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { User, Save } from "lucide-react";
+import { User, Save, Edit2, Check } from "lucide-react";
+
+interface UserProfile {
+  name: string;
+  gender: string;
+  bio: string;
+  dateOfBirth: string;
+}
 
 interface Measurement {
   weight: string;
@@ -17,6 +24,13 @@ export default function Profile() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [editingProfile, setEditingProfile] = useState(false);
+  const [userProfile, setUserProfile] = useState<UserProfile>({
+    name: "",
+    gender: "",
+    bio: "",
+    dateOfBirth: "",
+  });
   const [measurements, setMeasurements] = useState<Measurement>({
     weight: "",
     muscleMass: "",
@@ -25,7 +39,6 @@ export default function Profile() {
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const [userName, setUserName] = useState("Usuário");
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -41,7 +54,22 @@ export default function Profile() {
         }
 
         setUserId(session.user.id);
-        setUserName(session.user.user_metadata?.name || "Usuário");
+
+        // Get user profile
+        const { data: userData } = await supabase
+          .from("users")
+          .select("name, gender, bio, date_of_birth")
+          .eq("id", session.user.id)
+          .single();
+
+        if (userData) {
+          setUserProfile({
+            name: userData.name || "",
+            gender: userData.gender || "",
+            bio: userData.bio || "",
+            dateOfBirth: userData.date_of_birth || "",
+          });
+        }
 
         // Get latest measurements
         const { data: metricsData } = await supabase

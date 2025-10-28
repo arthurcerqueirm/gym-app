@@ -375,7 +375,7 @@ export default function Index() {
     <Layout userName={userName}>
       <div className="p-4 md:p-8 max-w-2xl mx-auto">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 text-white rounded-3xl p-6 md:p-8 mb-8 shadow-lg shadow-purple-500/30">
+        <div className="btn-gradient text-white rounded-3xl p-6 md:p-8 mb-8 shadow-lg shadow-orange-500/20">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-3xl md:text-4xl font-bold">Treino do Dia</h1>
             <Flame size={32} className="animate-bounce" />
@@ -396,7 +396,7 @@ export default function Index() {
               <h2 className="text-xl md:text-2xl font-bold text-foreground">
                 Exercícios do Dia
               </h2>
-              <div className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm font-semibold border border-purple-500/40">
+              <div className="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-semibold border border-primary/40">
                 {workout.exercises.filter((e) => e.done).length}/
                 {workout.exercises.length} feitos
               </div>
@@ -407,7 +407,7 @@ export default function Index() {
                 className={`rounded-2xl p-5 shadow-md border-2 transition-all ${
                   exercise.done
                     ? "bg-emerald-950 border-emerald-500 bg-gradient-to-br from-emerald-950 to-emerald-900"
-                    : "bg-card border-purple-500/30 hover:border-purple-500/60"
+                    : "bg-card border-primary/30 hover:border-primary/60"
                 }`}
               >
                 <div className="flex items-start gap-4">
@@ -505,7 +505,7 @@ export default function Index() {
 
         {/* Completion Feedback */}
         {allCompleted && workout && workout.exercises.length > 0 && (
-          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl p-6 mb-8 shadow-lg shadow-emerald-500/30 animate-pulse">
+          <div className="bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-2xl p-6 mb-8 shadow-lg shadow-emerald-500/30 animate-pulse">
             <div className="text-center">
               <h3 className="text-2xl font-bold mb-2">
                 Parabéns {userName}! 🎉

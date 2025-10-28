@@ -182,17 +182,15 @@ export default function Index() {
               new_weight: null,
             }));
           }
-        } else if (workoutData) {
-          // No template scheduled, but workout exists - load its exercises
-          const { data: exercisesData } = await supabase
-            .from("exercises")
-            .select("*")
-            .eq("workout_id", workoutData.id);
-
-          exercises = (exercisesData || []).map((ex) => ({
-            ...ex,
-            new_weight: null,
-          }));
+        } else {
+          // No template scheduled for today
+          if (workoutData) {
+            // Delete the workout and its exercises if no template is scheduled
+            await supabase.from("exercises").delete().eq("workout_id", workoutData.id);
+            await supabase.from("workouts").delete().eq("id", workoutData.id);
+            workoutData = null;
+          }
+          exercises = [];
         }
 
         setWorkout(

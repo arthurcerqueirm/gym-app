@@ -2,6 +2,7 @@ import { ReactNode, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "@/lib/auth";
 import { useTheme } from "@/hooks/use-theme";
+import { useColorPalette } from "@/hooks/use-color-palette";
 import {
   Flame,
   Calendar,
@@ -23,6 +24,7 @@ export default function Layout({
   const navigate = useNavigate();
   const location = useLocation();
   const { theme } = useTheme();
+  const { paletteKey } = useColorPalette();
   const displayName =
     userName && userName !== "Usuário" ? userName : "GymStreak";
 
@@ -35,6 +37,11 @@ export default function Layout({
       html.classList.remove('dark');
     }
   }, [theme]);
+
+  useEffect(() => {
+    // Color palette changes trigger re-render
+    // The useColorPalette hook handles DOM updates
+  }, [paletteKey]);
 
   const handleLogout = async () => {
     await signOut();

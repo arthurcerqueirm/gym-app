@@ -117,3 +117,29 @@
     white-space: pre;
   }
 }
+
+@layer components {
+  .gradient-primary {
+    @apply bg-gradient-to-r from-purple-600 to-blue-600;
+  }
+
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-violet-600 to-purple-600;
+  }
+
+  .gradient-accent {
+    @apply bg-gradient-to-r from-orange-500 to-red-500;
+  }
+
+  .btn-gradient {
+    @apply bg-gradient-to-r from-purple-600 via-purple-500 to-blue-500 hover:from-purple-700 hover:via-purple-600 hover:to-blue-600 transition-all duration-300;
+  }
+
+  .card-dark {
+    @apply bg-gradient-to-br from-slate-800 to-slate-900 border border-purple-500/20;
+  }
+
+  .sidebar-gradient {
+    @apply bg-gradient-to-b from-purple-700 via-purple-600 to-indigo-700;
+  }
+}

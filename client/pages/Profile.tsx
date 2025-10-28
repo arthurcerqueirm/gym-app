@@ -5,7 +5,8 @@ import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ThemeToggle from "@/components/ThemeToggle";
-import { User, Save, Edit2, Check } from "lucide-react";
+import ColorPaletteSelector from "@/components/ColorPaletteSelector";
+import { User, Save, Edit2, Check, Palette } from "lucide-react";
 
 interface UserProfile {
   name: string;
@@ -497,6 +498,15 @@ export default function Profile() {
             Recomendamos registrar suas medições mensalmente no mesmo dia e
             horário para obter resultados mais precisos na evolução.
           </p>
+        </div>
+
+        {/* Color Palette Section */}
+        <div className="bg-card border border-border rounded-2xl shadow-lg p-6 md:p-8">
+          <div className="flex items-center gap-3 mb-6">
+            <Palette size={28} className="text-primary" />
+            <h2 className="text-2xl font-bold text-foreground">Personalizar Cores</h2>
+          </div>
+          <ColorPaletteSelector />
         </div>
       </div>
     </Layout>

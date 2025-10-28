@@ -337,7 +337,7 @@ export default function Profile() {
                 <Button
                   onClick={handleSaveProfile}
                   disabled={saving}
-                  className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+                  className="flex-1 btn-gradient text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
                 >
                   <Check size={20} />
                   {saving ? "Salvando..." : "Salvar Perfil"}
@@ -345,7 +345,7 @@ export default function Profile() {
                 <Button
                   onClick={() => setEditingProfile(false)}
                   disabled={saving}
-                  className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-lg"
+                  className="flex-1 bg-muted hover:bg-muted/80 text-foreground font-bold py-3 rounded-lg"
                 >
                   Cancelar
                 </Button>
@@ -353,24 +353,24 @@ export default function Profile() {
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-sm text-gray-600">Nome</p>
-                <p className="text-lg font-semibold text-gray-800">
+              <div className="bg-warm-50 dark:bg-card rounded-lg p-4 border border-warm">
+                <p className="text-sm text-muted-foreground">Nome</p>
+                <p className="text-lg font-semibold text-foreground">
                   {userProfile.name || "Não informado"}
                 </p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-sm text-gray-600">Gênero</p>
-                <p className="text-lg font-semibold text-gray-800">
+              <div className="bg-warm-50 dark:bg-card rounded-lg p-4 border border-warm">
+                <p className="text-sm text-muted-foreground">Gênero</p>
+                <p className="text-lg font-semibold text-foreground">
                   {userProfile.gender
                     ? userProfile.gender.charAt(0).toUpperCase() +
                       userProfile.gender.slice(1)
                     : "Não informado"}
                 </p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-sm text-gray-600">Data de Nascimento</p>
-                <p className="text-lg font-semibold text-gray-800">
+              <div className="bg-warm-50 dark:bg-card rounded-lg p-4 border border-warm">
+                <p className="text-sm text-muted-foreground">Data de Nascimento</p>
+                <p className="text-lg font-semibold text-foreground">
                   {userProfile.dateOfBirth
                     ? new Date(userProfile.dateOfBirth).toLocaleDateString(
                         "pt-BR",
@@ -379,9 +379,9 @@ export default function Profile() {
                 </p>
               </div>
               {userProfile.bio && (
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="text-sm text-gray-600">Bio</p>
-                  <p className="text-lg font-semibold text-gray-800">
+                <div className="bg-warm-50 dark:bg-card rounded-lg p-4 border border-warm">
+                  <p className="text-sm text-muted-foreground">Bio</p>
+                  <p className="text-lg font-semibold text-foreground">
                     {userProfile.bio}
                   </p>
                 </div>
@@ -483,7 +483,7 @@ export default function Profile() {
           <Button
             onClick={handleSaveMeasurements}
             disabled={saving}
-            className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-lg text-base flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+            className="w-full btn-gradient text-white font-bold py-3 rounded-lg text-base flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
           >
             <Save size={20} />
             {saving ? "Salvando..." : "Salvar Medições"}
@@ -491,9 +491,9 @@ export default function Profile() {
         </div>
 
         {/* Info Box */}
-        <div className="bg-orange-50 rounded-2xl p-6 text-orange-900 border-l-4 border-orange-500">
+        <div className="bg-warm-50 dark:bg-card rounded-2xl p-6 text-foreground border-l-4 border-primary">
           <p className="font-semibold mb-2">💡 Dica</p>
-          <p className="text-sm">
+          <p className="text-sm text-muted-foreground">
             Recomendamos registrar suas medições mensalmente no mesmo dia e
             horário para obter resultados mais precisos na evolução.
           </p>

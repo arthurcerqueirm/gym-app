@@ -28,8 +28,22 @@ export default function Layout({
   const location = useLocation();
   const { theme } = useTheme();
   const { paletteKey } = useColorPalette();
+  const [userIsAdmin, setUserIsAdmin] = useState(false);
   const displayName =
     userName && userName !== "Usuário" ? userName : "GymStreak";
+
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      const { data: authData } = await supabase.auth.getSession();
+      const userId = authData?.session?.user?.id;
+      if (userId) {
+        const admin = await isUserAdmin(userId);
+        setUserIsAdmin(admin);
+      }
+    };
+
+    checkAdminStatus();
+  }, []);
 
   useEffect(() => {
     // Initialize theme on mount

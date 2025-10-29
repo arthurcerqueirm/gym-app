@@ -1,8 +1,10 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "@/lib/auth";
 import { useTheme } from "@/hooks/use-theme";
 import { useColorPalette } from "@/hooks/use-color-palette";
+import { isUserAdmin } from "@/lib/admin";
+import { supabase } from "@/lib/supabase";
 import {
   Flame,
   Calendar,
@@ -10,6 +12,7 @@ import {
   User,
   LogOut,
   Dumbbell,
+  Shield,
 } from "lucide-react";
 
 interface LayoutProps {

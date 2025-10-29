@@ -167,26 +167,10 @@
 
   /* Utility classes for design tokens */
   .bg-primary-light {
-    @apply bg-primary/10;
+    background-color: hsl(var(--primary) / 0.1);
   }
 
-  .text-primary {
-    @apply text-primary;
-  }
-
-  .text-secondary {
-    @apply text-secondary;
-  }
-
-  .text-accent {
-    @apply text-accent;
-  }
-
-  .border-primary {
-    @apply border-primary;
-  }
-
-  .border-secondary {
-    @apply border-secondary;
+  .border-primary-light {
+    border-color: hsl(var(--primary) / 0.3);
   }
 }

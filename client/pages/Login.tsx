@@ -47,13 +47,13 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-2">
-            <span className="text-primary">GymStreak</span>
+            <span className="text-[#FF6B35]">GymStreak</span>
           </h1>
-          <p className="text-gray-600 text-lg">Não quebre a corrente! 🔥</p>
+          <p className="text-[#2C3E50] text-lg">Não quebre a corrente! 🔥</p>
         </div>
 
         <form
@@ -69,13 +69,13 @@ export default function Login() {
               placeholder="seu@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full h-12 rounded-xl border-2 border-gray-200 px-4 text-base focus:border-primary focus:outline-none"
+              className="w-full h-12 rounded-xl border-2 border-[#E8EAED] px-4 text-base focus:border-[#FF6B35] focus:outline-none"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-[#2C3E50] mb-2">
               Senha
             </label>
             <Input
@@ -83,7 +83,7 @@ export default function Login() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full h-12 rounded-xl border-2 border-gray-200 px-4 text-base focus:border-primary focus:outline-none"
+              className="w-full h-12 rounded-xl border-2 border-[#E8EAED] px-4 text-base focus:border-[#FF6B35] focus:outline-none"
               required
             />
           </div>
@@ -97,13 +97,13 @@ export default function Login() {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full btn-gradient text-white font-bold py-3 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 shadow-lg shadow-orange-500/20"
+            className="w-full bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 shadow-lg"
           >
             {loading ? "Entrando..." : "Entrar"}
           </Button>
         </form>
 
-        <p className="text-center text-gray-600 text-sm mt-6">
+        <p className="text-center text-[#2C3E50] text-sm mt-6">
           Não tem conta? Entre em contato com suporte para criar uma.
         </p>
       </div>

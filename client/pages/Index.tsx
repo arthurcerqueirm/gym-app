@@ -375,10 +375,10 @@ export default function Index() {
     <Layout userName={userName}>
       <div className="p-4 md:p-8 max-w-2xl mx-auto">
         {/* Header Section */}
-        <div className="btn-gradient text-white rounded-3xl p-6 md:p-8 mb-8 shadow-lg shadow-orange-500/20">
+        <div className="bg-[#FF6B35] text-white rounded-3xl p-6 md:p-8 mb-8 shadow-lg shadow-[#FF6B35]/20">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-3xl md:text-4xl font-bold">Treino do Dia</h1>
-            <Flame size={32} className="animate-bounce" />
+            <Flame size={32} className="animate-bounce text-[#A8E6CF]" />
           </div>
           <p className="text-lg md:text-xl font-semibold mb-2">
             🔥 Dia {stats.treinosConcluidos}/365 — Não quebre a corrente!
@@ -396,7 +396,7 @@ export default function Index() {
               <h2 className="text-xl md:text-2xl font-bold text-foreground">
                 Exercícios do Dia
               </h2>
-              <div className="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-semibold border border-primary/40">
+              <div className="bg-[#A8E6CF]/20 text-[#A8E6CF] px-3 py-1 rounded-full text-sm font-semibold border border-[#A8E6CF]/40">
                 {workout.exercises.filter((e) => e.done).length}/
                 {workout.exercises.length} feitos
               </div>
@@ -407,7 +407,7 @@ export default function Index() {
                 className={`rounded-2xl p-5 shadow-md border-2 transition-all ${
                   exercise.done
                     ? "bg-emerald-950 border-emerald-500 bg-gradient-to-br from-emerald-950 to-emerald-900"
-                    : "bg-card border-primary/30 hover:border-primary/60"
+                    : "bg-card border-[#FF6B35]/30 hover:border-[#FF6B35]/60"
                 }`}
               >
                 <div className="flex items-start gap-4">
@@ -428,37 +428,37 @@ export default function Index() {
                     </h3>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                      <div className="bg-slate-700/50 rounded-lg p-3">
-                        <label className="text-muted-foreground font-semibold block mb-1">
+                      <div className="bg-[#F8F9FA] rounded-lg p-3">
+                        <label className="text-[#2C3E50] font-semibold block mb-1">
                           Séries
                         </label>
-                        <p className="text-foreground font-bold text-lg">
+                        <p className="text-[#2C3E50] font-bold text-lg">
                           {exercise.sets}
                         </p>
                       </div>
-                      <div className="bg-slate-700/50 rounded-lg p-3">
-                        <label className="text-muted-foreground font-semibold block mb-1">
+                      <div className="bg-[#F8F9FA] rounded-lg p-3">
+                        <label className="text-[#2C3E50] font-semibold block mb-1">
                           Reps
                         </label>
-                        <p className="text-foreground font-bold text-lg">
+                        <p className="text-[#2C3E50] font-bold text-lg">
                           {exercise.reps}
                         </p>
                       </div>
-                      <div className="bg-secondary/10 rounded-lg p-3">
-                        <label className="text-secondary font-semibold block mb-1">
+                      <div className="bg-[#2E86AB]/10 rounded-lg p-3">
+                        <label className="text-[#2E86AB] font-semibold block mb-1">
                           Anterior
                         </label>
-                        <p className="text-secondary font-bold text-lg">
+                        <p className="text-[#2E86AB] font-bold text-lg">
                           {exercise.last_weight
                             ? `${exercise.last_weight}kg`
                             : "—"}
                         </p>
                       </div>
-                      <div className="bg-primary/10 rounded-lg p-3">
-                        <label className="text-primary font-semibold block mb-1">
+                      <div className="bg-[#A8E6CF]/10 rounded-lg p-3">
+                        <label className="text-[#A8E6CF] font-semibold block mb-1">
                           Progresso
                         </label>
-                        <p className="text-primary font-bold text-lg">
+                        <p className="text-[#A8E6CF] font-bold text-lg">
                           {exercise.new_weight && exercise.last_weight
                             ? `${(exercise.new_weight - exercise.last_weight).toFixed(1)}kg`
                             : "—"}
@@ -485,7 +485,7 @@ export default function Index() {
                             e.target.value ? parseFloat(e.target.value) : null,
                           )
                         }
-                        className="w-full h-10 rounded-lg border-2 border-slate-700 px-3 text-sm focus:border-purple-500 bg-slate-800 text-foreground"
+                        className="w-full h-10 rounded-lg border-2 border-[#E8EAED] px-3 text-sm focus:border-[#FF6B35] bg-white text-[#2C3E50]"
                         disabled={!exercise.done}
                       />
                     </div>
@@ -495,8 +495,8 @@ export default function Index() {
             ))}
           </div>
         ) : (
-          <div className="bg-card rounded-2xl p-8 text-center mb-8 border border-purple-500/20">
-            <p className="text-muted-foreground mb-4">
+          <div className="bg-white rounded-2xl p-8 text-center mb-8 border border-[#E8EAED]">
+            <p className="text-[#2C3E50] mb-4">
               Nenhum exercício agendado para hoje. Acesse "Programação" para
               configurar seus treinos.
             </p>
@@ -505,7 +505,7 @@ export default function Index() {
 
         {/* Completion Feedback */}
         {allCompleted && workout && workout.exercises.length > 0 && (
-          <div className="bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-2xl p-6 mb-8 shadow-lg shadow-emerald-500/30 animate-pulse">
+          <div className="bg-gradient-to-r from-[#A8E6CF] to-[#2E86AB] text-white rounded-2xl p-6 mb-8 shadow-lg shadow-[#A8E6CF]/30 animate-pulse">
             <div className="text-center">
               <h3 className="text-2xl font-bold mb-2">
                 Parabéns {userName}! 🎉
@@ -522,7 +522,7 @@ export default function Index() {
         <Button
           onClick={handleSaveWorkout}
           disabled={saving || !workout}
-          className="w-full btn-gradient text-white font-bold py-3 rounded-xl text-base mb-8 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+          className="w-full bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 rounded-xl text-base mb-8 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
         >
           {saving ? "Finalizando..." : "Finalizar treino"}
         </Button>

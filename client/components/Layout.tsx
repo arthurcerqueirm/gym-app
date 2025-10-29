@@ -73,6 +73,10 @@ export default function Layout({
     { path: "/profile", label: "Perfil", icon: User },
   ];
 
+  const adminItems = userIsAdmin
+    ? [{ path: "/admin", label: "Administração", icon: Shield }]
+    : [];
+
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row">
       {/* Mobile Header */}

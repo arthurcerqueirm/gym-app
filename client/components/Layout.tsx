@@ -1,8 +1,10 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "@/lib/auth";
 import { useTheme } from "@/hooks/use-theme";
 import { useColorPalette } from "@/hooks/use-color-palette";
+import { isUserAdmin } from "@/lib/admin";
+import { supabase } from "@/lib/supabase";
 import {
   Flame,
   Calendar,
@@ -10,6 +12,7 @@ import {
   User,
   LogOut,
   Dumbbell,
+  Shield,
 } from "lucide-react";
 
 interface LayoutProps {
@@ -25,8 +28,22 @@ export default function Layout({
   const location = useLocation();
   const { theme } = useTheme();
   const { paletteKey } = useColorPalette();
+  const [userIsAdmin, setUserIsAdmin] = useState(false);
   const displayName =
     userName && userName !== "Usuário" ? userName : "GymStreak";
+
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      const { data: authData } = await supabase.auth.getSession();
+      const userId = authData?.session?.user?.id;
+      if (userId) {
+        const admin = await isUserAdmin(userId);
+        setUserIsAdmin(admin);
+      }
+    };
+
+    checkAdminStatus();
+  }, []);
 
   useEffect(() => {
     // Initialize theme on mount
@@ -55,6 +72,10 @@ export default function Layout({
     { path: "/evolution", label: "Evolução", icon: TrendingUp },
     { path: "/profile", label: "Perfil", icon: User },
   ];
+
+  const adminItems = userIsAdmin
+    ? [{ path: "/admin", label: "Administração", icon: Shield }]
+    : [];
 
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row">
@@ -100,6 +121,30 @@ export default function Layout({
               </button>
             );
           })}
+
+          {adminItems.length > 0 && (
+            <>
+              <div className="my-4 border-t border-white/20"></div>
+              {adminItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = location.pathname === item.path;
+                return (
+                  <button
+                    key={item.path}
+                    onClick={() => navigate(item.path)}
+                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg font-semibold transition-all ${
+                      isActive
+                        ? "bg-white/30 bg-white text-[#FF6B35]"
+                        : "text-white hover:bg-white/20"
+                    }`}
+                  >
+                    <Icon size={24} />
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </>
+          )}
         </nav>
 
         <button
@@ -116,7 +161,7 @@ export default function Layout({
         <main className="flex-1 overflow-auto pb-20 md:pb-0">{children}</main>
 
         {/* Mobile Bottom Navigation */}
-        <nav className="md:hidden bg-white border-t border-gray-200 flex justify-around fixed bottom-0 left-0 right-0 z-50">
+        <nav className="md:hidden bg-white border-t border-gray-200 flex justify-around fixed bottom-0 left-0 right-0 z-50 overflow-x-auto">
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
@@ -124,7 +169,25 @@ export default function Layout({
               <button
                 key={item.path}
                 onClick={() => navigate(item.path)}
-                className={`flex flex-col items-center py-3 px-2 flex-1 transition-all ${
+                className={`flex flex-col items-center py-3 px-2 flex-1 transition-all whitespace-nowrap ${
+                  isActive
+                    ? "text-[#FF6B35] font-bold"
+                    : "text-gray-400 hover:text-gray-600"
+                }`}
+              >
+                <Icon size={24} />
+                <span className="text-xs mt-1">{item.label}</span>
+              </button>
+            );
+          })}
+          {adminItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.path;
+            return (
+              <button
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                className={`flex flex-col items-center py-3 px-2 flex-1 transition-all whitespace-nowrap ${
                   isActive
                     ? "text-[#FF6B35] font-bold"
                     : "text-gray-400 hover:text-gray-600"

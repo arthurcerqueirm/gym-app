@@ -16,6 +16,7 @@ import Calendar from "./pages/Calendar";
 import Evolution from "./pages/Evolution";
 import Profile from "./pages/Profile";
 import Schedule from "./pages/Schedule";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -102,6 +103,14 @@ function AppContent() {
         element={
           <ProtectedRoute>
             <Schedule />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <Admin />
           </ProtectedRoute>
         }
       />

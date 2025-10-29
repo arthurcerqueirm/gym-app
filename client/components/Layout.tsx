@@ -161,7 +161,7 @@ export default function Layout({
         <main className="flex-1 overflow-auto pb-20 md:pb-0">{children}</main>
 
         {/* Mobile Bottom Navigation */}
-        <nav className="md:hidden bg-white border-t border-gray-200 flex justify-around fixed bottom-0 left-0 right-0 z-50">
+        <nav className="md:hidden bg-white border-t border-gray-200 flex justify-around fixed bottom-0 left-0 right-0 z-50 overflow-x-auto">
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
@@ -169,7 +169,25 @@ export default function Layout({
               <button
                 key={item.path}
                 onClick={() => navigate(item.path)}
-                className={`flex flex-col items-center py-3 px-2 flex-1 transition-all ${
+                className={`flex flex-col items-center py-3 px-2 flex-1 transition-all whitespace-nowrap ${
+                  isActive
+                    ? "text-[#FF6B35] font-bold"
+                    : "text-gray-400 hover:text-gray-600"
+                }`}
+              >
+                <Icon size={24} />
+                <span className="text-xs mt-1">{item.label}</span>
+              </button>
+            );
+          })}
+          {adminItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.path;
+            return (
+              <button
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                className={`flex flex-col items-center py-3 px-2 flex-1 transition-all whitespace-nowrap ${
                   isActive
                     ? "text-[#FF6B35] font-bold"
                     : "text-gray-400 hover:text-gray-600"

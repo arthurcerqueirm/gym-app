@@ -121,6 +121,30 @@ export default function Layout({
               </button>
             );
           })}
+
+          {adminItems.length > 0 && (
+            <>
+              <div className="my-4 border-t border-white/20"></div>
+              {adminItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = location.pathname === item.path;
+                return (
+                  <button
+                    key={item.path}
+                    onClick={() => navigate(item.path)}
+                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg font-semibold transition-all ${
+                      isActive
+                        ? "bg-white/30 bg-white text-[#FF6B35]"
+                        : "text-white hover:bg-white/20"
+                    }`}
+                  >
+                    <Icon size={24} />
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </>
+          )}
         </nav>
 
         <button

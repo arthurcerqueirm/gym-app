@@ -369,7 +369,9 @@ export default function Profile() {
                 </p>
               </div>
               <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
-                <p className="text-sm text-muted-foreground">Data de Nascimento</p>
+                <p className="text-sm text-muted-foreground">
+                  Data de Nascimento
+                </p>
                 <p className="text-lg font-semibold text-foreground">
                   {userProfile.dateOfBirth
                     ? new Date(userProfile.dateOfBirth).toLocaleDateString(
@@ -498,7 +500,6 @@ export default function Profile() {
             horário para obter resultados mais precisos na evolução.
           </p>
         </div>
-
       </div>
     </Layout>
   );

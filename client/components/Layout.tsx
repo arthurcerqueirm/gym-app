@@ -31,10 +31,10 @@ export default function Layout({
   useEffect(() => {
     // Initialize theme on mount
     const html = document.documentElement;
-    if (theme === 'dark') {
-      html.classList.add('dark');
+    if (theme === "dark") {
+      html.classList.add("dark");
     } else {
-      html.classList.remove('dark');
+      html.classList.remove("dark");
     }
   }, [theme]);
 

@@ -227,7 +227,7 @@ export default function Profile() {
     <Layout userName={userProfile.name}>
       <div className="p-4 md:p-8 max-w-3xl mx-auto">
         {/* Header */}
-        <div className="btn-gradient text-white rounded-3xl p-8 mb-8 shadow-lg shadow-orange-500/20">
+        <div className="bg-[#FF6B35] text-white rounded-3xl p-8 mb-8 shadow-lg shadow-[#FF6B35]/20">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <User size={40} />
@@ -249,7 +249,7 @@ export default function Profile() {
             {!editingProfile && (
               <Button
                 onClick={() => setEditingProfile(true)}
-                className="bg-primary/10 hover:bg-primary/20 text-primary font-bold py-2 px-4 rounded-lg flex items-center gap-2"
+                className="bg-[#FF6B35]/10 hover:bg-[#FF6B35]/20 text-[#FF6B35] font-bold py-2 px-4 rounded-lg flex items-center gap-2"
               >
                 <Edit2 size={18} /> Editar
               </Button>
@@ -269,7 +269,7 @@ export default function Profile() {
                   onChange={(e) =>
                     setUserProfile({ ...userProfile, name: e.target.value })
                   }
-                  className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-background text-foreground"
+                  className="w-full h-12 rounded-lg border-2 border-[#E8EAED] px-4 text-base focus:border-[#FF6B35] bg-white text-[#2C3E50]"
                 />
               </div>
 
@@ -338,7 +338,7 @@ export default function Profile() {
                 <Button
                   onClick={handleSaveProfile}
                   disabled={saving}
-                  className="flex-1 btn-gradient text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+                  className="flex-1 bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
                 >
                   <Check size={20} />
                   {saving ? "Salvando..." : "Salvar Perfil"}
@@ -484,7 +484,7 @@ export default function Profile() {
           <Button
             onClick={handleSaveMeasurements}
             disabled={saving}
-            className="w-full btn-gradient text-white font-bold py-3 rounded-lg text-base flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+            className="w-full bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 rounded-lg text-base flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
           >
             <Save size={20} />
             {saving ? "Salvando..." : "Salvar Medições"}
@@ -492,7 +492,7 @@ export default function Profile() {
         </div>
 
         {/* Info Box */}
-        <div className="bg-warm-50 dark:bg-card rounded-2xl p-6 text-foreground border-l-4 border-primary">
+        <div className="bg-[#F8F9FA] dark:bg-card rounded-2xl p-6 text-[#2C3E50] border-l-4 border-[#FF6B35]">
           <p className="font-semibold mb-2">💡 Dica</p>
           <p className="text-sm text-muted-foreground">
             Recomendamos registrar suas medições mensalmente no mesmo dia e

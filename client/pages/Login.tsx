@@ -53,7 +53,9 @@ export default function Login() {
           <h1 className="text-5xl font-bold mb-2">
             <span className="text-[#FF6B35]">GymStreak</span>
           </h1>
-          <p className="text-[#2C3E50] text-lg">Seu parceiro diário de treino 💪</p>
+          <p className="text-[#2C3E50] text-lg">
+            Seu parceiro diário de treino 💪
+          </p>
         </div>
 
         <form

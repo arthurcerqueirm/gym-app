@@ -136,8 +136,8 @@ export default function Evolution() {
     return (
       <Layout userName={userName}>
         <div className="p-4 md:p-8 max-w-4xl mx-auto">
-          <div className="bg-warm-50 dark:bg-card rounded-2xl p-8 text-center border border-primary/20">
-            <TrendingUp size={48} className="mx-auto mb-4 text-primary" />
+          <div className="bg-[#F8F9FA] dark:bg-card rounded-2xl p-8 text-center border border-[#E8EAED]">
+            <TrendingUp size={48} className="mx-auto mb-4 text-[#FF6B35]" />
             <h2 className="text-2xl font-bold text-gray-800 mb-2">
               Nenhuma medição registrada
             </h2>

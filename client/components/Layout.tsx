@@ -59,7 +59,7 @@ export default function Layout({
   return (
     <div className="min-h-screen bg-white flex flex-col md:flex-row">
       {/* Mobile Header */}
-      <div className="md:hidden sidebar-gradient text-white p-4 flex justify-between items-center">
+      <div className="md:hidden bg-[#FF6B35] text-white p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">{displayName}</h1>
         <button
           onClick={handleLogout}
@@ -71,7 +71,7 @@ export default function Layout({
       </div>
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex flex-col w-64 sidebar-gradient text-white p-8 min-h-screen">
+      <div className="hidden md:flex flex-col w-64 bg-[#FF6B35] text-white p-8 min-h-screen">
         <div className="mb-12">
           <h1 className="text-3xl font-bold">GymStreak</h1>
           {userName && userName !== "Usuário" && (
@@ -91,7 +91,7 @@ export default function Layout({
                 onClick={() => navigate(item.path)}
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg font-semibold transition-all ${
                   isActive
-                    ? "bg-white/30 bg-white text-primary"
+                    ? "bg-white/30 bg-white text-[#FF6B35]"
                     : "text-white hover:bg-white/20"
                 }`}
               >
@@ -126,7 +126,7 @@ export default function Layout({
                 onClick={() => navigate(item.path)}
                 className={`flex flex-col items-center py-3 px-2 flex-1 transition-all ${
                   isActive
-                    ? "text-primary font-bold"
+                    ? "text-[#FF6B35] font-bold"
                     : "text-gray-400 hover:text-gray-600"
                 }`}
               >

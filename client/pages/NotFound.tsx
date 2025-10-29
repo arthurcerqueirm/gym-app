@@ -15,20 +15,20 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-amber-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA] p-4">
       <div className="text-center max-w-md">
-        <AlertCircle size={64} className="mx-auto mb-6 text-orange-500" />
-        <h1 className="text-6xl font-bold text-orange-600 mb-2">404</h1>
-        <p className="text-2xl font-bold text-gray-800 mb-2">
+        <AlertCircle size={64} className="mx-auto mb-6 text-[#FF6B35]" />
+        <h1 className="text-6xl font-bold text-[#FF6B35] mb-2">404</h1>
+        <p className="text-2xl font-bold text-[#2C3E50] mb-2">
           Página não encontrada
         </p>
-        <p className="text-gray-600 mb-8">
+        <p className="text-[#666666] mb-8">
           Desculpe, a página que você está procurando não existe. Parece que
           você saiu do caminho.
         </p>
         <Button
           onClick={() => navigate("/")}
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 px-8 rounded-xl transition-all transform hover:scale-105 active:scale-95"
+          className="inline-flex items-center gap-2 bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 px-8 rounded-xl transition-all transform hover:scale-105 active:scale-95 shadow-lg"
         >
           <ArrowLeft size={20} />
           Voltar para Home

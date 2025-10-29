@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ThemeToggle from "@/components/ThemeToggle";
 import { User, Save, Edit2, Check } from "lucide-react";
 
 interface UserProfile {
@@ -225,7 +226,7 @@ export default function Profile() {
     <Layout userName={userProfile.name}>
       <div className="p-4 md:p-8 max-w-3xl mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-3xl p-8 mb-8 shadow-lg">
+        <div className="bg-[#FF6B35] text-white rounded-3xl p-8 mb-8 shadow-lg shadow-[#FF6B35]/20">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <User size={40} />
@@ -236,17 +237,18 @@ export default function Profile() {
                 <p className="text-white/90">Gerencie seu perfil e medições</p>
               </div>
             </div>
+            <ThemeToggle />
           </div>
         </div>
 
         {/* Profile Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-8">
+        <div className="card-light dark:card-dark rounded-2xl shadow-lg p-6 md:p-8 mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-800">Meu Perfil</h2>
+            <h2 className="text-2xl font-bold text-foreground">Meu Perfil</h2>
             {!editingProfile && (
               <Button
                 onClick={() => setEditingProfile(true)}
-                className="bg-orange-100 hover:bg-orange-200 text-orange-600 font-bold py-2 px-4 rounded-lg flex items-center gap-2"
+                className="bg-[#FF6B35]/10 hover:bg-[#FF6B35]/20 text-[#FF6B35] font-bold py-2 px-4 rounded-lg flex items-center gap-2"
               >
                 <Edit2 size={18} /> Editar
               </Button>
@@ -256,7 +258,7 @@ export default function Profile() {
           {editingProfile ? (
             <div className="space-y-5 mb-8">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2">
                   Nome *
                 </label>
                 <Input
@@ -266,12 +268,12 @@ export default function Profile() {
                   onChange={(e) =>
                     setUserProfile({ ...userProfile, name: e.target.value })
                   }
-                  className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                  className="w-full h-12 rounded-lg border-2 border-[#E8EAED] px-4 text-base focus:border-[#FF6B35] bg-white text-[#2C3E50]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2">
                   Gênero
                 </label>
                 <select
@@ -335,7 +337,7 @@ export default function Profile() {
                 <Button
                   onClick={handleSaveProfile}
                   disabled={saving}
-                  className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+                  className="flex-1 bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
                 >
                   <Check size={20} />
                   {saving ? "Salvando..." : "Salvar Perfil"}
@@ -343,7 +345,7 @@ export default function Profile() {
                 <Button
                   onClick={() => setEditingProfile(false)}
                   disabled={saving}
-                  className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-lg"
+                  className="flex-1 bg-muted hover:bg-muted/80 text-foreground font-bold py-3 rounded-lg"
                 >
                   Cancelar
                 </Button>
@@ -351,24 +353,26 @@ export default function Profile() {
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-sm text-gray-600">Nome</p>
-                <p className="text-lg font-semibold text-gray-800">
+              <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+                <p className="text-sm text-muted-foreground">Nome</p>
+                <p className="text-lg font-semibold text-foreground">
                   {userProfile.name || "Não informado"}
                 </p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-sm text-gray-600">Gênero</p>
-                <p className="text-lg font-semibold text-gray-800">
+              <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+                <p className="text-sm text-muted-foreground">Gênero</p>
+                <p className="text-lg font-semibold text-foreground">
                   {userProfile.gender
                     ? userProfile.gender.charAt(0).toUpperCase() +
                       userProfile.gender.slice(1)
                     : "Não informado"}
                 </p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-sm text-gray-600">Data de Nascimento</p>
-                <p className="text-lg font-semibold text-gray-800">
+              <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+                <p className="text-sm text-muted-foreground">
+                  Data de Nascimento
+                </p>
+                <p className="text-lg font-semibold text-foreground">
                   {userProfile.dateOfBirth
                     ? new Date(userProfile.dateOfBirth).toLocaleDateString(
                         "pt-BR",
@@ -377,9 +381,9 @@ export default function Profile() {
                 </p>
               </div>
               {userProfile.bio && (
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="text-sm text-gray-600">Bio</p>
-                  <p className="text-lg font-semibold text-gray-800">
+                <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+                  <p className="text-sm text-muted-foreground">Bio</p>
+                  <p className="text-lg font-semibold text-foreground">
                     {userProfile.bio}
                   </p>
                 </div>
@@ -389,14 +393,14 @@ export default function Profile() {
         </div>
 
         {/* Measurements Form */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        <div className="card-light dark:card-dark rounded-2xl shadow-lg p-6 md:p-8 mb-8">
+          <h2 className="text-2xl font-bold text-foreground mb-6">
             Medições Corporais
           </h2>
 
           <div className="space-y-5 mb-8">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-foreground mb-2">
                 Peso (kg)
               </label>
               <Input
@@ -407,12 +411,12 @@ export default function Profile() {
                 onChange={(e) =>
                   setMeasurements({ ...measurements, weight: e.target.value })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-background text-foreground"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-foreground mb-2">
                 Massa Magra (kg)
               </label>
               <Input
@@ -426,12 +430,12 @@ export default function Profile() {
                     muscleMass: e.target.value,
                   })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-background text-foreground"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-foreground mb-2">
                 Gordura Corporal (%)
               </label>
               <Input
@@ -445,12 +449,12 @@ export default function Profile() {
                     fatPercentage: e.target.value,
                   })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-background text-foreground"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-foreground mb-2">
                 Altura (cm)
               </label>
               <Input
@@ -461,13 +465,13 @@ export default function Profile() {
                 onChange={(e) =>
                   setMeasurements({ ...measurements, height: e.target.value })
                 }
-                className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-background text-foreground"
               />
             </div>
           </div>
 
           {error && (
-            <div className="bg-red-50 text-red-600 p-4 rounded-lg text-sm font-medium mb-6">
+            <div className="bg-red-50 dark:bg-red-950 text-red-600 dark:text-red-300 p-4 rounded-lg text-sm font-medium mb-6">
               {error}
             </div>
           )}
@@ -481,7 +485,7 @@ export default function Profile() {
           <Button
             onClick={handleSaveMeasurements}
             disabled={saving}
-            className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-lg text-base flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+            className="w-full bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 rounded-lg text-base flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
           >
             <Save size={20} />
             {saving ? "Salvando..." : "Salvar Medições"}
@@ -489,9 +493,9 @@ export default function Profile() {
         </div>
 
         {/* Info Box */}
-        <div className="bg-orange-50 rounded-2xl p-6 text-orange-900 border-l-4 border-orange-500">
+        <div className="bg-[#F8F9FA] dark:bg-card rounded-2xl p-6 text-[#2C3E50] border-l-4 border-[#FF6B35]">
           <p className="font-semibold mb-2">💡 Dica</p>
-          <p className="text-sm">
+          <p className="text-sm text-muted-foreground">
             Recomendamos registrar suas medições mensalmente no mesmo dia e
             horário para obter resultados mais precisos na evolução.
           </p>

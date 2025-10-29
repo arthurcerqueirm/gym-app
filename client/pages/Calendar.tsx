@@ -184,15 +184,15 @@ export default function Calendar() {
                 <span>Sem treino</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-orange-300 rounded-sm"></div>
+                <div className="w-4 h-4 bg-[#FF6B35]/40 rounded-sm"></div>
                 <span>1-50 dias</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-orange-500 rounded-sm"></div>
+                <div className="w-4 h-4 bg-[#FF6B35] rounded-sm"></div>
                 <span>51-200 dias</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-orange-600 rounded-sm"></div>
+                <div className="w-4 h-4 bg-[#A8E6CF] rounded-sm"></div>
                 <span>200+ dias</span>
               </div>
             </div>

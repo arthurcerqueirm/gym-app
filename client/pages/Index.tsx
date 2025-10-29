@@ -361,7 +361,7 @@ export default function Index() {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <Flame
-              className="mx-auto mb-4 text-orange-500 animate-bounce"
+              className="mx-auto mb-4 text-accent animate-bounce"
               size={48}
             />
             <p className="text-gray-600">Carregando seu treino...</p>
@@ -375,10 +375,10 @@ export default function Index() {
     <Layout userName={userName}>
       <div className="p-4 md:p-8 max-w-2xl mx-auto">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-3xl p-6 md:p-8 mb-8 shadow-lg">
+        <div className="bg-[#FF6B35] text-white rounded-3xl p-6 md:p-8 mb-8 shadow-lg shadow-[#FF6B35]/20">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-3xl md:text-4xl font-bold">Treino do Dia</h1>
-            <Flame size={32} className="animate-bounce" />
+            <Flame size={32} className="animate-bounce text-[#A8E6CF]" />
           </div>
           <p className="text-lg md:text-xl font-semibold mb-2">
             🔥 Dia {stats.treinosConcluidos}/365 — Não quebre a corrente!
@@ -393,10 +393,10 @@ export default function Index() {
         {workout && workout.exercises.length > 0 ? (
           <div className="space-y-4 mb-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+              <h2 className="text-xl md:text-2xl font-bold text-foreground">
                 Exercícios do Dia
               </h2>
-              <div className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-semibold">
+              <div className="bg-[#A8E6CF]/20 text-[#A8E6CF] px-3 py-1 rounded-full text-sm font-semibold border border-[#A8E6CF]/40">
                 {workout.exercises.filter((e) => e.done).length}/
                 {workout.exercises.length} feitos
               </div>
@@ -404,10 +404,10 @@ export default function Index() {
             {workout.exercises.map((exercise) => (
               <div
                 key={exercise.id}
-                className={`bg-white rounded-2xl p-5 shadow-md border-2 transition-all ${
+                className={`rounded-2xl p-5 shadow-md border-2 transition-all ${
                   exercise.done
-                    ? "border-green-500 bg-green-50"
-                    : "border-gray-200 hover:border-orange-300"
+                    ? "bg-emerald-950 border-emerald-500 bg-gradient-to-br from-emerald-950 to-emerald-900"
+                    : "bg-card border-[#FF6B35]/30 hover:border-[#FF6B35]/60"
                 }`}
               >
                 <div className="flex items-start gap-4">
@@ -420,7 +420,7 @@ export default function Index() {
                   />
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-gray-800 text-lg mb-2 flex items-center gap-2">
+                    <h3 className="font-bold text-foreground text-lg mb-2 flex items-center gap-2">
                       {exercise.name}
                       {exercise.done && (
                         <Check size={20} className="text-green-600" />
@@ -428,37 +428,37 @@ export default function Index() {
                     </h3>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                      <div className="bg-gray-100 rounded-lg p-3">
-                        <label className="text-gray-600 font-semibold block mb-1">
+                      <div className="bg-[#F8F9FA] rounded-lg p-3">
+                        <label className="text-[#2C3E50] font-semibold block mb-1">
                           Séries
                         </label>
-                        <p className="text-gray-800 font-bold text-lg">
+                        <p className="text-[#2C3E50] font-bold text-lg">
                           {exercise.sets}
                         </p>
                       </div>
-                      <div className="bg-gray-100 rounded-lg p-3">
-                        <label className="text-gray-600 font-semibold block mb-1">
+                      <div className="bg-[#F8F9FA] rounded-lg p-3">
+                        <label className="text-[#2C3E50] font-semibold block mb-1">
                           Reps
                         </label>
-                        <p className="text-gray-800 font-bold text-lg">
+                        <p className="text-[#2C3E50] font-bold text-lg">
                           {exercise.reps}
                         </p>
                       </div>
-                      <div className="bg-orange-100 rounded-lg p-3">
-                        <label className="text-orange-700 font-semibold block mb-1">
+                      <div className="bg-[#2E86AB]/10 rounded-lg p-3">
+                        <label className="text-[#2E86AB] font-semibold block mb-1">
                           Anterior
                         </label>
-                        <p className="text-orange-900 font-bold text-lg">
+                        <p className="text-[#2E86AB] font-bold text-lg">
                           {exercise.last_weight
                             ? `${exercise.last_weight}kg`
                             : "—"}
                         </p>
                       </div>
-                      <div className="bg-amber-100 rounded-lg p-3">
-                        <label className="text-amber-700 font-semibold block mb-1">
+                      <div className="bg-[#A8E6CF]/10 rounded-lg p-3">
+                        <label className="text-[#A8E6CF] font-semibold block mb-1">
                           Progresso
                         </label>
-                        <p className="text-amber-900 font-bold text-lg">
+                        <p className="text-[#A8E6CF] font-bold text-lg">
                           {exercise.new_weight && exercise.last_weight
                             ? `${(exercise.new_weight - exercise.last_weight).toFixed(1)}kg`
                             : "—"}
@@ -485,7 +485,7 @@ export default function Index() {
                             e.target.value ? parseFloat(e.target.value) : null,
                           )
                         }
-                        className="w-full h-10 rounded-lg border-2 border-gray-200 px-3 text-sm focus:border-orange-500"
+                        className="w-full h-10 rounded-lg border-2 border-[#E8EAED] px-3 text-sm focus:border-[#FF6B35] bg-white text-[#2C3E50]"
                         disabled={!exercise.done}
                       />
                     </div>
@@ -495,8 +495,8 @@ export default function Index() {
             ))}
           </div>
         ) : (
-          <div className="bg-gray-50 rounded-2xl p-8 text-center mb-8">
-            <p className="text-gray-600 mb-4">
+          <div className="bg-white rounded-2xl p-8 text-center mb-8 border border-[#E8EAED]">
+            <p className="text-[#2C3E50] mb-4">
               Nenhum exercício agendado para hoje. Acesse "Programação" para
               configurar seus treinos.
             </p>
@@ -505,7 +505,7 @@ export default function Index() {
 
         {/* Completion Feedback */}
         {allCompleted && workout && workout.exercises.length > 0 && (
-          <div className="bg-gradient-to-r from-green-400 to-emerald-400 text-white rounded-2xl p-6 mb-8 shadow-lg animate-pulse">
+          <div className="bg-gradient-to-r from-[#A8E6CF] to-[#2E86AB] text-white rounded-2xl p-6 mb-8 shadow-lg shadow-[#A8E6CF]/30 animate-pulse">
             <div className="text-center">
               <h3 className="text-2xl font-bold mb-2">
                 Parabéns {userName}! 🎉
@@ -522,7 +522,7 @@ export default function Index() {
         <Button
           onClick={handleSaveWorkout}
           disabled={saving || !workout}
-          className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-xl text-base mb-8 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+          className="w-full bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 rounded-xl text-base mb-8 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
         >
           {saving ? "Finalizando..." : "Finalizar treino"}
         </Button>

@@ -22,16 +22,14 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserManagementModal } from "@/components/UserManagementModal";
 import { supabase } from "@/lib/supabase";
-import { isUserAdmin, getAllUsers, getUserCount, canDeleteUser } from "@/lib/admin";
-import { toast } from "sonner";
 import {
-  Trash2,
-  Shield,
-  ShieldOff,
-  Plus,
-  Users,
-  Lock,
-} from "lucide-react";
+  isUserAdmin,
+  getAllUsers,
+  getUserCount,
+  canDeleteUser,
+} from "@/lib/admin";
+import { toast } from "sonner";
+import { Trash2, Shield, ShieldOff, Plus, Users, Lock } from "lucide-react";
 
 interface User {
   id: string;
@@ -105,10 +103,7 @@ export default function Admin() {
   const handleDeleteUser = async () => {
     if (!selectedUser) return;
 
-    const canDelete = await canDeleteUser(
-      selectedUser.id,
-      currentUserEmail,
-    );
+    const canDelete = await canDeleteUser(selectedUser.id, currentUserEmail);
     if (!canDelete) {
       toast.error("Não é possível deletar o dono do sistema");
       setDeleteConfirm(false);
@@ -181,7 +176,9 @@ export default function Admin() {
       setNewPassword("");
     } catch (error) {
       console.error("Error changing password:", error);
-      toast.error("Erro ao alterar senha. Verifique se você tem permissão de admin no Supabase.");
+      toast.error(
+        "Erro ao alterar senha. Verifique se você tem permissão de admin no Supabase.",
+      );
     } finally {
       setPasswordLoading(false);
     }
@@ -267,7 +264,9 @@ export default function Admin() {
                     <TableHead className="font-semibold">Nome</TableHead>
                     <TableHead className="font-semibold">Email</TableHead>
                     <TableHead className="font-semibold">Status</TableHead>
-                    <TableHead className="font-semibold">Cadastrado em</TableHead>
+                    <TableHead className="font-semibold">
+                      Cadastrado em
+                    </TableHead>
                     <TableHead className="font-semibold text-right">
                       Ações
                     </TableHead>
@@ -305,9 +304,7 @@ export default function Admin() {
                               <Button
                                 size="sm"
                                 variant="outline"
-                                onClick={() =>
-                                  handleToggleAdmin(user)
-                                }
+                                onClick={() => handleToggleAdmin(user)}
                                 title={
                                   user.is_admin
                                     ? "Remover admin"

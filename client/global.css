@@ -9,43 +9,43 @@
   /**
    * Design Tokens - Fixed Color Palette for GymStreak
    * Primary: #FF6B35 (hsl(15, 100%, 58%))
-   * Secondary: #2E86AB (hsl(201, 63%, 38%))
-   * Accent: #A8E6CF (hsl(156, 62%, 74%))
+   * Secondary: #1B5E7A (hsl(201, 63%, 28%)) - Darker blue for better contrast
+   * Accent: #1FA67B (hsl(156, 62%, 44%)) - Darker teal for better contrast
    * Background: #F8F9FA (hsl(210, 17%, 98%))
-   * Text: #2C3E50 (hsl(204, 28%, 29%))
+   * Text: #1F2937 (hsl(217, 33%, 16%)) - Darker for better contrast
   */
   :root {
     /* Design Tokens */
     --primary: 15 100% 58%;
-    --secondary: 201 63% 38%;
-    --accent: 156 62% 74%;
+    --secondary: 201 63% 28%;
+    --accent: 156 62% 44%;
     --bg: 210 17% 98%;
-    --text: 204 28% 29%;
+    --text: 217 33% 16%;
 
     /* Extended palette for light theme */
     --background: 210 17% 98%;
-    --foreground: 204 28% 29%;
+    --foreground: 217 33% 16%;
 
     --card: 0 0% 100%;
-    --card-foreground: 204 28% 29%;
+    --card-foreground: 217 33% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 204 28% 29%;
+    --popover-foreground: 217 33% 16%;
 
     --primary-foreground: 0 0% 100%;
 
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 12% 60%;
-    --muted-foreground: 204 28% 29%;
+    --muted: 217 8% 48%;
+    --muted-foreground: 217 8% 30%;
 
-    --accent-foreground: 0 0% 20%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 210 17% 92%;
-    --input: 210 17% 95%;
+    --border: 210 17% 88%;
+    --input: 210 17% 93%;
     --ring: 15 100% 58%;
 
     --radius: 0.75rem;
@@ -56,41 +56,41 @@
     --sidebar-primary: 15 100% 58%;
     --sidebar-primary-foreground: 0 0% 100%;
 
-    --sidebar-accent: 156 62% 74%;
-    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-accent: 156 62% 50%;
+    --sidebar-accent-foreground: 0 0% 100%;
 
     --sidebar-border: 15 100% 68%;
     --sidebar-ring: 15 100% 58%;
   }
 
   .dark {
-    /* Dark theme - same colors for consistency */
-    --background: 204 28% 15%;
-    --foreground: 210 17% 98%;
+    /* Dark theme - enhanced for contrast */
+    --background: 217 28% 12%;
+    --foreground: 210 17% 95%;
 
-    --card: 204 28% 22%;
-    --card-foreground: 210 17% 98%;
+    --card: 217 28% 18%;
+    --card-foreground: 210 17% 95%;
 
-    --popover: 204 28% 22%;
-    --popover-foreground: 210 17% 98%;
+    --popover: 217 28% 18%;
+    --popover-foreground: 210 17% 95%;
 
     --primary: 15 100% 58%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 201 63% 48%;
+    --secondary: 201 63% 58%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 12% 45%;
-    --muted-foreground: 210 17% 85%;
+    --muted: 217 8% 42%;
+    --muted-foreground: 210 17% 80%;
 
-    --accent: 156 62% 70%;
-    --accent-foreground: 0 0% 20%;
+    --accent: 156 62% 54%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 204 28% 28%;
-    --input: 204 28% 25%;
+    --border: 217 28% 25%;
+    --input: 217 28% 22%;
     --ring: 15 100% 58%;
 
     --sidebar-background: 15 100% 48%;
@@ -99,8 +99,8 @@
     --sidebar-primary: 15 100% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
 
-    --sidebar-accent: 156 62% 65%;
-    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-accent: 156 62% 54%;
+    --sidebar-accent-foreground: 0 0% 100%;
 
     --sidebar-border: 15 100% 58%;
     --sidebar-ring: 15 100% 58%;

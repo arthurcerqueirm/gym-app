@@ -505,7 +505,7 @@ export default function Schedule() {
                     ) : (
                       <Button
                         onClick={() => setEditingTemplate(template.id)}
-                        className="w-full bg-orange-100 hover:bg-orange-200 text-orange-600 font-bold py-2 rounded-lg flex items-center justify-center gap-2 text-sm"
+                        className="w-full bg-primary/10 hover:bg-primary/20 text-primary font-bold py-2 rounded-lg flex items-center justify-center gap-2 text-sm"
                       >
                         <Plus size={18} /> Adicionar Exercício
                       </Button>

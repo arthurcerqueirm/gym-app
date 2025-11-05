@@ -308,7 +308,7 @@ export default function Profile() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2">
                   Bio (opcional)
                 </label>
                 <textarea
@@ -317,7 +317,7 @@ export default function Profile() {
                   onChange={(e) =>
                     setUserProfile({ ...userProfile, bio: e.target.value })
                   }
-                  className="w-full h-24 rounded-lg border-2 border-gray-200 px-4 py-3 text-base focus:border-orange-500 resize-none"
+                  className="w-full h-24 rounded-lg border-2 border-border px-4 py-3 text-base focus:border-primary bg-input text-foreground resize-none"
                 />
               </div>
 

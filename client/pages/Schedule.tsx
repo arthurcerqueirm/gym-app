@@ -436,7 +436,7 @@ export default function Schedule() {
 
                     {/* Add Exercise Form */}
                     {editingTemplate === template.id ? (
-                      <div className="bg-gray-50 p-4 rounded-lg space-y-3 border-2 border-orange-200">
+                      <div className="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg space-y-3 border-2 border-orange-200 dark:border-orange-400">
                         <Input
                           placeholder="Nome do exercício"
                           value={newExercise.name}
@@ -446,7 +446,7 @@ export default function Schedule() {
                               name: e.target.value,
                             })
                           }
-                          className="w-full h-10 rounded-lg border-2 border-gray-300 px-3 text-sm"
+                          className="w-full h-10 rounded-lg border-2 border-gray-300 dark:border-slate-600 dark:bg-slate-600 dark:text-white px-3 text-sm"
                         />
                         <div className="grid grid-cols-3 gap-2">
                           <Input
@@ -459,7 +459,7 @@ export default function Schedule() {
                                 sets: parseInt(e.target.value) || 3,
                               })
                             }
-                            className="h-10 rounded-lg border-2 border-gray-300 px-2 text-sm"
+                            className="h-10 rounded-lg border-2 border-gray-300 dark:border-slate-600 dark:bg-slate-600 dark:text-white px-2 text-sm"
                           />
                           <Input
                             type="number"
@@ -471,7 +471,7 @@ export default function Schedule() {
                                 reps: parseInt(e.target.value) || 10,
                               })
                             }
-                            className="h-10 rounded-lg border-2 border-gray-300 px-2 text-sm"
+                            className="h-10 rounded-lg border-2 border-gray-300 dark:border-slate-600 dark:bg-slate-600 dark:text-white px-2 text-sm"
                           />
                           <Input
                             type="number"
@@ -484,7 +484,7 @@ export default function Schedule() {
                                 initial_weight: e.target.value,
                               })
                             }
-                            className="h-10 rounded-lg border-2 border-red-400 px-2 text-sm font-semibold bg-red-50"
+                            className="h-10 rounded-lg border-2 border-red-400 dark:border-red-500 px-2 text-sm font-semibold bg-red-50 dark:bg-red-900/30 dark:text-white"
                           />
                         </div>
                         <div className="flex gap-2">

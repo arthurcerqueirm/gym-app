@@ -136,12 +136,12 @@ export default function Evolution() {
     return (
       <Layout userName={userName}>
         <div className="p-4 md:p-8 max-w-4xl mx-auto">
-          <div className="bg-[#F8F9FA] dark:bg-card rounded-2xl p-8 text-center border border-[#E8EAED]">
-            <TrendingUp size={48} className="mx-auto mb-4 text-[#FF6B35]" />
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+          <div className="bg-muted rounded-2xl p-8 text-center border border-border">
+            <TrendingUp size={48} className="mx-auto mb-4 text-primary" />
+            <h2 className="text-2xl font-bold text-foreground mb-2">
               Nenhuma medição registrada
             </h2>
-            <p className="text-gray-600 mb-4">
+            <p className="text-muted-foreground mb-4">
               Acesse a aba Perfil para registrar suas primeiras medições e
               começar a acompanhar sua evolução.
             </p>
@@ -156,16 +156,16 @@ export default function Evolution() {
       <div className="p-4 md:p-8 max-w-5xl mx-auto">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-orange-200">
-            <p className="text-gray-600 font-semibold text-sm mb-2">
+          <div className="bg-card rounded-2xl shadow-lg p-6 border-2 border-primary/30">
+            <p className="text-muted-foreground font-semibold text-sm mb-2">
               Peso Atual
             </p>
-            <p className="text-4xl font-bold text-gray-800">
+            <p className="text-4xl font-bold text-foreground">
               {summary.currentWeight}kg
             </p>
             <p
               className={`text-sm font-semibold mt-2 ${
-                summary.weightChange < 0 ? "text-green-600" : "text-red-600"
+                summary.weightChange < 0 ? "text-accent" : "text-destructive"
               }`}
             >
               {summary.weightChange > 0 ? "+" : ""}
@@ -173,16 +173,16 @@ export default function Evolution() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-orange-200">
-            <p className="text-gray-600 font-semibold text-sm mb-2">
+          <div className="bg-card rounded-2xl shadow-lg p-6 border-2 border-primary/30">
+            <p className="text-muted-foreground font-semibold text-sm mb-2">
               Gordura Corporal
             </p>
-            <p className="text-4xl font-bold text-gray-800">
+            <p className="text-4xl font-bold text-foreground">
               {summary.currentFat}%
             </p>
             <p
               className={`text-sm font-semibold mt-2 ${
-                summary.fatChange < 0 ? "text-green-600" : "text-red-600"
+                summary.fatChange < 0 ? "text-accent" : "text-destructive"
               }`}
             >
               {summary.fatChange > 0 ? "+" : ""}
@@ -190,16 +190,16 @@ export default function Evolution() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-orange-200">
-            <p className="text-gray-600 font-semibold text-sm mb-2">
+          <div className="bg-card rounded-2xl shadow-lg p-6 border-2 border-primary/30">
+            <p className="text-muted-foreground font-semibold text-sm mb-2">
               Massa Magra
             </p>
-            <p className="text-4xl font-bold text-gray-800">
+            <p className="text-4xl font-bold text-foreground">
               {summary.currentMuscle}kg
             </p>
             <p
               className={`text-sm font-semibold mt-2 ${
-                summary.muscleChange > 0 ? "text-green-600" : "text-red-600"
+                summary.muscleChange > 0 ? "text-accent" : "text-destructive"
               }`}
             >
               {summary.muscleChange > 0 ? "+" : ""}
@@ -211,8 +211,8 @@ export default function Evolution() {
         {/* Charts */}
         <div className="space-y-8">
           {/* Weight Chart */}
-          <div className="bg-white rounded-2xl shadow-lg p-6">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">
+          <div className="bg-card rounded-2xl shadow-lg p-6 border border-border">
+            <h3 className="text-xl font-bold text-foreground mb-4">
               Evolução de Peso
             </h3>
             <ResponsiveContainer width="100%" height={300}>
@@ -234,8 +234,8 @@ export default function Evolution() {
           </div>
 
           {/* Body Composition Chart */}
-          <div className="bg-white rounded-2xl shadow-lg p-6">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">
+          <div className="bg-card rounded-2xl shadow-lg p-6 border border-border">
+            <h3 className="text-xl font-bold text-foreground mb-4">
               Composição Corporal
             </h3>
             <ResponsiveContainer width="100%" height={300}>

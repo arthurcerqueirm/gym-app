@@ -291,7 +291,7 @@ export default function Profile() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2">
                   Data de Nascimento
                 </label>
                 <Input
@@ -303,7 +303,7 @@ export default function Profile() {
                       dateOfBirth: e.target.value,
                     })
                   }
-                  className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                  className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-input text-foreground"
                 />
               </div>
 

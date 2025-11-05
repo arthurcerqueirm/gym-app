@@ -47,23 +47,23 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-2">
-            <span className="text-[#FF6B35]">GymStreak</span>
+            <span className="text-primary">GymStreak</span>
           </h1>
-          <p className="text-[#2C3E50] text-lg">
+          <p className="text-foreground text-lg">
             Seu parceiro diário de treino 💪
           </p>
         </div>
 
         <form
           onSubmit={handleLogin}
-          className="bg-white rounded-3xl shadow-lg p-8 space-y-6"
+          className="bg-card rounded-3xl shadow-lg p-8 space-y-6"
         >
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-foreground mb-2">
               Email
             </label>
             <Input
@@ -71,13 +71,13 @@ export default function Login() {
               placeholder="seu@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full h-12 rounded-xl border-2 border-[#E8EAED] px-4 text-base focus:border-[#FF6B35] focus:outline-none"
+              className="w-full h-12 rounded-xl border-2 border-border px-4 text-base focus:border-primary focus:outline-none bg-input text-foreground placeholder-muted-foreground"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-[#2C3E50] mb-2">
+            <label className="block text-sm font-semibold text-foreground mb-2">
               Senha
             </label>
             <Input
@@ -85,13 +85,13 @@ export default function Login() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full h-12 rounded-xl border-2 border-[#E8EAED] px-4 text-base focus:border-[#FF6B35] focus:outline-none"
+              className="w-full h-12 rounded-xl border-2 border-border px-4 text-base focus:border-primary focus:outline-none bg-input text-foreground placeholder-muted-foreground"
               required
             />
           </div>
 
           {error && (
-            <div className="bg-red-50 text-red-600 p-3 rounded-xl text-sm font-medium">
+            <div className="bg-destructive/20 text-destructive p-3 rounded-xl text-sm font-medium">
               {error}
             </div>
           )}
@@ -99,13 +99,13 @@ export default function Login() {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 shadow-lg"
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 rounded-xl text-base transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 shadow-lg"
           >
             {loading ? "Entrando..." : "Entrar"}
           </Button>
         </form>
 
-        <p className="text-center text-[#2C3E50] text-sm mt-6">
+        <p className="text-center text-foreground text-sm mt-6">
           Não tem conta? Entre em contato com suporte para criar uma.
         </p>
       </div>

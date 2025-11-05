@@ -364,7 +364,7 @@ export default function Index() {
               className="mx-auto mb-4 text-accent animate-bounce"
               size={48}
             />
-            <p className="text-gray-600">Carregando seu treino...</p>
+            <p className="text-muted-foreground">Carregando seu treino...</p>
           </div>
         </div>
       </Layout>
@@ -378,7 +378,7 @@ export default function Index() {
         <div className="bg-[#FF6B35] text-white rounded-3xl p-6 md:p-8 mb-8 shadow-lg shadow-[#FF6B35]/20">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-3xl md:text-4xl font-bold">Treino do Dia</h1>
-            <Flame size={32} className="animate-bounce text-[#A8E6CF]" />
+            <Flame size={32} className="animate-bounce text-accent" />
           </div>
           <p className="text-lg md:text-xl font-semibold mb-2">
             🔥 Dia {stats.treinosConcluidos}/365 — Não quebre a corrente!
@@ -428,37 +428,37 @@ export default function Index() {
                     </h3>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                      <div className="bg-[#F8F9FA] rounded-lg p-3">
-                        <label className="text-[#2C3E50] font-semibold block mb-1">
+                      <div className="bg-muted rounded-lg p-3">
+                        <label className="text-foreground font-semibold block mb-1">
                           Séries
                         </label>
-                        <p className="text-[#2C3E50] font-bold text-lg">
+                        <p className="text-foreground font-bold text-lg">
                           {exercise.sets}
                         </p>
                       </div>
-                      <div className="bg-[#F8F9FA] rounded-lg p-3">
-                        <label className="text-[#2C3E50] font-semibold block mb-1">
+                      <div className="bg-muted rounded-lg p-3">
+                        <label className="text-foreground font-semibold block mb-1">
                           Reps
                         </label>
-                        <p className="text-[#2C3E50] font-bold text-lg">
+                        <p className="text-foreground font-bold text-lg">
                           {exercise.reps}
                         </p>
                       </div>
-                      <div className="bg-[#2E86AB]/10 rounded-lg p-3">
-                        <label className="text-[#2E86AB] font-semibold block mb-1">
+                      <div className="bg-secondary/10 rounded-lg p-3">
+                        <label className="text-secondary font-semibold block mb-1">
                           Anterior
                         </label>
-                        <p className="text-[#2E86AB] font-bold text-lg">
+                        <p className="text-secondary font-bold text-lg">
                           {exercise.last_weight
                             ? `${exercise.last_weight}kg`
                             : "—"}
                         </p>
                       </div>
-                      <div className="bg-[#A8E6CF]/10 rounded-lg p-3">
-                        <label className="text-[#A8E6CF] font-semibold block mb-1">
+                      <div className="bg-accent/10 rounded-lg p-3">
+                        <label className="text-accent font-semibold block mb-1">
                           Progresso
                         </label>
-                        <p className="text-[#A8E6CF] font-bold text-lg">
+                        <p className="text-accent font-bold text-lg">
                           {exercise.new_weight && exercise.last_weight
                             ? `${(exercise.new_weight - exercise.last_weight).toFixed(1)}kg`
                             : "—"}
@@ -467,7 +467,7 @@ export default function Index() {
                     </div>
 
                     <div className="mt-4">
-                      <label className="text-gray-600 font-semibold text-sm block mb-2">
+                      <label className="text-muted-foreground font-semibold text-sm block mb-2">
                         Nova carga (kg)
                       </label>
                       <Input
@@ -495,8 +495,8 @@ export default function Index() {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-2xl p-8 text-center mb-8 border border-[#E8EAED]">
-            <p className="text-[#2C3E50] mb-4">
+          <div className="bg-card rounded-2xl p-8 text-center mb-8 border border-border">
+            <p className="text-card-foreground mb-4">
               Nenhum exercício agendado para hoje. Acesse "Programação" para
               configurar seus treinos.
             </p>

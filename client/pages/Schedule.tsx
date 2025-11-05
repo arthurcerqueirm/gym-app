@@ -309,13 +309,13 @@ export default function Schedule() {
 
   return (
     <Layout userName={userName}>
-      <div className="p-4 md:p-8 max-w-7xl mx-auto">
+      <div className="p-4 md:p-8 max-w-7xl mx-auto bg-background min-h-screen">
         {/* Header */}
-        <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-3xl p-8 mb-8 shadow-lg">
+        <div className="bg-primary text-primary-foreground rounded-3xl p-8 mb-8 shadow-lg">
           <h1 className="text-3xl md:text-4xl font-bold">
             Programação de Treino
           </h1>
-          <p className="text-white/90 mt-2">
+          <p className="text-primary-foreground/90 mt-2">
             Crie seus treinos e organize a semana
           </p>
         </div>
@@ -324,37 +324,37 @@ export default function Schedule() {
           {/* LEFT: Create & Manage Templates */}
           <div className="lg:col-span-2 space-y-6">
             {/* Create Template Card */}
-            <div className="bg-white dark:bg-card rounded-2xl shadow-lg p-6 border border-[#E8EAED]">
-              <h2 className="text-2xl font-bold text-[#2C3E50] mb-4 flex items-center gap-2">
-                <Plus size={24} className="text-[#FF6B35]" />
+            <div className="bg-card text-card-foreground rounded-2xl shadow-lg p-6 border border-border">
+              <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+                <Plus size={24} className="text-primary" />
                 Criar Novo Treino
               </h2>
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-foreground mb-2">
                     Nome do Treino (ex: Treino A)
                   </label>
                   <Input
                     placeholder="Treino A"
                     value={newTemplateName}
                     onChange={(e) => setNewTemplateName(e.target.value)}
-                    className="w-full h-11 rounded-lg border-2 border-gray-300 px-3 text-base"
+                    className="w-full h-11 rounded-lg border-2 border-border bg-input text-foreground placeholder-muted-foreground px-3 text-base"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-foreground mb-2">
                     Descrição (opcional)
                   </label>
                   <Input
                     placeholder="Ex: Peito e Costas"
                     value={newTemplateDesc}
                     onChange={(e) => setNewTemplateDesc(e.target.value)}
-                    className="w-full h-11 rounded-lg border-2 border-gray-300 px-3 text-base"
+                    className="w-full h-11 rounded-lg border-2 border-border bg-input text-foreground placeholder-muted-foreground px-3 text-base"
                   />
                 </div>
                 <Button
                   onClick={handleCreateTemplate}
-                  className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-base"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-base"
                 >
                   <Plus size={20} /> Criar Treino
                 </Button>
@@ -364,8 +364,8 @@ export default function Schedule() {
             {/* Templates List */}
             <div className="space-y-4">
               {templates.length === 0 ? (
-                <div className="bg-gray-50 rounded-2xl p-8 text-center border-2 border-dashed border-gray-300">
-                  <p className="text-gray-500 text-lg">
+                <div className="bg-muted rounded-2xl p-8 text-center border-2 border-dashed border-border">
+                  <p className="text-muted-foreground text-lg">
                     Nenhum treino criado ainda.
                     <br />
                     <span className="text-sm">
@@ -377,15 +377,15 @@ export default function Schedule() {
                 templates.map((template) => (
                   <div
                     key={template.id}
-                    className="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-100 hover:border-orange-300 transition-all"
+                    className="bg-card text-card-foreground rounded-2xl shadow-lg p-6 border-2 border-border hover:border-primary/50 transition-all"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="text-2xl font-bold text-gray-800">
+                        <h3 className="text-2xl font-bold text-foreground">
                           {template.name}
                         </h3>
                         {template.description && (
-                          <p className="text-sm text-gray-600 mt-1">
+                          <p className="text-sm text-muted-foreground mt-1">
                             {template.description}
                           </p>
                         )}
@@ -402,20 +402,20 @@ export default function Schedule() {
                     {/* Exercises List */}
                     <div className="space-y-2 mb-4">
                       {template.exercises.length === 0 ? (
-                        <p className="text-gray-500 text-sm italic p-3 bg-gray-50 rounded-lg">
+                        <p className="text-muted-foreground text-sm italic p-3 bg-muted rounded-lg">
                           Nenhum exercício adicionado
                         </p>
                       ) : (
                         template.exercises.map((exercise) => (
                           <div
                             key={exercise.id}
-                            className="flex items-center justify-between bg-gradient-to-r from-orange-50 to-amber-50 p-4 rounded-lg border-l-4 border-orange-400"
+                            className="flex items-center justify-between bg-muted p-4 rounded-lg border-l-4 border-primary"
                           >
                             <div className="flex-1">
-                              <p className="font-bold text-gray-800">
+                              <p className="font-bold text-foreground">
                                 {exercise.name}
                               </p>
-                              <p className="text-sm text-gray-600">
+                              <p className="text-sm text-muted-foreground">
                                 {exercise.sets}x{exercise.reps} •{" "}
                                 {exercise.initial_weight}kg
                               </p>
@@ -436,7 +436,7 @@ export default function Schedule() {
 
                     {/* Add Exercise Form */}
                     {editingTemplate === template.id ? (
-                      <div className="bg-gray-50 p-4 rounded-lg space-y-3 border-2 border-orange-200">
+                      <div className="bg-muted p-4 rounded-lg space-y-3 border-2 border-primary/30">
                         <Input
                           placeholder="Nome do exercício"
                           value={newExercise.name}
@@ -446,7 +446,7 @@ export default function Schedule() {
                               name: e.target.value,
                             })
                           }
-                          className="w-full h-10 rounded-lg border-2 border-gray-300 px-3 text-sm"
+                          className="w-full h-10 rounded-lg border-2 border-border bg-input text-foreground placeholder-muted-foreground px-3 text-sm"
                         />
                         <div className="grid grid-cols-3 gap-2">
                           <Input
@@ -459,7 +459,7 @@ export default function Schedule() {
                                 sets: parseInt(e.target.value) || 3,
                               })
                             }
-                            className="h-10 rounded-lg border-2 border-gray-300 px-2 text-sm"
+                            className="h-10 rounded-lg border-2 border-border bg-input text-foreground placeholder-muted-foreground px-2 text-sm"
                           />
                           <Input
                             type="number"
@@ -471,7 +471,7 @@ export default function Schedule() {
                                 reps: parseInt(e.target.value) || 10,
                               })
                             }
-                            className="h-10 rounded-lg border-2 border-gray-300 px-2 text-sm"
+                            className="h-10 rounded-lg border-2 border-border bg-input text-foreground placeholder-muted-foreground px-2 text-sm"
                           />
                           <Input
                             type="number"
@@ -484,19 +484,19 @@ export default function Schedule() {
                                 initial_weight: e.target.value,
                               })
                             }
-                            className="h-10 rounded-lg border-2 border-red-400 px-2 text-sm font-semibold bg-red-50"
+                            className="h-10 rounded-lg border-2 border-destructive px-2 text-sm font-semibold bg-input text-foreground placeholder-muted-foreground"
                           />
                         </div>
                         <div className="flex gap-2">
                           <Button
                             onClick={() => handleAddExercise(template.id)}
-                            className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded-lg text-sm"
+                            className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-2 rounded-lg text-sm"
                           >
                             Salvar Exercício
                           </Button>
                           <Button
                             onClick={() => setEditingTemplate(null)}
-                            className="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 rounded-lg text-sm"
+                            className="flex-1 bg-muted hover:bg-muted/80 text-muted-foreground font-bold py-2 rounded-lg text-sm"
                           >
                             Cancelar
                           </Button>
@@ -505,7 +505,7 @@ export default function Schedule() {
                     ) : (
                       <Button
                         onClick={() => setEditingTemplate(template.id)}
-                        className="w-full bg-orange-100 hover:bg-orange-200 text-orange-600 font-bold py-2 rounded-lg flex items-center justify-center gap-2 text-sm"
+                        className="w-full bg-primary/10 hover:bg-primary/20 text-primary font-bold py-2 rounded-lg flex items-center justify-center gap-2 text-sm"
                       >
                         <Plus size={18} /> Adicionar Exercício
                       </Button>
@@ -518,8 +518,8 @@ export default function Schedule() {
 
           {/* RIGHT: Weekly Schedule */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-4 border-2 border-purple-200">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            <div className="bg-card text-card-foreground rounded-2xl shadow-lg p-6 sticky top-4 border-2 border-primary/30">
+              <h2 className="text-2xl font-bold text-foreground mb-4">
                 Sua Semana
               </h2>
               <div className="space-y-3">
@@ -531,7 +531,7 @@ export default function Schedule() {
 
                   return (
                     <div key={day.index} className="space-y-1">
-                      <label className="block text-sm font-semibold text-gray-700">
+                      <label className="block text-sm font-semibold text-foreground">
                         {day.name}
                       </label>
                       <select
@@ -539,7 +539,7 @@ export default function Schedule() {
                         onChange={(e) =>
                           handleScheduleDay(day.index, e.target.value || null)
                         }
-                        className="w-full h-10 rounded-lg border-2 border-gray-300 px-3 text-sm bg-white text-gray-800 font-medium focus:border-purple-500 focus:outline-none"
+                        className="w-full h-10 rounded-lg border-2 border-border px-3 text-sm bg-input text-foreground font-medium focus:border-primary focus:outline-none"
                       >
                         <option value="">Descanso</option>
                         {templates.map((template) => (
@@ -549,7 +549,7 @@ export default function Schedule() {
                         ))}
                       </select>
                       {scheduledTemplate && (
-                        <div className="text-xs text-purple-600 bg-purple-50 p-2 rounded">
+                        <div className="text-xs text-foreground bg-primary/10 p-2 rounded">
                           {scheduledTemplate.exercises.length} exercícios
                         </div>
                       )}
@@ -557,8 +557,8 @@ export default function Schedule() {
                   );
                 })}
               </div>
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
-                <p className="text-xs text-blue-700">
+              <div className="mt-6 p-4 bg-primary/10 rounded-lg border-l-4 border-primary">
+                <p className="text-xs text-foreground">
                   💡 <strong>Dica:</strong> Selecione um treino para cada dia. O
                   programa se repete automaticamente toda semana.
                 </p>

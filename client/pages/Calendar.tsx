@@ -154,8 +154,8 @@ export default function Calendar() {
         </div>
 
         {/* Calendar Heatmap */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        <div className="bg-card rounded-2xl shadow-lg p-6 md:p-8 border border-border">
+          <h2 className="text-2xl font-bold text-foreground mb-6">
             Progresso Anual
           </h2>
 
@@ -166,9 +166,7 @@ export default function Calendar() {
                 <div
                   key={day.date}
                   className={`w-3 h-3 md:w-4 md:h-4 rounded-sm cursor-pointer transition-all hover:scale-125 ${
-                    day.hasWorkout
-                      ? "bg-gradient-to-br from-orange-400 to-orange-600"
-                      : "bg-gray-200"
+                    day.hasWorkout ? "bg-primary" : "bg-muted"
                   }`}
                   title={day.date}
                 />
@@ -176,23 +174,23 @@ export default function Calendar() {
             })}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <div className="flex items-center gap-2 text-sm text-gray-600 flex-wrap">
+          <div className="mt-8 pt-6 border-t border-border">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground flex-wrap">
               <span className="font-semibold">Legenda:</span>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-gray-200 rounded-sm"></div>
+                <div className="w-4 h-4 bg-muted rounded-sm"></div>
                 <span>Sem treino</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-[#FF6B35]/40 rounded-sm"></div>
+                <div className="w-4 h-4 bg-primary/40 rounded-sm"></div>
                 <span>1-50 dias</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-[#FF6B35] rounded-sm"></div>
+                <div className="w-4 h-4 bg-primary rounded-sm"></div>
                 <span>51-200 dias</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-[#A8E6CF] rounded-sm"></div>
+                <div className="w-4 h-4 bg-accent rounded-sm"></div>
                 <span>200+ dias</span>
               </div>
             </div>

@@ -226,7 +226,7 @@ export default function Profile() {
     <Layout userName={userProfile.name}>
       <div className="p-4 md:p-8 max-w-3xl mx-auto">
         {/* Header */}
-        <div className="bg-[#FF6B35] text-white rounded-3xl p-8 mb-8 shadow-lg shadow-[#FF6B35]/20">
+        <div className="bg-primary text-primary-foreground rounded-3xl p-8 mb-8 shadow-lg">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <User size={40} />
@@ -234,7 +234,9 @@ export default function Profile() {
                 <h1 className="text-3xl font-bold">
                   {userProfile.name || "Novo Usuário"}
                 </h1>
-                <p className="text-white/90">Gerencie seu perfil e medições</p>
+                <p className="text-primary-foreground/90">
+                  Gerencie seu perfil e medições
+                </p>
               </div>
             </div>
             <ThemeToggle />
@@ -242,13 +244,13 @@ export default function Profile() {
         </div>
 
         {/* Profile Section */}
-        <div className="card-light dark:card-dark rounded-2xl shadow-lg p-6 md:p-8 mb-8">
+        <div className="bg-card text-card-foreground rounded-2xl shadow-lg p-6 md:p-8 mb-8 border border-border">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-foreground">Meu Perfil</h2>
             {!editingProfile && (
               <Button
                 onClick={() => setEditingProfile(true)}
-                className="bg-[#FF6B35]/10 hover:bg-[#FF6B35]/20 text-[#FF6B35] font-bold py-2 px-4 rounded-lg flex items-center gap-2"
+                className="bg-primary/10 hover:bg-primary/20 text-primary font-bold py-2 px-4 rounded-lg flex items-center gap-2"
               >
                 <Edit2 size={18} /> Editar
               </Button>
@@ -268,7 +270,7 @@ export default function Profile() {
                   onChange={(e) =>
                     setUserProfile({ ...userProfile, name: e.target.value })
                   }
-                  className="w-full h-12 rounded-lg border-2 border-[#E8EAED] px-4 text-base focus:border-[#FF6B35] bg-white text-[#2C3E50]"
+                  className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-input text-foreground placeholder-muted-foreground"
                 />
               </div>
 
@@ -281,7 +283,7 @@ export default function Profile() {
                   onChange={(e) =>
                     setUserProfile({ ...userProfile, gender: e.target.value })
                   }
-                  className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base bg-white focus:border-orange-500"
+                  className="w-full h-12 rounded-lg border-2 border-border px-4 text-base bg-input text-foreground focus:border-primary"
                 >
                   <option value="">Prefiro não informar</option>
                   <option value="masculino">Masculino</option>
@@ -291,7 +293,7 @@ export default function Profile() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2">
                   Data de Nascimento
                 </label>
                 <Input
@@ -303,12 +305,12 @@ export default function Profile() {
                       dateOfBirth: e.target.value,
                     })
                   }
-                  className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base focus:border-orange-500"
+                  className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-input text-foreground"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2">
                   Bio (opcional)
                 </label>
                 <textarea
@@ -317,18 +319,18 @@ export default function Profile() {
                   onChange={(e) =>
                     setUserProfile({ ...userProfile, bio: e.target.value })
                   }
-                  className="w-full h-24 rounded-lg border-2 border-gray-200 px-4 py-3 text-base focus:border-orange-500 resize-none"
+                  className="w-full h-24 rounded-lg border-2 border-border px-4 py-3 text-base focus:border-primary bg-input text-foreground resize-none"
                 />
               </div>
 
               {error && (
-                <div className="bg-red-50 text-red-600 p-4 rounded-lg text-sm font-medium">
+                <div className="bg-destructive/20 text-destructive p-4 rounded-lg text-sm font-medium">
                   {error}
                 </div>
               )}
 
               {success && (
-                <div className="bg-green-50 text-green-600 p-4 rounded-lg text-sm font-medium">
+                <div className="bg-primary/20 text-primary p-4 rounded-lg text-sm font-medium">
                   ✓ Perfil atualizado com sucesso!
                 </div>
               )}
@@ -337,7 +339,7 @@ export default function Profile() {
                 <Button
                   onClick={handleSaveProfile}
                   disabled={saving}
-                  className="flex-1 bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+                  className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
                 >
                   <Check size={20} />
                   {saving ? "Salvando..." : "Salvar Perfil"}
@@ -353,13 +355,13 @@ export default function Profile() {
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+              <div className="bg-muted rounded-lg p-4 border border-border">
                 <p className="text-sm text-muted-foreground">Nome</p>
                 <p className="text-lg font-semibold text-foreground">
                   {userProfile.name || "Não informado"}
                 </p>
               </div>
-              <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+              <div className="bg-muted rounded-lg p-4 border border-border">
                 <p className="text-sm text-muted-foreground">Gênero</p>
                 <p className="text-lg font-semibold text-foreground">
                   {userProfile.gender
@@ -368,7 +370,7 @@ export default function Profile() {
                     : "Não informado"}
                 </p>
               </div>
-              <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+              <div className="bg-muted rounded-lg p-4 border border-border">
                 <p className="text-sm text-muted-foreground">
                   Data de Nascimento
                 </p>
@@ -381,7 +383,7 @@ export default function Profile() {
                 </p>
               </div>
               {userProfile.bio && (
-                <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+                <div className="bg-muted rounded-lg p-4 border border-border">
                   <p className="text-sm text-muted-foreground">Bio</p>
                   <p className="text-lg font-semibold text-foreground">
                     {userProfile.bio}
@@ -393,7 +395,7 @@ export default function Profile() {
         </div>
 
         {/* Measurements Form */}
-        <div className="card-light dark:card-dark rounded-2xl shadow-lg p-6 md:p-8 mb-8">
+        <div className="bg-card text-card-foreground rounded-2xl shadow-lg p-6 md:p-8 mb-8 border border-border">
           <h2 className="text-2xl font-bold text-foreground mb-6">
             Medições Corporais
           </h2>

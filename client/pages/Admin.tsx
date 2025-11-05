@@ -189,8 +189,8 @@ export default function Admin() {
       <Layout>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-gray-600">Carregando...</p>
+            <div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Carregando...</p>
           </div>
         </div>
       </Layout>
@@ -205,10 +205,10 @@ export default function Admin() {
     <Layout>
       <div className="p-6 md:p-8 max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-4xl font-bold text-foreground mb-2">
             Painel de Administração
           </h1>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             Gerencie usuários e permissões do sistema
           </p>
         </div>
@@ -250,7 +250,7 @@ export default function Admin() {
             <CardTitle>Usuários do Sistema</CardTitle>
             <Button
               onClick={() => setIsModalOpen(true)}
-              className="bg-[#FF6B35] hover:bg-[#FF6B35]/90"
+              className="bg-primary hover:bg-primary/90"
             >
               <Plus className="w-4 h-4 mr-2" />
               Novo Usuário
@@ -274,7 +274,7 @@ export default function Admin() {
                 </TableHeader>
                 <TableBody>
                   {users.map((user) => (
-                    <TableRow key={user.id} className="hover:bg-gray-50">
+                    <TableRow key={user.id} className="hover:bg-muted/50">
                       <TableCell className="font-medium">{user.name}</TableCell>
                       <TableCell>{user.email}</TableCell>
                       <TableCell>
@@ -294,7 +294,7 @@ export default function Admin() {
                           </span>
                         )}
                       </TableCell>
-                      <TableCell className="text-sm text-gray-600">
+                      <TableCell className="text-sm text-muted-foreground">
                         {new Date(user.created_at).toLocaleDateString("pt-BR")}
                       </TableCell>
                       <TableCell className="text-right">
@@ -404,7 +404,7 @@ export default function Admin() {
               <Button
                 onClick={handleChangePassword}
                 disabled={passwordLoading || !newPassword}
-                className="bg-[#FF6B35] hover:bg-[#FF6B35]/90"
+                className="bg-primary hover:bg-primary/90"
               >
                 {passwordLoading ? "Alterando..." : "Alterar Senha"}
               </Button>

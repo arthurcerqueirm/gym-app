@@ -250,7 +250,7 @@ export default function Admin() {
             <CardTitle>Usuários do Sistema</CardTitle>
             <Button
               onClick={() => setIsModalOpen(true)}
-              className="bg-[#FF6B35] hover:bg-[#FF6B35]/90"
+              className="bg-primary hover:bg-primary/90"
             >
               <Plus className="w-4 h-4 mr-2" />
               Novo Usuário
@@ -404,7 +404,7 @@ export default function Admin() {
               <Button
                 onClick={handleChangePassword}
                 disabled={passwordLoading || !newPassword}
-                className="bg-[#FF6B35] hover:bg-[#FF6B35]/90"
+                className="bg-primary hover:bg-primary/90"
               >
                 {passwordLoading ? "Alterando..." : "Alterar Senha"}
               </Button>

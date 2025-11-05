@@ -518,8 +518,8 @@ export default function Schedule() {
 
           {/* RIGHT: Weekly Schedule */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-4 border-2 border-purple-200">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 sticky top-4 border-2 border-purple-200 dark:border-purple-400">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Sua Semana
               </h2>
               <div className="space-y-3">
@@ -531,7 +531,7 @@ export default function Schedule() {
 
                   return (
                     <div key={day.index} className="space-y-1">
-                      <label className="block text-sm font-semibold text-gray-700">
+                      <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200">
                         {day.name}
                       </label>
                       <select
@@ -539,7 +539,7 @@ export default function Schedule() {
                         onChange={(e) =>
                           handleScheduleDay(day.index, e.target.value || null)
                         }
-                        className="w-full h-10 rounded-lg border-2 border-gray-300 px-3 text-sm bg-white text-gray-800 font-medium focus:border-purple-500 focus:outline-none"
+                        className="w-full h-10 rounded-lg border-2 border-gray-300 dark:border-slate-600 px-3 text-sm bg-white dark:bg-slate-700 text-gray-800 dark:text-white font-medium focus:border-purple-500 focus:outline-none"
                       >
                         <option value="">Descanso</option>
                         {templates.map((template) => (
@@ -549,7 +549,7 @@ export default function Schedule() {
                         ))}
                       </select>
                       {scheduledTemplate && (
-                        <div className="text-xs text-purple-600 bg-purple-50 p-2 rounded">
+                        <div className="text-xs text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-900/30 p-2 rounded">
                           {scheduledTemplate.exercises.length} exercícios
                         </div>
                       )}
@@ -557,8 +557,8 @@ export default function Schedule() {
                   );
                 })}
               </div>
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
-                <p className="text-xs text-blue-700">
+              <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border-l-4 border-blue-400 dark:border-blue-500">
+                <p className="text-xs text-blue-700 dark:text-blue-300">
                   💡 <strong>Dica:</strong> Selecione um treino para cada dia. O
                   programa se repete automaticamente toda semana.
                 </p>

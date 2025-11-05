@@ -364,8 +364,8 @@ export default function Schedule() {
             {/* Templates List */}
             <div className="space-y-4">
               {templates.length === 0 ? (
-                <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 text-center border-2 border-dashed border-gray-300 dark:border-slate-600">
-                  <p className="text-gray-600 dark:text-gray-300 text-lg">
+                <div className="bg-muted rounded-2xl p-8 text-center border-2 border-dashed border-border">
+                  <p className="text-muted-foreground text-lg">
                     Nenhum treino criado ainda.
                     <br />
                     <span className="text-sm">
@@ -377,15 +377,15 @@ export default function Schedule() {
                 templates.map((template) => (
                   <div
                     key={template.id}
-                    className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 border-2 border-gray-100 dark:border-slate-700 hover:border-orange-300 transition-all"
+                    className="bg-card text-card-foreground rounded-2xl shadow-lg p-6 border-2 border-border hover:border-primary/50 transition-all"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                        <h3 className="text-2xl font-bold text-foreground">
                           {template.name}
                         </h3>
                         {template.description && (
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                          <p className="text-sm text-muted-foreground mt-1">
                             {template.description}
                           </p>
                         )}

@@ -322,13 +322,13 @@ export default function Profile() {
               </div>
 
               {error && (
-                <div className="bg-red-50 text-red-600 p-4 rounded-lg text-sm font-medium">
+                <div className="bg-destructive/20 text-destructive p-4 rounded-lg text-sm font-medium">
                   {error}
                 </div>
               )}
 
               {success && (
-                <div className="bg-green-50 text-green-600 p-4 rounded-lg text-sm font-medium">
+                <div className="bg-primary/20 text-primary p-4 rounded-lg text-sm font-medium">
                   ✓ Perfil atualizado com sucesso!
                 </div>
               )}

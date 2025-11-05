@@ -393,7 +393,7 @@ export default function Profile() {
         </div>
 
         {/* Measurements Form */}
-        <div className="card-light dark:card-dark rounded-2xl shadow-lg p-6 md:p-8 mb-8">
+        <div className="bg-card text-card-foreground rounded-2xl shadow-lg p-6 md:p-8 mb-8 border border-border">
           <h2 className="text-2xl font-bold text-foreground mb-6">
             Medições Corporais
           </h2>

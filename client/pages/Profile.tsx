@@ -353,13 +353,13 @@ export default function Profile() {
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+              <div className="bg-muted rounded-lg p-4 border border-border">
                 <p className="text-sm text-muted-foreground">Nome</p>
                 <p className="text-lg font-semibold text-foreground">
                   {userProfile.name || "Não informado"}
                 </p>
               </div>
-              <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+              <div className="bg-muted rounded-lg p-4 border border-border">
                 <p className="text-sm text-muted-foreground">Gênero</p>
                 <p className="text-lg font-semibold text-foreground">
                   {userProfile.gender
@@ -368,7 +368,7 @@ export default function Profile() {
                     : "Não informado"}
                 </p>
               </div>
-              <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+              <div className="bg-muted rounded-lg p-4 border border-border">
                 <p className="text-sm text-muted-foreground">
                   Data de Nascimento
                 </p>
@@ -381,7 +381,7 @@ export default function Profile() {
                 </p>
               </div>
               {userProfile.bio && (
-                <div className="bg-[#F8F9FA] dark:bg-card rounded-lg p-4 border border-[#E8EAED]">
+                <div className="bg-muted rounded-lg p-4 border border-border">
                   <p className="text-sm text-muted-foreground">Bio</p>
                   <p className="text-lg font-semibold text-foreground">
                     {userProfile.bio}

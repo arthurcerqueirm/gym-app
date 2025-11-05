@@ -354,7 +354,7 @@ export default function Schedule() {
                 </div>
                 <Button
                   onClick={handleCreateTemplate}
-                  className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-base"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-base"
                 >
                   <Plus size={20} /> Criar Treino
                 </Button>

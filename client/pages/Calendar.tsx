@@ -166,9 +166,7 @@ export default function Calendar() {
                 <div
                   key={day.date}
                   className={`w-3 h-3 md:w-4 md:h-4 rounded-sm cursor-pointer transition-all hover:scale-125 ${
-                    day.hasWorkout
-                      ? "bg-primary"
-                      : "bg-muted"
+                    day.hasWorkout ? "bg-primary" : "bg-muted"
                   }`}
                   title={day.date}
                 />

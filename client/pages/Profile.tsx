@@ -234,7 +234,9 @@ export default function Profile() {
                 <h1 className="text-3xl font-bold">
                   {userProfile.name || "Novo Usuário"}
                 </h1>
-                <p className="text-primary-foreground/90">Gerencie seu perfil e medições</p>
+                <p className="text-primary-foreground/90">
+                  Gerencie seu perfil e medições
+                </p>
               </div>
             </div>
             <ThemeToggle />

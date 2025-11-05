@@ -226,7 +226,7 @@ export default function Profile() {
     <Layout userName={userProfile.name}>
       <div className="p-4 md:p-8 max-w-3xl mx-auto">
         {/* Header */}
-        <div className="bg-[#FF6B35] text-white rounded-3xl p-8 mb-8 shadow-lg shadow-[#FF6B35]/20">
+        <div className="bg-primary text-primary-foreground rounded-3xl p-8 mb-8 shadow-lg">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <User size={40} />
@@ -234,7 +234,7 @@ export default function Profile() {
                 <h1 className="text-3xl font-bold">
                   {userProfile.name || "Novo Usuário"}
                 </h1>
-                <p className="text-white/90">Gerencie seu perfil e medições</p>
+                <p className="text-primary-foreground/90">Gerencie seu perfil e medições</p>
               </div>
             </div>
             <ThemeToggle />

@@ -490,13 +490,13 @@ export default function Schedule() {
                         <div className="flex gap-2">
                           <Button
                             onClick={() => handleAddExercise(template.id)}
-                            className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded-lg text-sm"
+                            className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-2 rounded-lg text-sm"
                           >
                             Salvar Exercício
                           </Button>
                           <Button
                             onClick={() => setEditingTemplate(null)}
-                            className="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 rounded-lg text-sm"
+                            className="flex-1 bg-muted hover:bg-muted/80 text-muted-foreground font-bold py-2 rounded-lg text-sm"
                           >
                             Cancelar
                           </Button>

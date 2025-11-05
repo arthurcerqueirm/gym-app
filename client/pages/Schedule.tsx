@@ -309,13 +309,13 @@ export default function Schedule() {
 
   return (
     <Layout userName={userName}>
-      <div className="p-4 md:p-8 max-w-7xl mx-auto">
+      <div className="p-4 md:p-8 max-w-7xl mx-auto bg-background min-h-screen">
         {/* Header */}
-        <div className="bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-3xl p-8 mb-8 shadow-lg">
+        <div className="bg-primary text-primary-foreground rounded-3xl p-8 mb-8 shadow-lg">
           <h1 className="text-3xl md:text-4xl font-bold">
             Programação de Treino
           </h1>
-          <p className="text-white/90 mt-2">
+          <p className="text-primary-foreground/90 mt-2">
             Crie seus treinos e organize a semana
           </p>
         </div>

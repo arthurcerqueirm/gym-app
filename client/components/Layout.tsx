@@ -78,13 +78,13 @@ export default function Layout({
     : [];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col md:flex-row">
+    <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row">
       {/* Mobile Header */}
-      <div className="md:hidden bg-[#FF6B35] text-white p-4 flex justify-between items-center">
+      <div className="md:hidden bg-primary text-primary-foreground p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">{displayName}</h1>
         <button
           onClick={handleLogout}
-          className="text-white hover:bg-white/20 p-2 rounded-full transition-all"
+          className="text-primary-foreground hover:bg-white/20 p-2 rounded-full transition-all"
           title="Sair"
         >
           <LogOut size={24} />
@@ -92,11 +92,11 @@ export default function Layout({
       </div>
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex flex-col w-64 bg-[#FF6B35] text-white p-8 min-h-screen">
+      <div className="hidden md:flex flex-col w-64 bg-primary text-primary-foreground p-8 min-h-screen">
         <div className="mb-12">
           <h1 className="text-3xl font-bold">GymStreak</h1>
           {userName && userName !== "Usuário" && (
-            <p className="text-sidebar-foreground text-sm mt-2 opacity-80">
+            <p className="text-primary-foreground text-sm mt-2 opacity-80">
               Bem-vindo, {userName}!
             </p>
           )}
@@ -112,8 +112,8 @@ export default function Layout({
                 onClick={() => navigate(item.path)}
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg font-semibold transition-all ${
                   isActive
-                    ? "bg-white/30 bg-white text-[#FF6B35]"
-                    : "text-white hover:bg-white/20"
+                    ? "bg-white/30 text-primary"
+                    : "text-primary-foreground hover:bg-white/20"
                 }`}
               >
                 <Icon size={24} />
@@ -134,8 +134,8 @@ export default function Layout({
                     onClick={() => navigate(item.path)}
                     className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg font-semibold transition-all ${
                       isActive
-                        ? "bg-white/30 bg-white text-[#FF6B35]"
-                        : "text-white hover:bg-white/20"
+                        ? "bg-white/30 text-primary"
+                        : "text-primary-foreground hover:bg-white/20"
                     }`}
                   >
                     <Icon size={24} />
@@ -149,7 +149,7 @@ export default function Layout({
 
         <button
           onClick={handleLogout}
-          className="flex items-center space-x-3 px-4 py-3 rounded-lg font-semibold hover:bg-white/20 transition-all w-full text-white"
+          className="flex items-center space-x-3 px-4 py-3 rounded-lg font-semibold hover:bg-white/20 transition-all w-full text-primary-foreground"
         >
           <LogOut size={24} />
           <span>Sair</span>
@@ -161,7 +161,7 @@ export default function Layout({
         <main className="flex-1 overflow-auto pb-20 md:pb-0">{children}</main>
 
         {/* Mobile Bottom Navigation */}
-        <nav className="md:hidden bg-white border-t border-gray-200 flex justify-around fixed bottom-0 left-0 right-0 z-50 overflow-x-auto">
+        <nav className="md:hidden bg-background border-t border-border flex justify-around fixed bottom-0 left-0 right-0 z-50 overflow-x-auto">
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
@@ -171,8 +171,8 @@ export default function Layout({
                 onClick={() => navigate(item.path)}
                 className={`flex flex-col items-center py-3 px-2 flex-1 transition-all whitespace-nowrap ${
                   isActive
-                    ? "text-[#FF6B35] font-bold"
-                    : "text-gray-400 hover:text-gray-600"
+                    ? "text-primary font-bold"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <Icon size={24} />
@@ -189,8 +189,8 @@ export default function Layout({
                 onClick={() => navigate(item.path)}
                 className={`flex flex-col items-center py-3 px-2 flex-1 transition-all whitespace-nowrap ${
                   isActive
-                    ? "text-[#FF6B35] font-bold"
-                    : "text-gray-400 hover:text-gray-600"
+                    ? "text-primary font-bold"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <Icon size={24} />

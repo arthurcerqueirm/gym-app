@@ -281,7 +281,7 @@ export default function Profile() {
                   onChange={(e) =>
                     setUserProfile({ ...userProfile, gender: e.target.value })
                   }
-                  className="w-full h-12 rounded-lg border-2 border-gray-200 px-4 text-base bg-white focus:border-orange-500"
+                  className="w-full h-12 rounded-lg border-2 border-border px-4 text-base bg-input text-foreground focus:border-primary"
                 >
                   <option value="">Prefiro não informar</option>
                   <option value="masculino">Masculino</option>

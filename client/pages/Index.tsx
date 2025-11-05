@@ -428,37 +428,37 @@ export default function Index() {
                     </h3>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                      <div className="bg-[#F8F9FA] rounded-lg p-3">
-                        <label className="text-[#2C3E50] font-semibold block mb-1">
+                      <div className="bg-muted rounded-lg p-3">
+                        <label className="text-foreground font-semibold block mb-1">
                           Séries
                         </label>
-                        <p className="text-[#2C3E50] font-bold text-lg">
+                        <p className="text-foreground font-bold text-lg">
                           {exercise.sets}
                         </p>
                       </div>
-                      <div className="bg-[#F8F9FA] rounded-lg p-3">
-                        <label className="text-[#2C3E50] font-semibold block mb-1">
+                      <div className="bg-muted rounded-lg p-3">
+                        <label className="text-foreground font-semibold block mb-1">
                           Reps
                         </label>
-                        <p className="text-[#2C3E50] font-bold text-lg">
+                        <p className="text-foreground font-bold text-lg">
                           {exercise.reps}
                         </p>
                       </div>
-                      <div className="bg-[#2E86AB]/10 rounded-lg p-3">
-                        <label className="text-[#2E86AB] font-semibold block mb-1">
+                      <div className="bg-secondary/10 rounded-lg p-3">
+                        <label className="text-secondary font-semibold block mb-1">
                           Anterior
                         </label>
-                        <p className="text-[#2E86AB] font-bold text-lg">
+                        <p className="text-secondary font-bold text-lg">
                           {exercise.last_weight
                             ? `${exercise.last_weight}kg`
                             : "—"}
                         </p>
                       </div>
-                      <div className="bg-[#A8E6CF]/10 rounded-lg p-3">
-                        <label className="text-[#A8E6CF] font-semibold block mb-1">
+                      <div className="bg-accent/10 rounded-lg p-3">
+                        <label className="text-accent font-semibold block mb-1">
                           Progresso
                         </label>
-                        <p className="text-[#A8E6CF] font-bold text-lg">
+                        <p className="text-accent font-bold text-lg">
                           {exercise.new_weight && exercise.last_weight
                             ? `${(exercise.new_weight - exercise.last_weight).toFixed(1)}kg`
                             : "—"}

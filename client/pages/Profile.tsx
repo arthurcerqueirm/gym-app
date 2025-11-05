@@ -337,7 +337,7 @@ export default function Profile() {
                 <Button
                   onClick={handleSaveProfile}
                   disabled={saving}
-                  className="flex-1 bg-[#FF6B35] hover:bg-[#E85A27] text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
+                  className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50"
                 >
                   <Check size={20} />
                   {saving ? "Salvando..." : "Salvar Perfil"}

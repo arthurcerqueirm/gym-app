@@ -268,7 +268,7 @@ export default function Profile() {
                   onChange={(e) =>
                     setUserProfile({ ...userProfile, name: e.target.value })
                   }
-                  className="w-full h-12 rounded-lg border-2 border-[#E8EAED] px-4 text-base focus:border-[#FF6B35] bg-white text-[#2C3E50]"
+                  className="w-full h-12 rounded-lg border-2 border-border px-4 text-base focus:border-primary bg-input text-foreground placeholder-muted-foreground"
                 />
               </div>
 

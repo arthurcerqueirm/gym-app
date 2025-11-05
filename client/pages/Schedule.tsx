@@ -402,20 +402,20 @@ export default function Schedule() {
                     {/* Exercises List */}
                     <div className="space-y-2 mb-4">
                       {template.exercises.length === 0 ? (
-                        <p className="text-gray-500 text-sm italic p-3 bg-gray-50 rounded-lg">
+                        <p className="text-gray-600 dark:text-gray-400 text-sm italic p-3 bg-gray-50 dark:bg-slate-700 rounded-lg">
                           Nenhum exercício adicionado
                         </p>
                       ) : (
                         template.exercises.map((exercise) => (
                           <div
                             key={exercise.id}
-                            className="flex items-center justify-between bg-gradient-to-r from-orange-50 to-amber-50 p-4 rounded-lg border-l-4 border-orange-400"
+                            className="flex items-center justify-between bg-gradient-to-r from-orange-50 to-amber-50 dark:from-slate-700 dark:to-slate-700 p-4 rounded-lg border-l-4 border-orange-400 dark:border-orange-500"
                           >
                             <div className="flex-1">
-                              <p className="font-bold text-gray-800">
+                              <p className="font-bold text-gray-900 dark:text-white">
                                 {exercise.name}
                               </p>
-                              <p className="text-sm text-gray-600">
+                              <p className="text-sm text-gray-700 dark:text-gray-300">
                                 {exercise.sets}x{exercise.reps} •{" "}
                                 {exercise.initial_weight}kg
                               </p>

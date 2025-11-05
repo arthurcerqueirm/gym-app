@@ -324,32 +324,32 @@ export default function Schedule() {
           {/* LEFT: Create & Manage Templates */}
           <div className="lg:col-span-2 space-y-6">
             {/* Create Template Card */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 border border-[#E8EAED] dark:border-slate-700">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <Plus size={24} className="text-[#FF6B35]" />
+            <div className="bg-card text-card-foreground rounded-2xl shadow-lg p-6 border border-border">
+              <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+                <Plus size={24} className="text-primary" />
                 Criar Novo Treino
               </h2>
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                  <label className="block text-sm font-semibold text-foreground mb-2">
                     Nome do Treino (ex: Treino A)
                   </label>
                   <Input
                     placeholder="Treino A"
                     value={newTemplateName}
                     onChange={(e) => setNewTemplateName(e.target.value)}
-                    className="w-full h-11 rounded-lg border-2 border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-3 text-base"
+                    className="w-full h-11 rounded-lg border-2 border-border bg-input text-foreground placeholder-muted-foreground px-3 text-base"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                  <label className="block text-sm font-semibold text-foreground mb-2">
                     Descrição (opcional)
                   </label>
                   <Input
                     placeholder="Ex: Peito e Costas"
                     value={newTemplateDesc}
                     onChange={(e) => setNewTemplateDesc(e.target.value)}
-                    className="w-full h-11 rounded-lg border-2 border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-3 text-base"
+                    className="w-full h-11 rounded-lg border-2 border-border bg-input text-foreground placeholder-muted-foreground px-3 text-base"
                   />
                 </div>
                 <Button

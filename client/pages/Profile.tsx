@@ -242,13 +242,13 @@ export default function Profile() {
         </div>
 
         {/* Profile Section */}
-        <div className="card-light dark:card-dark rounded-2xl shadow-lg p-6 md:p-8 mb-8">
+        <div className="bg-card text-card-foreground rounded-2xl shadow-lg p-6 md:p-8 mb-8 border border-border">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-foreground">Meu Perfil</h2>
             {!editingProfile && (
               <Button
                 onClick={() => setEditingProfile(true)}
-                className="bg-[#FF6B35]/10 hover:bg-[#FF6B35]/20 text-[#FF6B35] font-bold py-2 px-4 rounded-lg flex items-center gap-2"
+                className="bg-primary/10 hover:bg-primary/20 text-primary font-bold py-2 px-4 rounded-lg flex items-center gap-2"
               >
                 <Edit2 size={18} /> Editar
               </Button>
